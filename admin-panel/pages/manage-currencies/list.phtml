@@ -1,0 +1,19 @@
+<tr class="setting-banlist" id="currency_<?php echo $wo['currency_value']?>" >
+   <td><?php echo $wo['currency_key']?></td>
+   <td>
+      <div>
+         <?php echo $wo['currency_value'];?>
+      </div>
+   </td>
+   <td>
+     <?php echo $wo['config']['currency_symbol_array'][$wo['currency_value']] ?>
+   </td>
+   <td>
+     <?php echo ($wo['currency_value'] == $wo['config']['currency']) ? '<span class="label label-success">Default</span>': '';?>
+   </td>
+   <td>
+      <a href="javascript:void()" onclick="make_default('<?php echo $wo['currency_value']; ?>')" class="btn btn-success waves-effect">设置默认</a>
+      <a href="javascript:void()" onclick="open_edit_currency('<?php echo $wo['currency_value']; ?>','<?php echo($wo['config']['currency_symbol_array'][$wo['currency_value']]) ?>','<?php echo $wo['currency_key']?>')" class="btn btn-info waves-effect">编辑</a>
+      <a href="javascript:void()" onclick="delete_currency('<?php echo $wo['currency_value']; ?>')" class="btn btn-danger waves-effect">删除</a>
+   </td>
+</tr>

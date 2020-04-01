@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>工具 > 备份 SQL & 文件</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>备份 SQL & 文件</h2> 
+                     <form id="backup"><button type="submit" class="btn btn-warning waves-effect waves-light m-t-20">创建新的完全备份</button></form>
+                     <br>
+                     <div>请注意，可能需要几分钟时间.</div>
+                </div>
+                <div class="body">
+                  <h5>最后一次备份: <span class="last_backup"><?php echo $wo['config']['last_backup'];?></span></h5>
+			      <h5>备份目录：./ script_backups /</h5>
+			      <h5>备份类型：所有文件，包括./upload文件夹和数据库的完整备份。</h5>
+			      <h5>建议通过FTP下载备份.</h5>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    </div>
+    <!-- #END# Vertical Layout -->
+<script>
+$(function() {
+    $('form#backup').ajaxForm({
+      url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=new_backup',
+      beforeSend: function() {
+      	$('form#backup').find('button').text('请稍后..');
+      },
+      success: function(data) {
+        if (data.status == 200) {
+         $('.last_backup').text(data.date);
+         $('form#backup').find('button').text('备份完成!');
+         setTimeout(function () {
+         	$('form#backup').find('button').text('创建新的完全备份');
+         }, 2000);
+        } 
+      }
+    });
+});
+</script>

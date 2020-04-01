@@ -1,0 +1,273 @@
+<?php 
+
+$page           = (!empty($_GET['page-id']) && is_numeric($_GET['page-id'])) ? $_GET['page-id'] : 1;
+$filter_keyword = (!empty($_GET['query'])) ? Wo_Secure($_GET['query']) : '';
+$db->pageLimit  = 50;
+
+
+if (!empty($filter_keyword)) {
+  $sql   = "(
+    `username`     LIKE '%$filter_keyword%' OR 
+    `email`        LIKE '%$filter_keyword%' OR 
+    `first_name`   LIKE '%$filter_keyword%' OR 
+    `ip_address`   LIKE '%$filter_keyword%' OR 
+    `phone_number` LIKE '%$filter_keyword%' OR 
+    `last_name`    LIKE '%$filter_keyword%'
+  )";
+
+  $users = $db->where($sql)->orderBy('user_id', 'DESC')->objectbuilder()->paginate(T_USERS, $page);
+} 
+
+else {
+  $users = $db->objectbuilder()->orderBy('user_id', 'DESC')->paginate(T_USERS, $page);
+}
+
+if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
+  header("Location: " . Wo_LoadAdminLinkSettings('manage-users'));
+  exit();
+}
+
+?>
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>用户 > 管理用户</h2>
+    </div>
+    <!-- Vertical Layout -->
+    <div class="row">
+      <?php foreach ($wo['genders'] as $key => $gender) { ?>
+            <div class="col-lg-3 col-md-3">
+                <div class="info-box bg-light-green hover-expand-effect">
+                    <div class="icon">
+                        <i class="material-icons">account_box</i>
+                    </div>
+                    <div class="content">
+                        <div class="text"><?php echo $gender; ?></div>
+                        <div class="number count-to" data-from="0" data-to="<?php echo Wo_CountUserData($key); ?>" data-speed="1000" data-fresh-interval="20"></div>
+                    </div>
+                </div>
+            </div>
+          <?php } ?>
+        <div class="col-lg-3 col-md-3 ">
+            <div class="info-box bg-light-green hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">people_outline</i>
+                </div>
+                <div class="content">
+                    <div class="text">活跃用户</div>
+                    <div class="number count-to" data-from="0" data-to="<?php echo Wo_CountUserData('active'); ?>" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 ">
+            <div class="info-box bg-light-green hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">mail_outline</i>
+                </div>
+                <div class="content">
+                    <div class="text">不活跃用户</div>
+                    <div class="number count-to" data-from="0" data-to="<?php echo Wo_CountUserData('not_active'); ?>" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>管理 & 编辑用户</h2>
+                </div>
+                <div class="body">
+                    <div class="row">
+                      <div class="col-md-12">
+                         <div class="alert alert-success site-settings-alert"></div>
+                      </div>
+                      <div class="col-md-4" style="margin-bottom:0;">
+                        <form method="get" action="<?php echo Wo_LoadAdminLinkSettings('manage-users'); ?>">
+                          <div class="row">
+                            <div class="col-md-11">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                      <input type="text" name="query" id="query" class="form-control" value="<?php echo($filter_keyword); ?>">
+                                      <label class="form-label search-form">
+                                        搜索用户名，电子邮件，名字，姓氏
+                                      </label>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="col-md-1">
+                               <button class="btn btn-info">搜索</button>
+                            </div>
+                          </div>
+                          <div class="clearfix"></div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-responsive1">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr>
+                              <th>ID</th>
+  					                  <th>用户名</th>
+  					                  <th>来源</th>
+  					                  <th>电子邮件</th>
+  					                  <th>IP地址</th>
+  					                  <th>状态</th>
+  					                  <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                              <?php 
+        				                foreach ($users as $userlist) {
+                                  $wo['userlist'] = Wo_UserData($userlist->user_id);
+        				                  echo Wo_LoadAdminPage('manage-users/list');
+        				                }
+				                      ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal fade" id="FollowersForm" role="dialog">
+                      <div class="modal-dialog">
+
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">添加粉丝</h4><br>
+                          </div>
+                          <div class="modal-body">
+  
+                         <div class="alert alert-danger site-settings-alert"></div>
+                            <form class="add-followers" method="POST">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                      <input type="number" id="followers" name="followers" class="form-control">
+                                      <label class="form-label">你想添加多少粉丝？ 您可以在1和之间添加 <?php echo $db->getValue(T_USERS, "COUNT(*)");?>.</label>
+                                  </div>
+                              </div>
+                              <input type="hidden" id="user_id" name="user_id">
+                              <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                              <button type="submit" id="submitLikes" class="btn btn-primary m-t-15 waves-effect">开始</button>
+                          </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" id="closeLikesForm" class="btn btn-default" data-dismiss="modal">结束</button>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="wo-admincp-feturepager">
+                      <div class="pull-left">
+                        <span>
+                          <?php echo "Showing $page out of " . $db->totalPages; ?>
+                        </span>
+                      </div>
+                      <div class="pull-right">
+                        <nav>
+                          <ul class="pagination">
+                            <li>
+                              <a href="<?php echo Wo_LoadAdminLinkSettings('manage-users?page-id=1'); ?>" class="waves-effect" title='First Page'>
+                                  <i class="material-icons">first_page</i>
+                              </a>
+                            </li>
+                            <?php if ($page > 1) {  ?>
+                              <li>
+                                  <a href="<?php echo Wo_LoadAdminLinkSettings('manage-users?page-id=' . ($page - 1)); ?>" class="waves-effect" title='Previous Page'>
+                                      <i class="material-icons">chevron_left</i>
+                                  </a>
+                              </li>
+                            <?php  } ?>
+
+                            <?php 
+                              $nums       = 0;
+                              $nums_pages = ($page > 4) ? ($page - 4) : $page;
+
+                              for ($i=$nums_pages; $i <= $db->totalPages; $i++) { 
+                                if ($nums < 20) {
+                            ?>
+                              <li class="<?php echo ($page == $i) ? 'active' : ''; ?>">
+                                <a href="<?php echo Wo_LoadAdminLinkSettings('manage-users?page-id=' . ($i)); ?>" class="waves-effect">
+                                  <?php echo $i ?>   
+                                </a>
+                              </li>
+
+                            <?php } $nums++; }?>
+
+                            <?php if ($db->totalPages > $page) { ?>
+                              <li>
+                                  <a href="<?php echo Wo_LoadAdminLinkSettings('manage-users?page-id=' . ($page + 1)); ?>" class="waves-effect" title="Next Page">
+                                      <i class="material-icons">chevron_right</i>
+                                  </a>
+                              </li>
+                            <?php } ?>
+                            <li>
+                              <a href="<?php echo Wo_LoadAdminLinkSettings('manage-users?page-id=' . ($db->totalPages)); ?>" class="waves-effect" title='Last Page'>
+                                  <i class="material-icons">last_page</i>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+<script>
+
+function Wo_DeleteUserPosts(user_id) {
+  if (confirm("Are you sure you want to delete all user posts?") == false) {
+    return false;
+  }
+  hash_id = $('#hash_id').val();
+  $.get(Wo_Ajax_Requests_File(),{f:'admin_setting', s:'delete_user_posts', user_id: user_id, hash_id: hash_id},function(data) {
+    if (data.status == 200) {
+      $('.site-settings-alert.alert-success').html('<i class="fa fa-check"></i> User`s posts are being deleted in the background, please check in a while.');
+      setTimeout(function () {
+        $('.site-settings-alert.alert-success').html('');
+      },3000);
+    }
+  });
+}
+
+function Wo_DeleteUser(user_id) {
+  if (confirm("Are you sure you want to delete this user?") == false) {
+    return false;
+  }
+  hash_id = $('#hash_id').val();
+  $('#UserID_' + user_id).fadeOut(300, function() {
+    $(this).remove();
+  });
+  $.get(Wo_Ajax_Requests_File(),{f:'admin_setting', s:'delete_user', user_id: user_id, hash_id: hash_id});
+}
+function getUserId(user_id) {
+   $('#user_id').val(user_id);
+}
+$(function() {
+    var form_site_settings = $('form.add-followers');
+    form_site_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=add_followers',
+        beforeSend: function() {
+           $('.site-settings-alert.alert-danger').empty();
+            $('#submitLikes').text('Please wait..');
+        },
+        success: function(data) {
+            if (data['status'] == 200) {
+                $('#submitLikes').text('Add');
+                $('#closeLikesForm').click();
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                $('.site-settings-alert.alert-success').html('<i class="fa fa-check"></i> Followers are being added in the background, this process might take few mins.');
+                setTimeout(function () {
+                    $('.site-settings-alert').empty();
+                }, 10000);
+            } else if (data['status'] == 500) {
+              $('#submitLikes').text('Add');
+              $('.site-settings-alert.alert-danger').html('<i class="fa fa-fw fa-exclamation-triangle"></i> ' + data['error']);
+            }
+        }
+    });
+});
+$('#FollowersForm').on('hidden.bs.modal', function () {
+  $('.site-settings-alert.alert-danger').empty();
+})
+</script>

@@ -1,0 +1,64 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>工具 > 假用户生成</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h2>假用户生成</h2> 
+                    <br>
+                    <small>生成无限制的假用户.</small>
+                </div>
+                <form action="" method="POST" class="generate-form">
+                	<div class="body">
+                	 <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="number" id="count_users" name="count_users" class="form-control" value="10">
+                                <label class="form-label">您要生成多少用户?</label>
+                            </div>
+                        </div>
+                         <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="password" name="password" class="form-control">
+                                <label class="form-label">密码（选择将用于所有用户的密码，默认值：123456789）</label>
+                            </div>
+                        </div>
+                        <label for="avatar">创建随机头像?</label>
+                        <div class="form-group">
+                            <input type="radio" name="avatar" id="avatar-enabled" value="1">
+                            <label for="avatar-enabled">是</label>
+                            <input type="radio" name="avatar" id="avatar-disabled" value="0" checked>
+                            <label for="avatar-disabled" class="m-l-20">否</label>
+                        </div>
+                        <div class="clearfix"></div>
+                        <small>如果启用了头像，您可能会看到重复的头像，随机生成头像.</small><br>
+                        <small>此过程可能需要一些时间，您可以在几分钟后检查您的网站更改.</small><br>
+                        <button type="submit" class="btn btn-danger waves-effect waves-light m-t-20" id="delete-btn">生成假数据</button>
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    </div>
+<script>
+$(function() {
+    var generate_form = $('form.generate-form');
+    generate_form.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=generate_fake_users',
+        beforeSend: function() {
+            $('#delete-btn').text('请稍后..');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+            	$('#delete-btn').text('用户正在生成，几分钟后检查您的网站.');
+            	setTimeout(function () {
+					$('#delete-btn').text('生成假数据');
+				}, 4000);
+            }
+        }
+    });
+
+});
+</script>

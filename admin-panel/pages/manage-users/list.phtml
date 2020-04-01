@@ -1,0 +1,34 @@
+<tr class="user-list" id="UserID_<?php echo $wo['userlist']['user_id']?>" data-user-id="<?php echo $wo['userlist']['user_id']?>">
+   <td><?php echo $wo['userlist']['user_id']?></td>
+   <td>
+      <a href="<?php echo $wo['userlist']['url']; ?>">
+      <img src="<?php echo $wo['userlist']['avatar']; ?>" class="setting-avatar" alt="<?php echo $wo['userlist']['avatar']?> Profile Picture">
+      <?php echo $wo['userlist']['name']; ?>
+      </a>
+   </td>
+   <td><?php echo $wo['userlist']['src']?></td>
+   <td><?php echo $wo['userlist']['email']?></td>
+   <td><?php echo $wo['userlist']['ip_address']?></td>
+   <td><?php echo (Wo_UserActive($wo['userlist']['username']) === true) ? '<span class="label label-success">' . $wo['lang']['active'] . '</span>': '<span class="label label-danger">' . $wo['lang']['pending'] . '</span>';?></td>
+   <td>
+      <div class="dropdown" style="display: inline;">
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sliders dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+         <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width: 80px; font-size: 12px;">
+            <?php if ($wo['config']['connectivitySystem'] == 0) { ?>
+            <li>
+               <a href="javascript:void(0)" onclick="getUserId(<?php echo $wo['userlist']['user_id']?>);" data-toggle="modal" data-target="#FollowersForm">添加粉丝</a>
+            </li>
+            <?php } ?>
+            <li>
+               <a target="_blank" href="<?php echo Wo_SeoLink('index.php?link1=setting&user=' . $wo['userlist']['username'] . '&page=general-setting') ?>">编辑</a>
+            </li>
+            <li>
+               <a href="javascript:void(0)" onclick="Wo_DeleteUser(<?php echo $wo['userlist']['user_id']?>);">删除</a>
+            </li>
+            <li>
+               <a href="javascript:void(0)" onclick="Wo_DeleteUserPosts(<?php echo $wo['userlist']['user_id']?>);">删除文章</a>
+            </li>
+         </ul>
+      </div>
+   </td>
+</tr>

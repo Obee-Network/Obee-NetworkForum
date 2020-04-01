@@ -1,0 +1,92 @@
+<label for="status">状态</label>
+<div class="form-group">
+    <input type="radio" name="status" id="status-enabled" value="1" <?php echo ($wo['pro']['status'] == 1) ? 'checked': '';?>>
+    <label for="status-enabled">启用</label>
+    <input type="radio" name="status" id="status-disabled" value="0" <?php echo ($wo['pro']['status'] == 0) ? 'checked': '';?>>
+    <label for="status-disabled" class="m-l-20">禁用</label>
+</div>
+
+
+<div class="form-group form-float">
+    <div class="form-line focused">
+        <input type="text" name="name" class="form-control" value="<?php echo $wo['lang'][$wo['pro']['type']];?>">
+        <label class="form-label">名称</label>
+    </div>
+</div>
+<div class="form-group form-float">
+    <div class="form-line focused">
+        <input type="number" name="price" class="form-control" value="<?php echo $wo['pro']['price'];?>">
+        <label class="form-label">价格</label>
+    </div>
+</div>
+<label for="featured_member">特色成员</label>
+<div class="form-group">
+    <input type="radio" name="featured_member" id="featured_member-enabled" value="1" <?php echo ($wo['pro']['featured_member'] == 1) ? 'checked': '';?>>
+    <label for="featured_member-enabled">启用</label>
+    <input type="radio" name="featured_member" id="featured_member-disabled" value="0" <?php echo ($wo['pro']['featured_member'] == 0) ? 'checked': '';?>>
+    <label for="featured_member-disabled" class="m-l-20">禁用</label>
+</div>
+<label for="profile_visitors">查看资料访客</label>
+<div class="form-group">
+    <input type="radio" name="profile_visitors" id="profile_visitors-enabled" value="1" <?php echo ($wo['pro']['profile_visitors'] == 1) ? 'checked': '';?>>
+    <label for="profile_visitors-enabled">启用</label>
+    <input type="radio" name="profile_visitors" id="profile_visitors-disabled" value="0" <?php echo ($wo['pro']['profile_visitors'] == 0) ? 'checked': '';?>>
+    <label for="profile_visitors-disabled" class="m-l-20">禁用</label>
+</div>
+<label for="last_seen">隐身显示</label>
+<div class="form-group">
+    <input type="radio" name="last_seen" id="last_seen-enabled" value="1" <?php echo ($wo['pro']['last_seen'] == 1) ? 'checked': '';?>>
+    <label for="last_seen-enabled">启用</label>
+    <input type="radio" name="last_seen" id="last_seen-disabled" value="0" <?php echo ($wo['pro']['last_seen'] == 0) ? 'checked': '';?>>
+    <label for="last_seen-disabled" class="m-l-20">禁用</label>
+</div>
+<label for="verified_badge">认证图标</label>
+<div class="form-group">
+    <input type="radio" name="verified_badge" id="verified_badge-enabled" value="1" <?php echo ($wo['pro']['verified_badge'] == 1) ? 'checked': '';?>>
+    <label for="verified_badge-enabled">启用</label>
+    <input type="radio" name="verified_badge" id="verified_badge-disabled" value="0" <?php echo ($wo['pro']['verified_badge'] == 0) ? 'checked': '';?>>
+    <label for="verified_badge-disabled" class="m-l-20">禁用</label>
+</div>
+<div class="form-group form-float">
+    <div class="form-line focused">
+        <input type="number" name="pages_promotion" class="form-control" value="<?php echo $wo['pro']['pages_promotion'];?>">
+        <label class="form-label">页面推广</label>
+    </div>
+</div>
+<div class="form-group form-float">
+    <div class="form-line focused">
+        <input type="number" name="posts_promotion" class="form-control" value="<?php echo $wo['pro']['posts_promotion'];?>">
+        <label class="form-label">文章提升</label>
+    </div>
+</div>
+<div class="form-group form-float">
+    <div class="form-line focused">
+        <input type="number" name="discount" class="form-control" value="<?php echo $wo['pro']['discount'];?>">
+        <label class="form-label">折扣 (<?php echo $wo['pro']['discount'];?>%)</label>
+    </div>
+</div>
+<div class="form-group form-float">
+    <div class="form-line focused">
+        <input type="number" name="time" class="form-control" value="<?php echo $wo['pro']['time'];?>">
+        <label class="form-label">时间 (天)</label>
+    </div>
+</div>
+<div class="form-group form-float">
+    <div class="form-line focused">
+        <input type="file" name="icon" class="form-control">
+        <label class="form-label">图标</label>
+    </div>
+    <br>
+    <small>图标大小（宽度= 32px 高度：32px.png）</small>
+</div>
+<?php if (!empty($wo['pro']['image'])) { ?>
+<label for="icon_to_use">使用图标</label>
+<div class="form-group">
+    <input type="radio" name="icon_to_use" id="icon_to_use-enabled" value="1">
+    <label for="icon_to_use-enabled">默认</label>
+    <input type="radio" name="icon_to_use" id="icon_to_use-disabled" value="0" checked>
+    <label for="icon_to_use-disabled" class="m-l-20">我的图标</label>
+</div>
+<?php } ?>
+
+<input type="hidden" name="type" value="<?php echo $wo['pro']['type'];?>">
