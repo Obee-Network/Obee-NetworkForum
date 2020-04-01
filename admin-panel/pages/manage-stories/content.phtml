@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>用户 > 管理用户故事 / 状态</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>管理用户故事 / 状态</h2>
+                </div>
+                <div class="body">
+                   <div class="table-responsive1">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                      <th>ID</th>
+					                  <th>期限</th>
+					                  <th>所有者</th>
+					                  <th>时间</th>
+					                  <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+				                foreach (Wo_GetAllStories() as $wo['status']) {
+				                    echo Wo_LoadAdminPage('manage-stories/list');
+				                }
+				                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    </div>
+    <!-- #END# Vertical Layout -->
+<script>
+$(function () {
+  $('table').DataTable();
+});
+function Wo_DeleteStatus(id){
+  if (!id || !confirm('您确定要删除此故事吗?')) {
+    return false;
+  }
+  $("[data-status-id='"+id+"']").slideUp(function(){
+    $(this).remove();
+  });
+  $.ajax({
+    url: Wo_Ajax_Requests_File(),
+    type: 'GET',
+    dataType: 'json',
+    data: {f: 'status',s:'remove',id:id},
+  })
+  .done(function(data) {
+    
+  })
+  .fail(function() {
+    console.log("error");
+  })
+}
+</script>

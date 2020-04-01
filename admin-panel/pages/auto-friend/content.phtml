@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>工具 > Auto 自动关注朋友</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h2>自动关注朋友</h2> 
+                    <br>
+                    <small>当用户创建新帐户时，请选择您希望自动获得/关注的用户.</small>
+                </div>
+                <div class="body">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="users" name="users" class="form-control" value="<?php echo $wo['config']['auto_friend_users']; ?>">
+                                <label class="form-label">用户名以逗号（，）分隔</label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div><br>
+                        <small>此过程可能需要一些时间，您可以在几分钟后检查您的网站更改.</small><br>
+                  <button type="submit" class="btn btn-danger waves-effect waves-light m-t-20" id="users-btn">保存</button>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    </div>
+<script>
+$(document).on('click', '#users-btn', function(event) {
+	event.preventDefault();
+	$(this).text('请稍后..');
+	$.get(Wo_Ajax_Requests_File(), {f:'admin_setting', s: 'auto_friend', users: $('#users').val()}, function(data, textStatus, xhr) {
+		$('#users-btn').text('Saved!');
+		setTimeout(function () {
+			$('#users-btn').text('保存');
+		}, 4000);
+	});
+});
+</script>

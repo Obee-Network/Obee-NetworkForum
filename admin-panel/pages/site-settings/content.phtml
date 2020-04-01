@@ -1,0 +1,243 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>设置 > 网站设置</h2>
+    </div>
+    <!-- Vertical Layout -->
+    <div class="row">
+        <div class="col-lg-6 col-md-6 float-left">
+            <div class="card">
+                <div class="header">
+                    <h2>网站设置</h2>
+                </div>
+                <div class="body">
+                    <div class="alert alert-success site-settings-alert"></div>
+                    <form class="site-settings" method="POST">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="siteTitle" name="siteTitle" class="form-control" value="<?php echo $wo['config']['siteTitle']; ?>">
+                                <label class="form-label">网站标题</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="siteName" name="siteName" class="form-control" value="<?php echo $wo['config']['siteName']; ?>">
+                                <label class="form-label">网站名称</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="siteEmail" name="siteEmail" class="form-control" value="<?php echo $wo['config']['siteEmail']; ?>">
+                                <label class="form-label">电子邮件</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="siteKeywords" name="siteKeywords" class="form-control" value="<?php echo $wo['config']['siteKeywords']; ?>">
+                                <label class="form-label">网站关键字</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <textarea name="siteDesc" id="siteDesc" class="form-control" cols="30" rows="5"><?php echo $wo['config']['siteDesc']; ?></textarea>
+                                <label class="form-label">网站描述</label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">保存</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 float-right">
+            <div class="card">
+                <div class="header">
+                    <h2>其他设置</h2>
+                </div>
+                <div class="body">
+                    <div class="alert alert-success other-settings-alert"></div>
+                    <form class="other-settings" method="POST">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="censored_words" name="censored_words" class="form-control" value="<?php echo $wo['config']['censored_words']?>">
+                                <label class="form-label">屏蔽关键词 <small>(用英文逗号分开)</small></label>
+                            </div>
+                        </div><br>
+                        <label for="defualtLang">默认语言</label>
+                        <select class="form-control show-tick" id="defualtLang" name="defualtLang">
+                        	<?php
+                             foreach (Wo_LangsNamesFromDB() as $lang) {
+                                
+                               $languages = $lang;
+                                
+                               $languages_name = ucfirst(strtolower($languages));
+                                
+                               $selected_lang = ($languages == $wo['config']['defualtLang']) ? ' selected' : '';
+                                
+                             ?>
+                          <option value="<?php echo $languages;?>"<?php echo $selected_lang;?> ><?php echo $languages_name;?></option>
+                          <?php } ?>
+                        </select>
+                        <div class="clearfix"></div>
+                        <br><br>
+                        <label for="connectivitySystem">社交系统</label>
+                        <div class="form-group">
+                            <input type="radio" name="connectivitySystem" id="connectivitySystem-enabled" value="1" <?php echo ($wo['config']['connectivitySystem'] == 1) ? 'checked': '';?>>
+                            <label for="connectivitySystem-enabled">朋友系统</label>
+                            <input type="radio" name="connectivitySystem" id="connectivitySystem-disabled" value="0" <?php echo ($wo['config']['connectivitySystem'] == 0) ? 'checked': '';?>>
+                            <label for="connectivitySystem-disabled" class="m-l-20">关注系统</label>
+                            <span class="help-block">
+                                <span style="color:red">提示</span>: 如果您将系统更改为另一个系统，将删除所有现有的关注者，关注者，朋友。
+                            </span>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" name="connectivitySystemLimit" class="form-control" value="<?php echo $wo['config']['connectivitySystemLimit']?>">
+                                <label class="form-label">连接系统限制</label>
+                            </div>
+                        </div>
+                        <label for="update_user_profile">更新用户配置文件边栏数据（计数，关注者，以下..）</label>
+                        <select class="form-control show-tick" id="update_user_profile" name="update_user_profile">
+                          <option value="30" <?php echo ($wo['config']['update_user_profile'] == 30)   ? ' selected' : '';?> >每 30 秒</option>
+                          <option value="120" <?php echo ($wo['config']['update_user_profile'] == 120)   ? ' selected' : '';?> >每 2 分钟</option>
+                          <option value="3600" <?php echo ($wo['config']['update_user_profile'] == 3600)   ? ' selected' : '';?> >每 1 小时</option>
+                          <option value="7200" <?php echo ($wo['config']['update_user_profile'] == 7200)   ? ' selected' : '';?> >每 2 小时</option>
+                          <option value="43200" <?php echo ($wo['config']['update_user_profile'] == 43200)   ? ' selected' : '';?> >每 12 小时</option>
+                          <option value="86400" <?php echo ($wo['config']['update_user_profile'] == 86400)   ? ' selected' : '';?> >每 24 小时</option>
+                        </select>
+                        <div class="clearfix"></div>
+                        <br><br>
+                        <label for="cache_sidebar">缓存主页侧边栏</label>
+                        <select class="form-control show-tick" id="cache_sidebar" name="cache_sidebar">
+                          <option value="1" <?php echo ($wo['config']['cache_sidebar'] == 1)   ? ' selected' : '';?> >每2分钟更新一次主页边栏数据（加载速度更快）</option>
+                          <option value="0" <?php echo ($wo['config']['cache_sidebar'] == 0)   ? ' selected' : '';?> >永远不要缓存，总是获取新数据</option>
+                        </select>
+                        <div class="clearfix"></div>
+                        <br><br>
+                        <label for="second_post_button">贴文反应系统</label>
+                        <select class="form-control show-tick" id="second_post_button" name="second_post_button">
+                          <option value="wonder" <?php echo ($wo['config']['second_post_button'] == 'wonder')   ? ' selected' : '';?> >想知道</option>
+                          <option value="dislike" <?php echo ($wo['config']['second_post_button'] == 'dislike')   ? ' selected' : '';?> >不喜欢</option>
+                          <option value="reaction" <?php echo ($wo['config']['second_post_button'] == 'reaction')   ? ' selected' : '';?> >反应系统</option>
+                          <option value="disabled" <?php echo ($wo['config']['second_post_button'] == 'disabled')   ? ' selected' : '';?> >禁用按钮</option>
+                        </select>
+                        <div class="clearfix"></div>
+                        <br><br>
+                        <label for="date_style">日期格式</label>
+                        <select class="form-control show-tick" id="date_style" name="date_style">
+                          <option value="m-d-y" <?php if($wo['config']['date_style'] == 'm-d-y'){echo 'selected';};?> >mm-dd-yy</option>
+                          <option value="d-m-y" <?php if($wo['config']['date_style'] == 'd-m-y'){echo 'selected';};?> >dd-mm-yy</option>
+                          <option value="y-m-d" <?php if($wo['config']['date_style'] == 'y-m-d'){echo 'selected';};?> >yy-mm-dd</option>
+                          <option value="M-d-y" <?php if($wo['config']['date_style'] == 'M-d-y'){echo 'selected';};?> >mmm-dd-yy</option>      
+                          <option value="d-F-y" <?php if($wo['config']['date_style'] == 'd-F-y'){echo 'selected';};?> >dd-mmmm-yy</option>
+                          <option value="Y-m-d" <?php if($wo['config']['date_style'] == 'Y-m-d'){echo 'selected';};?> >yyyy-mm-dd</option> 
+                          <option value="d-M-Y" <?php if($wo['config']['date_style'] == 'd-M-Y'){echo 'selected';};?> >dd-mmm-yyyy</option>
+                          <option value="d-F-Y" <?php if($wo['config']['date_style'] == 'd-F-Y'){echo 'selected';};?> >dd-mmmm-yyyy</option>
+                        </select>
+                        <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">保存</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 float-left">
+            <div class="card">
+                <div class="header">
+                    <h2>API设置</h2>
+                </div>
+                <div class="body">
+                    <div class="alert alert-success api-settings-alert"></div>
+                    <form class="api-settings" method="POST">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="google_map_api" name="google_map_api" class="form-control" value="<?php echo $wo['config']['google_map_api']?>">
+                                <label class="form-label">Google Map API</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="yandex_translation_api" name="yandex_translation_api" class="form-control" value="<?php echo $wo['config']['yandex_translation_api']?>">
+                                <label class="form-label">Yandex Translation API</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="giphy_api" name="giphy_api" class="form-control" value="<?php echo $wo['config']['giphy_api']?>">
+                                <label class="form-label">Giphy API</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <textarea name="googleAnalytics" id="googleAnalytics" class="form-control" cols="30" rows="5"><?php echo $wo['config']['googleAnalytics']; ?></textarea>
+                                <label class="form-label">Google Analytics Code</label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">保存</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- #END# Vertical Layout -->
+<script>
+$(function() {
+    var form_site_settings = $('form.site-settings');
+    form_site_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_general_setting',
+        beforeSend: function() {
+            form_site_settings.find('button').text('Please wait..');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_site_settings.find('button').text('Save');
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                $('.site-settings-alert').html('<i class="fa fa-check"></i> Settings updated successfully');
+                setTimeout(function () {
+                    $('.site-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+
+    var form_other_settings = $('form.other-settings');
+    form_other_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_general_setting',
+        beforeSend: function() {
+            form_other_settings.find('.waves-effect').text('Please wait..');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_other_settings.find('.waves-effect').text('Save');
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                $('.other-settings-alert').html('<i class="fa fa-check"></i> Settings updated successfully');
+                setTimeout(function () {
+                    $('.other-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+
+    var form_api_settings = $('form.api-settings');
+    form_api_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_general_setting',
+        beforeSend: function() {
+            form_api_settings.find('.waves-effect').text('Please wait..');
+
+        },
+        beforeSubmit : function(arr, $form, options){
+          arr.splice(3, 1);
+          arr.push({name:'googleAnalytics_en', value:btoa($('#googleAnalytics').val())})
+       },
+        success: function(data) {
+            if (data.status == 200) {
+                form_api_settings.find('.waves-effect').text('Save');
+                $('.api-settings-alert').html('<i class="fa fa-check"></i> Settings updated successfully');
+                setTimeout(function () {
+                    $('.api-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+});
+</script>

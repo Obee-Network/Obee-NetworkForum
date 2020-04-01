@@ -1,0 +1,9 @@
+<tr id="<?php echo $wo['gender_key'];?>">
+   <td><?php echo $wo['gender_id'];?></td>
+   <td><?php echo $wo['gender_key'];?></td>
+   <td id="edit_<?php echo $wo['gender_key'];?>"><?php echo $wo['gender'];?></td>
+   <td>
+      <button type="button" class="btn btn-default waves-effect btn-lang m-r-20" data-id="<?php echo $wo['gender_key'];?>" data-toggle="modal" data-target="#defaultModal">编辑</button>
+      <button onclick="Wo_DeleteGender('<?php echo $wo['gender_key'];?>');" type="button" class="btn btn-danger waves-effect waves-light">删除</button>
+   </td>
+</tr>

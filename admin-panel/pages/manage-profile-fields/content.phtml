@@ -1,0 +1,77 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>用户 > 管理自定义资料字段</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>管理 & 编辑自定义资料字段</h2> 
+                    <a href="<?php echo Wo_LoadAdminLinkSettings('add-new-profile-field'); ?>" class="btn btn-warning waves-effect waves-light m-t-20">创建新自定义字段</a>
+                </div>
+                <div class="body">
+                   <div class="table-responsive1">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                   <th>ID</th>
+					               <th>字段名称</th>
+					               <th>类型</th>
+					               <th>长度</th>
+					               <th>布局</th>
+					               <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+				                foreach (Wo_GetProfileFields('admin') as $wo['field']) {
+				                    echo Wo_LoadAdminPage('manage-profile-fields/list');
+				                }
+				                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    </div>
+    <!-- #END# Vertical Layout -->
+<script>
+$(function () {
+  $('table').DataTable();
+});
+function Wo_DeleteStatus(id){
+  if (!id || !confirm('您确定要删除此状态吗？?')) {
+    return false;
+  }
+  $("[data-status-id='"+id+"']").slideUp(function(){
+    $(this).remove();
+  });
+  $.ajax({
+    url: Wo_Ajax_Requests_File(),
+    type: 'GET',
+    dataType: 'json',
+    data: {f: 'status',s:'remove',id:id},
+  })
+  .done(function(data) {
+    
+  })
+  .fail(function() {
+    console.log("error");
+  })
+}
+function Wo_DeleteField(id) {
+  if (id == '') {
+    return false;
+  }
+  if (!confirm('您确定要删除此字段吗?')) {
+    return false;
+  }
+  $('#' + id).fadeOut(300, function () {
+    $(this).remove();
+  });
+  $.get(Wo_Ajax_Requests_File(), {f: 'admin_setting', s:'delete_field', id:id});
+}
+</script>

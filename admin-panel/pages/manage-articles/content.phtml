@@ -1,0 +1,55 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>功能管理 > 新闻 (博客)</h2>
+    </div>
+    <!-- Vertical Layout -->
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>管理新闻 (博客)</h2>
+                </div>
+                <div class="body">
+                   <input type="hidden" id="hash_id" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                   <div class="clearfix"></div>
+                   <div class="table-responsive1">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                      <th>ID</th>
+					                  <th>链接</th>
+					                  <th>作者</th>
+					                  <th>发布</th>
+					                  <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <?php 
+        				                foreach (Wo_GetBlogs(array('limit' => 900000)) as $wo['blog']) {
+        				                  echo Wo_LoadAdminPage('manage-articles/list');
+        				                }
+				                          ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- #END# Vertical Layout -->
+<script>
+$(function () {
+	$('table').DataTable();
+});
+
+function Wo_DeleteBlog(id) {
+  if (confirm("您确定要删除此文章吗？'") == false) {
+    return false;
+  }
+  $('#BlogID_' + id).fadeOut(300, function() {
+    $(this).remove();
+  });
+  $.get(Wo_Ajax_Requests_File(),{f:'delete-my-blog',id: id});
+}
+</script>

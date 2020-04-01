@@ -1,0 +1,88 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>功能管理 > 论坛 > 论坛回复</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>管理论坛回复</h2>
+                </div>
+                <div class="body">
+                   <div class="table-responsive1">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                      <th>ID</th>
+					                  <th>作者</th>
+					                  <th>主题</th>
+					                  <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php $replies = Wo_GetThreadReplies(array('limit'=> 500000, 'order_by' => 'DESC')) ?>
+                             <?php foreach ($replies as $reply): ?>
+							    <tr data-thread-reply="<?php echo $reply['id']; ?>">
+							        <td><?php echo $reply['id']; ?></td>
+							        <td><?php echo $reply['user_data']['username']; ?></td>
+							        <td><?php echo $reply['post_subject']; ?></td>
+							        <td>
+							            <button class="btn main btn-danger waves-effect waves-light delete-th-reply" id="<?php echo $reply['id']; ?>">
+							                删除
+							            </button>
+							       </td>
+							    </tr>
+							<?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="modal fade" id="delete-reply">
+   <div class="modal-dialog">
+      <div class="modal-content modal-col-red">
+         <div class="modal-header">
+            <h4 class="modal-title"><i class="fa fa-exclamation-circle"></i> 删除回复</h4>
+         </div>
+         <div class="modal-body">
+            <p>你确定要删除此回复吗?</p>
+         </div>
+         <div class="modal-footer">
+            <button  type="button" onclick="Wo_DelReplyAdmin($('#delete-reply').attr('data-rmd-reply-ident'))" class="btn btn-link">删除</button>
+            <button  type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+         </div>
+      </div>
+   </div>
+</div>
+<script>
+$(function () {
+  $('table').DataTable();
+});
+$(document).on('click', ".delete-th-reply", function(event) {
+    event.preventDefault();
+    $("#delete-reply").attr('data-rmd-reply-ident', $(this).attr('id')).modal('show');
+});
+function Wo_DelReplyAdmin(id) {
+  if (!id) {
+    return false;
+  }else{
+	  $("#delete-reply").modal("hide");
+	  $("[data-thread-reply='" + id + "']").slideUp(function() {
+	      $(this).remove()
+	  });
+	  $.ajax({
+	      type: "GET",
+	      url: Wo_Ajax_Requests_File(),
+	      data: {
+	          id: id,
+	          f: 'delete-reply'
+	      },
+	      dataType: 'json'
+	  });
+  }
+}
+</script>

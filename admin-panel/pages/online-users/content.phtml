@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>用户 > 在线用户</h2>
+    </div>
+    <!-- Vertical Layout -->
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>在线用户</h2>
+                </div>
+                <div class="body">
+                   <div class="table-responsive1">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                      <th>ID</th>
+					                  <th>用户名</th>
+					                  <th>来源</th>
+					                  <th>电子邮件</th>
+					                  <th>IP地址</th>
+					                  <th>状态</th>
+					                  <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+				                foreach (Wo_GetAllOnlineData() as $wo['userlist']) {
+				                    echo Wo_LoadAdminPage('manage-users/list');
+				                }
+				                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <input type="hidden" id="hash_id" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+    </div>
+    <!-- #END# Vertical Layout -->
+<script>
+$(function () {
+  $('table').DataTable();
+});
+function Wo_DeleteUser(user_id) {
+  if (confirm("您确定要删除此用户吗?") == false) {
+    return false;
+  }
+  hash_id = $('#hash_id').val();
+  $('#UserID_' + user_id).fadeOut(300, function() {
+    $(this).remove();
+  });
+  $.get(Wo_Ajax_Requests_File(),{f:'admin_setting', s:'delete_user', user_id: user_id, hash_id: hash_id});
+}
+</script>
