@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Progress Bars | Bootstrap Based Admin Template - Material Design</title>
+    <title>Animations | Bootstrap Based Admin Template - Material Design</title>
     <!-- Favicon-->
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 
@@ -20,6 +20,9 @@
 
     <!-- Animation Css -->
     <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Bootstrap Select Css -->
+    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="../../css/style.css" rel="stylesheet">
@@ -369,13 +372,12 @@
                             <li>
                                 <a href="../../pages/ui/alerts.html">Alerts</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="../../pages/ui/animations.html">Animations</a>
                             </li>
                             <li>
                                 <a href="../../pages/ui/badges.html">Badges</a>
                             </li>
-
                             <li>
                                 <a href="../../pages/ui/breadcrumbs.html">Breadcrumbs</a>
                             </li>
@@ -415,7 +417,7 @@
                             <li>
                                 <a href="../../pages/ui/preloaders.html">Preloaders</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="../../pages/ui/progressbars.html">Progress Bars</a>
                             </li>
                             <li>
@@ -791,15 +793,15 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>PROGRESS BARS</h2>
+                <h2>ANIMATIONS</h2>
             </div>
-            <!-- Basic Examples -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
                             <h2>
-                                BASIC EXAMPLES
+                                CSS ANIMATIONS
+                                <small>Pure css animations - <a href="https://daneden.github.io/animate.css/" target="_blank">daneden.github.io/animate.css</a></small>
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -815,267 +817,119 @@
                             </ul>
                         </div>
                         <div class="body">
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                    <span class="sr-only">60% Complete</span>
-                                </div>
+                            <img src="../../images/animation-bg.jpg" class="js-animating-object img-responsive">
+                            <div class="demo-image-copyright">
+                                This image taken from <a href="https://unsplash.com" target="_blank">Unsplash</a>
                             </div>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
-                                    75%
-                                </div>
-                            </div>
+                            <select class="js-animations form-control show-tick">
+                                <optgroup label="Attention Seekers">
+                                    <option value="bounce">bounce</option>
+                                    <option value="flash">flash</option>
+                                    <option value="pulse">pulse</option>
+                                    <option value="rubberBand">rubberBand</option>
+                                    <option value="shake">shake</option>
+                                    <option value="swing">swing</option>
+                                    <option value="tada">tada</option>
+                                    <option value="wobble">wobble</option>
+                                    <option value="jello">jello</option>
+                                </optgroup>
+                                <optgroup label="Bouncing Entrances">
+                                    <option value="bounceIn">bounceIn</option>
+                                    <option value="bounceInDown">bounceInDown</option>
+                                    <option value="bounceInLeft">bounceInLeft</option>
+                                    <option value="bounceInRight">bounceInRight</option>
+                                    <option value="bounceInUp">bounceInUp</option>
+                                </optgroup>
+                                <optgroup label="Bouncing Exits">
+                                    <option value="bounceOut">bounceOut</option>
+                                    <option value="bounceOutDown">bounceOutDown</option>
+                                    <option value="bounceOutLeft">bounceOutLeft</option>
+                                    <option value="bounceOutRight">bounceOutRight</option>
+                                    <option value="bounceOutUp">bounceOutUp</option>
+                                </optgroup>
+                                <optgroup label="Fading Entrances">
+                                    <option value="fadeIn">fadeIn</option>
+                                    <option value="fadeInDown">fadeInDown</option>
+                                    <option value="fadeInDownBig">fadeInDownBig</option>
+                                    <option value="fadeInLeft">fadeInLeft</option>
+                                    <option value="fadeInLeftBig">fadeInLeftBig</option>
+                                    <option value="fadeInRight">fadeInRight</option>
+                                    <option value="fadeInRightBig">fadeInRightBig</option>
+                                    <option value="fadeInUp">fadeInUp</option>
+                                    <option value="fadeInUpBig">fadeInUpBig</option>
+                                </optgroup>
+                                <optgroup label="Fading Exits">
+                                    <option value="fadeOut">fadeOut</option>
+                                    <option value="fadeOutDown">fadeOutDown</option>
+                                    <option value="fadeOutDownBig">fadeOutDownBig</option>
+                                    <option value="fadeOutLeft">fadeOutLeft</option>
+                                    <option value="fadeOutLeftBig">fadeOutLeftBig</option>
+                                    <option value="fadeOutRight">fadeOutRight</option>
+                                    <option value="fadeOutRightBig">fadeOutRightBig</option>
+                                    <option value="fadeOutUp">fadeOutUp</option>
+                                    <option value="fadeOutUpBig">fadeOutUpBig</option>
+                                </optgroup>
+                                <optgroup label="Flippers">
+                                    <option value="flip">flip</option>
+                                    <option value="flipInX">flipInX</option>
+                                    <option value="flipInY">flipInY</option>
+                                    <option value="flipOutX">flipOutX</option>
+                                    <option value="flipOutY">flipOutY</option>
+                                </optgroup>
+                                <optgroup label="Lightspeed">
+                                    <option value="lightSpeedIn">lightSpeedIn</option>
+                                    <option value="lightSpeedOut">lightSpeedOut</option>
+                                </optgroup>
+                                <optgroup label="Rotating Entrances">
+                                    <option value="rotateIn">rotateIn</option>
+                                    <option value="rotateInDownLeft">rotateInDownLeft</option>
+                                    <option value="rotateInDownRight">rotateInDownRight</option>
+                                    <option value="rotateInUpLeft">rotateInUpLeft</option>
+                                    <option value="rotateInUpRight">rotateInUpRight</option>
+                                </optgroup>
+                                <optgroup label="Rotating Exits">
+                                    <option value="rotateOut">rotateOut</option>
+                                    <option value="rotateOutDownLeft">rotateOutDownLeft</option>
+                                    <option value="rotateOutDownRight">rotateOutDownRight</option>
+                                    <option value="rotateOutUpLeft">rotateOutUpLeft</option>
+                                    <option value="rotateOutUpRight">rotateOutUpRight</option>
+                                </optgroup>
+                                <optgroup label="Sliding Entrances">
+                                    <option value="slideInUp">slideInUp</option>
+                                    <option value="slideInDown">slideInDown</option>
+                                    <option value="slideInLeft">slideInLeft</option>
+                                    <option value="slideInRight">slideInRight</option>
+                                </optgroup>
+                                <optgroup label="Sliding Exits">
+                                    <option value="slideOutUp">slideOutUp</option>
+                                    <option value="slideOutDown">slideOutDown</option>
+                                    <option value="slideOutLeft">slideOutLeft</option>
+                                    <option value="slideOutRight">slideOutRight</option>
+                                </optgroup>
+                                <optgroup label="Zoom Entrances">
+                                    <option value="zoomIn">zoomIn</option>
+                                    <option value="zoomInDown">zoomInDown</option>
+                                    <option value="zoomInLeft">zoomInLeft</option>
+                                    <option value="zoomInRight">zoomInRight</option>
+                                    <option value="zoomInUp">zoomInUp</option>
+                                </optgroup>
+                                <optgroup label="Zoom Exits">
+                                    <option value="zoomOut">zoomOut</option>
+                                    <option value="zoomOutDown">zoomOutDown</option>
+                                    <option value="zoomOutLeft">zoomOutLeft</option>
+                                    <option value="zoomOutRight">zoomOutRight</option>
+                                    <option value="zoomOutUp">zoomOutUp</option>
+                                </optgroup>
+                                <optgroup label="Specials">
+                                    <option value="hinge">hinge</option>
+                                    <option value="rollIn">rollIn</option>
+                                    <option value="rollOut">rollOut</option>
+                                </optgroup>
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- #END# Basic Examples -->
-            <!-- Contextual Alternatives -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                CONTEXTUAL ALTERNATIVES
-                                <small>Progress bars use some of the same button and alert classes for consistent styles.</small>
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
-                                     style="width: 40%">
-                                    <span class="sr-only">40% Complete (success)</span>
-                                </div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                    <span class="sr-only">20% Complete</span>
-                                </div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                     style="width: 60%">
-                                    <span class="sr-only">60% Complete (warning)</span>
-                                </div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                     style="width: 80%">
-                                    <span class="sr-only">80% Complete (danger)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Contextual Alternatives -->
-            <!-- Striped -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                STRIPED
-                                <small>Uses a gradient to create a striped effect. Not available in IE9 and below.</small>
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 40%">
-                                    <span class="sr-only">40% Complete (success)</span>
-                                </div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 20%">
-                                    <span class="sr-only">20% Complete</span>
-                                </div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 60%">
-                                    <span class="sr-only">60% Complete (warning)</span>
-                                </div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="80" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 80%">
-                                    <span class="sr-only">80% Complete (danger)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Striped -->
-            <!-- Animated -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                ANIMATED
-                                <small>Add <code>.active</code> to <code>.progress-bar-striped</code> to animate the stripes right to left. Not available in IE9 and below.</small>
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 40%">
-                                    <span class="sr-only">40% Complete (success)</span>
-                                </div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 20%">
-                                    <span class="sr-only">20% Complete</span>
-                                </div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 60%">
-                                    <span class="sr-only">60% Complete (warning)</span>
-                                </div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 80%">
-                                    <span class="sr-only">80% Complete (danger)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Animated -->
-            <!-- Stacked -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                STACKED
-                                <small>Place multiple bars into the same <code>.progress</code> to stack them.</small>
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success" style="width: 35%">
-                                    <span class="sr-only">35% Complete (success)</span>
-                                </div>
-                                <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: 20%">
-                                    <span class="sr-only">20% Complete (warning)</span>
-                                </div>
-                                <div class="progress-bar progress-bar-danger" style="width: 10%">
-                                    <span class="sr-only">10% Complete (danger)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Stacked -->
-            <!-- With Material Design Colors -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                WITH MATERIAL DESIGN COLORS
-                                <small>You can use material design color which examples are <code>.bg-pink, .bg-red</code> class</small>
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <div class="progress">
-                                <div class="progress-bar bg-pink progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
-                                     style="width: 40%">
-                                    PINK PROGRESS BAR
-                                </div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar bg-cyan progress-bar-striped active" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
-                                     style="width: 75%">
-                                    CYAN PROGRESS BAR
-                                </div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar bg-teal progress-bar-striped" role="progressbar" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100"
-                                     style="width: 32%">
-                                    TEAL PROGRESS BAR
-                                </div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar bg-orange progress-bar-striped active" role="progressbar" aria-valuenow="85" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 85%">
-                                    ORANGE PROGRESS BAR
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# With Material Design Colors -->
         </div>
     </section>
 
@@ -1096,6 +950,7 @@
 
     <!-- Custom Js -->
     <script src="../../js/admin.js"></script>
+    <script src="../../js/pages/ui/animations.js"></script>
 
     <!-- Demo Js -->
     <script src="../../js/demo.js"></script>
