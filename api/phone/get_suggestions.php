@@ -22,6 +22,7 @@ if (empty($_GET['type']) || !isset($_GET['type'])) {
         )
     );
     header("Content-type: application/json");
+    // header("Content-type: application/json");
     echo json_encode($json_error_data, JSON_PRETTY_PRINT);
     exit();
 }
