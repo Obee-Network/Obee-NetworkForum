@@ -44,6 +44,8 @@ if ($type == 'get_user_data') {
             'errors' => array(
                 'error_id' => '5',
                 'error_text' => 'No profile id sent.'
+
+                //alter_function
             )
         );
     } else if (empty($_POST['s'])) {
