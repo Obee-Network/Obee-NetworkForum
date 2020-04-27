@@ -174,6 +174,20 @@ $non_allowed_config = array(
 $type               = Wo_Secure($_GET['type'], 0);
 if ($type == 'get_settings') {
     $get_config = Wo_GetConfig();
+    // if (empty($get_config)) {
+    //     $json_error_data = array(
+    //         'api_status' => '400',
+    //         'api_text' => 'failed',
+    //         'api_version' => $api_version,
+    //         'errors' => array(
+    //             'error_id' => '6',
+    //             'error_text' => 'No settings availabe.'
+    //         )
+    //     );
+    //     header("Content-type: application/json");
+    //     echo json_encode($json_error_data, JSON_PRETTY_PRINT);
+    //     exit();
+    // }
     if (empty($get_config)) {
         $json_error_data = array(
             'api_status' => '400',
@@ -181,6 +195,7 @@ if ($type == 'get_settings') {
             'api_version' => $api_version,
             'errors' => array(
                 'error_id' => '6',
+                //todo
                 'error_text' => 'No settings availabe.'
             )
         );
