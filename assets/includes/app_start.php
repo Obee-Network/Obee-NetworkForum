@@ -46,20 +46,20 @@ $db                  = new MysqliDb($sqlConnect);
 
 $all_langs           = Wo_LangsNamesFromDB();
 
-// foreach ($all_langs as $key => $value) {
-//     $insert = false;
-//     if (!in_array($value, array_keys($config))) {
-//         $db->insert(T_CONFIG,array('name' => $value, 'value' => 1));
-//         $insert = true;
-//     }
-// }
-// if ($insert == true) {
-//     $config = Wo_GetConfig();
-// }
+foreach ($all_langs as $key => $value) {
+    $insert = false;
+    if (!in_array($value, array_keys($config))) {
+        $db->insert(T_CONFIG,array('name' => $value, 'value' => 1));
+        $insert = true;
+    }
+}
+if ($insert == true) {
+    $config = Wo_GetConfig();
+}
 
-// if( ISSET( $_GET['theme'] ) && in_array($_GET['theme'], ['default', 'sunshine', 'wowonder'])){
-//     $_SESSION['theme'] = $_GET['theme'];
-// }
+if( ISSET( $_GET['theme'] ) && in_array($_GET['theme'], ['default', 'sunshine', 'wowonder'])){
+    $_SESSION['theme'] = $_GET['theme'];
+}
 
 if( ISSET( $_SESSION['theme'] ) ){
     $config['theme'] = $_SESSION['theme'];
