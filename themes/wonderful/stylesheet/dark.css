@@ -44,6 +44,47 @@ a, .blog-h-list h3, .main-blog-sidebar .popular-articles li .article-title, .wo_
 	background: #363636 !important;
 }
 
+/* 
+.flip-3d {
+    width: 49.9999%;
+}
+
+.timeline-item {
+    position: relative;
+}
+
+.timeline-wrap .timeline-index-box {
+    position: absolute;
+    padding-right: 0;
+    padding-left: 0;
+    top: 0;
+    bottom: 0;
+    margin-bottom: 0;
+}
+
+.timeline-time {
+    padding-left: 64px;
+}
+
+.timeline-event {
+    padding-left: 70px;
+}
+
+.timeline-wrap .timeline-index-box .timeline-index-tail {
+    right: initial;
+    height: auto;
+    width: 2px;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.timeline-wrap .timeline-item:nth-child(3n+0) .timeline-index-box .timeline-index-tail {
+    background-color: #1957dd;
+    right: initial;
+    margin-right: initial;
+} */
 .estimated_ad_limit, .earn_points .points_tip, #select-status-media, #video-form div.video-poster-image .thumb-renderer, .wo_votes, .key_shortcts th span, .modal-header, .sidebar-conatnier .avatar_btns .avatarz img, .post .post-footer, .notification-mico, .publisher-box .publisher-box-footer, .profile-container .card.hovercard .user-avatar img, .profile-style .avatar img {
 	border-color: rgba(255, 255, 255, 0.23);
 }
