@@ -10,6 +10,7 @@
 // +------------------------------------------------------------------------+
 $json_error_data   = array();
 $json_success_data = array();
+$type = Wo_Secure($_GET['type'], 0);
 if (empty($_GET['type']) || !isset($_GET['type'])) {
     $json_error_data = array(
         'api_status' => '400',
@@ -24,7 +25,6 @@ if (empty($_GET['type']) || !isset($_GET['type'])) {
     echo json_encode($json_error_data, JSON_PRETTY_PRINT);
     exit();
 }
-$type = Wo_Secure($_GET['type'], 0);
 if ($type == 'get_group_data') {
     if (empty($_POST['user_id'])) {
         $json_error_data = array(
