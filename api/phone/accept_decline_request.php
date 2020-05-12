@@ -1,13 +1,5 @@
 <?php
 // +------------------------------------------------------------------------+
-// | @author Deen Doughouz (DoughouzForest)
-// | @author_url 1: http://www.wowonder.com
-// | @author_url 2: http://codecanyon.net/user/doughouzforest
-// | @author_email: wowondersocial@gmail.com   
-// +------------------------------------------------------------------------+
-// | WoWonder - The Ultimate Social Networking Platform
-// | Copyright (c) 2016 WoWonder. All rights reserved.
-// +------------------------------------------------------------------------+
 $json_error_data     = array();
 $json_success_data   = array();
 $follow_data = array();
@@ -23,17 +15,7 @@ if ($type == 'accept_decline_request') {
                 'error_text' => 'No user id sent.'
             )
         );
-    } else if (empty($_POST['recipient_id'])) {
-        $json_error_data = array(
-            'api_status' => '400',
-            'api_text' => 'failed',
-            'api_version' => $api_version,
-            'errors' => array(
-                'error_id' => '5',
-                'error_text' => 'No recipient id sent.'
-            )
-        );
-    } else if (empty($_POST['s'])) {
+    }  else if (empty($_POST['s'])) {
         $json_error_data = array(
             'api_status' => '400',
             'api_text' => 'failed',
@@ -41,6 +23,16 @@ if ($type == 'accept_decline_request') {
             'errors' => array(
                 'error_id' => '5',
                 'error_text' => 'No session sent.'
+            )
+        );
+    }else if (empty($_POST['recipient_id'])) {
+        $json_error_data = array(
+            'api_status' => '400',
+            'api_text' => 'failed',
+            'api_version' => $api_version,
+            'errors' => array(
+                'error_id' => '5',
+                'error_text' => 'No recipient id sent.'
             )
         );
     }
