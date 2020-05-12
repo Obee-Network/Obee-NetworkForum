@@ -1,40 +1,31 @@
 <?php 
-// +------------------------------------------------------------------------+
-// | @author Deen Doughouz (DoughouzForest)
-// | @author_url 1: http://www.wowonder.com
-// | @author_url 2: http://codecanyon.net/user/doughouzforest
-// | @author_email: wowondersocial@gmail.com   
-// +------------------------------------------------------------------------+
-// | WoWonder - The Ultimate Social Networking Platform
-// | Copyright (c) 2017 WoWonder. All rights reserved.
-// +------------------------------------------------------------------------+
 require_once('assets/init.php');
-// if (file_exists('updatev2.php') && empty($wo['config']['updatev2'])) {
-//     if (is_writable('updatev2.php')) {
-//         header('Location: ./updatev2.php');
-//         exit();
-//     }
-// }
+if (file_exists('updatev2.php') && empty($wo['config']['updatev2'])) {
+    if (is_writable('updatev2.php')) {
+        header('Location: ./updatev2.php');
+        exit();
+    }
+}
 if ($wo['loggedin'] == true) {
     $update_last_seen = Wo_LastSeen($wo['user']['user_id']);
 } else if (!empty($_SERVER['HTTP_HOST'])) {
-    // $server_scheme = @$_SERVER["HTTPS"];
-    // $pageURL = ($server_scheme == "on") ? "https://" : "http://";
-    // $http_url = $pageURL . $_SERVER['HTTP_HOST'];
-    // $url = parse_url($wo['config']['site_url']);
-    // if (!empty($url)) {
-    //     if ($url['scheme'] == 'http') {
-    //         if ($http_url != 'http://' . $url['host']) { 
-    //            header('Location: ' . $wo['config']['site_url']);
-    //            exit();
-    //         }
-    //     } else {
-    //         if ($http_url != 'https://' . $url['host']) { 
-    //            header('Location: ' . $wo['config']['site_url']);
-    //            exit();
-    //         }
-    //     }
-    // }
+    $server_scheme = @$_SERVER["HTTPS"];
+    $pageURL = ($server_scheme == "on") ? "https://" : "http://";
+    $http_url = $pageURL . $_SERVER['HTTP_HOST'];
+    $url = parse_url($wo['config']['site_url']);
+    if (!empty($url)) {
+        if ($url['scheme'] == 'http') {
+            if ($http_url != 'http://' . $url['host']) { 
+               header('Location: ' . $wo['config']['site_url']);
+               exit();
+            }
+        } else {
+            if ($http_url != 'https://' . $url['host']) { 
+               header('Location: ' . $wo['config']['site_url']);
+               exit();
+            }
+        }
+    }
 }
 if (!empty($_GET['ref']) && $wo['loggedin'] == false && !isset($_COOKIE['src'])) {
     $get_ip = get_ip_address();
