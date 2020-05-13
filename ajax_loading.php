@@ -1,13 +1,5 @@
 <?php 
-// +------------------------------------------------------------------------+
-// | @author Deen Doughouz (DoughouzForest)
-// | @author_url 1: http://www.wowonder.com
-// | @author_url 2: http://codecanyon.net/user/doughouzforest
-// | @author_email: wowondersocial@gmail.com   
-// +------------------------------------------------------------------------+
-// | WoWonder - The Ultimate Social Networking Platform
-// | Copyright (c) 2017 WoWonder. All rights reserved.
-// +------------------------------------------------------------------------+
+
 require_once('assets/init.php');
 
 if ($wo['loggedin'] == true) {
@@ -364,13 +356,7 @@ $data['welcome_url'] = Wo_SeoLink('index.php?link1=welcome');
 if ($wo['page'] == 'welcome') {
     $data['welcome_page'] = 1;
 }
-if ($wo['page'] == 'timeline' && $wo['loggedin'] == true && $wo['config']['css_upload'] == 1 && !empty($wo['user_profile'])) {
-    if (!empty($wo['user_profile']['css_file']) && file_exists($wo['user_profile']['css_file'])) {
-      $data['is_css_file'] = 1;
-      $data['css_file'] = '<link rel="stylesheet" class="styled-profile" href="' . Wo_GetMedia($wo['user_profile']['css_file']) . '">';
-      $data['css_file_header'] = $wo['css_file_header'];
-    } 
-}
+
 
 $data['is_footer'] = 0;
 if (in_array($wo['page'], $wo['footer_pages'])) {
@@ -383,6 +369,13 @@ if (!empty($_POST['url'])) {
 $data['redirect'] = 0;
 if ($wo['redirect'] == 1) {
     $data['redirect'] = 1;
+}
+if ($wo['page'] == 'timeline' && $wo['loggedin'] == true && $wo['config']['css_upload'] == 1 && !empty($wo['user_profile'])) {
+    if (!empty($wo['user_profile']['css_file']) && file_exists($wo['user_profile']['css_file'])) {
+      $data['is_css_file'] = 1;
+      $data['css_file'] = '<link rel="stylesheet" class="styled-profile" href="' . Wo_GetMedia($wo['user_profile']['css_file']) . '">';
+      $data['css_file_header'] = $wo['css_file_header'];
+    } 
 }
 
 // if (strpos($_SERVER["HTTP_REFERER"], 'messages') !== false) {

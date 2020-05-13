@@ -16,6 +16,15 @@ if (!empty($wo['config']['adult_images_file'])) {
     putenv('GOOGLE_APPLICATION_CREDENTIALS='.$wo['config']['adult_images_file']);
 }
 use Google\Cloud\Vision\V1\ImageAnnotatorClient;
+
+function Wo_CountUnseenReports() {
+    global $wo, $sqlConnect;
+    $query_one    = "SELECT COUNT(`id`) AS `reports` FROM " . T_REPORTS . " WHERE `seen` = 0 ";
+    $sql          = mysqli_query($sqlConnect, $query_one);
+    $fetched_data = mysqli_fetch_assoc($sql);
+    return $fetched_data['reports'];
+}
+
 function Wo_ReportPost($post_data = array()) {
     global $wo, $sqlConnect;
     if ($wo['loggedin'] == false) {
@@ -67,13 +76,6 @@ function Wo_ReportPost($post_data = array()) {
         return 'report';
     }
     
-}
-function Wo_CountUnseenReports() {
-    global $wo, $sqlConnect;
-    $query_one    = "SELECT COUNT(`id`) AS `reports` FROM " . T_REPORTS . " WHERE `seen` = 0 ";
-    $sql          = mysqli_query($sqlConnect, $query_one);
-    $fetched_data = mysqli_fetch_assoc($sql);
-    return $fetched_data['reports'];
 }
 function Wo_UpdateSeenReports() {
     global $wo, $sqlConnect;
