@@ -22,15 +22,6 @@ function Wo_RegisterPoint($post_id, $type, $action = '+',$user_id = 0){
         return false;
     }
     
-    if (!empty($user_id) && is_numeric($user_id) && $user_id > 0) {
-        $user_id = Wo_Secure($user_id);
-    }
-    else{
-        $user_id = Wo_Secure( $wo["user"]["id"] );
-        if (empty($user_id) || !is_numeric($user_id) || $user_id < 1) {
-            return fasle;
-        }
-    }
     if (empty($wo["user"]["point_day_expire"])) {
         $today_end = strtotime(date('M')." ".date('d').", ".date('Y')." 11:59pm");
         $db->where('user_id',$user_id)->update(T_USERS,array('point_day_expire' => $today_end));
@@ -40,6 +31,16 @@ function Wo_RegisterPoint($post_id, $type, $action = '+',$user_id = 0){
         $db->where('user_id',$user_id)->update(T_USERS,array('point_day_expire' => $today_end,
                                                              'daily_points' => 0));
     }
+    if (!empty($user_id) && is_numeric($user_id) && $user_id > 0) {
+        $user_id = Wo_Secure($user_id);
+    }
+    else{
+        $user_id = Wo_Secure( $wo["user"]["id"] );
+        if (empty($user_id) || !is_numeric($user_id) || $user_id < 1) {
+            return fasle;
+        }
+    }
+    
     $points = 0;
     $dollar_to_point_cost = $wo['config']['dollar_to_point_cost'];
 
