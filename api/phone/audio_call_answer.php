@@ -1,14 +1,4 @@
 <?php
-// +------------------------------------------------------------------------+
-// | @author Deen Doughouz (DoughouzForest)
-// | @author_url 1: http://www.wowonder.com
-// | @author_url 2: http://codecanyon.net/user/doughouzforest
-// | @author_email: wowondersocial@gmail.com   
-// +------------------------------------------------------------------------+
-// | WoWonder - The Ultimate Social Networking Platform
-// | Copyright (c) 2016 WoWonder. All rights reserved.
-// +------------------------------------------------------------------------+
-
 $json_error_data     = array();
 $json_success_data   = array();
 $type                = Wo_Secure($_GET['type'], 0);
@@ -52,20 +42,7 @@ if ($type == 'audio_call_answer') {
             header("Content-type: application/json");
             echo json_encode($json_error_data, JSON_PRETTY_PRINT);
             exit();
-        } else if ($wo['loggedin'] == false) {
-            $json_error_data = array(
-                'api_status' => '400',
-                'api_text' => 'failed',
-                'api_version' => $api_version,
-                'errors' => array(
-                    'error_id' => '6',
-                    'error_text' => 'Session id is wrong.'
-                )
-            );
-            header("Content-type: application/json");
-            echo json_encode($json_error_data, JSON_PRETTY_PRINT);
-            exit();
-        } else {
+        }  else if{
             if (!empty($_POST['answer_type'])) {
             	if (!empty($_POST['call_id'])) {
             		if ($_POST['answer_type'] == 'answer') {
@@ -97,6 +74,19 @@ if ($type == 'audio_call_answer') {
 			        exit();
 			    }
             }
+        } if ($wo['loggedin'] == false) {
+            $json_error_data = array(
+                'api_status' => '400',
+                'api_text' => 'failed',
+                'api_version' => $api_version,
+                'errors' => array(
+                    'error_id' => '6',
+                    'error_text' => 'Session id is wrong.'
+                )
+            );
+            header("Content-type: application/json");
+            echo json_encode($json_error_data, JSON_PRETTY_PRINT);
+            exit();
         }
     } else {
         header("Content-type: application/json");
