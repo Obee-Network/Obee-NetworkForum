@@ -224,27 +224,7 @@ if (Wo_IsLogged() == true) {
     $wo['loggedin'] = true;
 }
 
-if (!empty($_GET['c_id']) && !empty($_GET['user_id'])) {
-    $application = 'windows';
-    if (!empty($_GET['application'])) {
-        if ($_GET['application'] == 'phone') {
-            $application = Wo_Secure($_GET['application']);
-        }
-    }
-    $c_id             = Wo_Secure($_GET['c_id']);
-    $user_id          = Wo_Secure($_GET['user_id']);
-    $check_if_session = Wo_CheckUserSessionID($user_id, $c_id, $application);
-    if ($check_if_session === true) {
-        $wo['user']          = Wo_UserData($user_id);
-        $session             = Wo_CreateLoginSession($user_id);
-        $_SESSION['user_id'] = $session;
-        setcookie("user_id", $session, time() + (10 * 365 * 24 * 60 * 60));
-        if ($wo['user']['user_id'] < 0 || empty($wo['user']['user_id']) || !is_numeric($wo['user']['user_id']) || Wo_UserActive($wo['user']['username']) === false) {
-            header("Location: " . Wo_SeoLink('index.php?link1=logout'));
-        }
-        $wo['loggedin'] = true;
-    }
-}
+
 if (!empty($_POST['user_id']) && (!empty($_POST['s']))) {
     $application = 'windows';
     $access_token = (!empty($_POST['s'])) ? $_POST['s'] : $_POST['access_token'];
@@ -287,6 +267,28 @@ if (!empty($_POST['user_id']) && (!empty($_POST['s']))) {
         header("Content-type: application/json");
         echo json_encode($json_error_data, JSON_PRETTY_PRINT);
         exit();
+    }
+}
+
+if (!empty($_GET['c_id']) && !empty($_GET['user_id'])) {
+    $application = 'windows';
+    if (!empty($_GET['application'])) {
+        if ($_GET['application'] == 'phone') {
+            $application = Wo_Secure($_GET['application']);
+        }
+    }
+    $c_id             = Wo_Secure($_GET['c_id']);
+    $user_id          = Wo_Secure($_GET['user_id']);
+    $check_if_session = Wo_CheckUserSessionID($user_id, $c_id, $application);
+    if ($check_if_session === true) {
+        $wo['user']          = Wo_UserData($user_id);
+        $session             = Wo_CreateLoginSession($user_id);
+        $_SESSION['user_id'] = $session;
+        setcookie("user_id", $session, time() + (10 * 365 * 24 * 60 * 60));
+        if ($wo['user']['user_id'] < 0 || empty($wo['user']['user_id']) || !is_numeric($wo['user']['user_id']) || Wo_UserActive($wo['user']['username']) === false) {
+            header("Location: " . Wo_SeoLink('index.php?link1=logout'));
+        }
+        $wo['loggedin'] = true;
     }
 }
 // Language Function
