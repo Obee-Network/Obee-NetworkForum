@@ -54,18 +54,7 @@ $(function () {
         cos.push([i, Math.cos(i)]);
     }
 
-    var trackingData = [
-        {
-            data: sin,
-            label: 'sin(x) = -0.00',
-            color: '#E91E63'
-        },
-        {
-            data: cos,
-            label: 'cos(x) = -0.00',
-            color: '#00BCD4'
-        }
-    ];
+
 
     var trackingPlot = $.plot('#tracking_chart', trackingData, {
         crosshair: {
@@ -84,6 +73,19 @@ $(function () {
         }
     });
 
+    var trackingData = [
+        {
+            data: sin,
+            label: 'sin(x) = -0.00',
+            color: '#E91E63'
+        },
+        {
+            data: cos,
+            label: 'cos(x) = -0.00',
+            color: '#00BCD4'
+        }
+    ];
+    
     var legends = $('#tracking_chart .legendLabel');
 
     legends.each(function () {
