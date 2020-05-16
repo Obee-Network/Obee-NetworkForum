@@ -14,6 +14,15 @@ $wo           = array();
 $sqlConnect   = $wo['sqlConnect'] = mysqli_connect($sql_db_host, $sql_db_user, $sql_db_pass, $sql_db_name, 3306);
 // Handling Server Errors
 $ServerErrors = array();
+
+$query = mysqli_query($sqlConnect, "SET NAMES utf8mb4");
+if (isset($ServerErrors) && !empty($ServerErrors)) {
+    foreach ($ServerErrors as $Error) {
+        echo "<h3>" . $Error . "</h3>";
+    }
+    die();
+}
+
 if (mysqli_connect_errno()) {
     $ServerErrors[] = "Failed to connect to MySQL: " . mysqli_connect_error();
 }
@@ -25,14 +34,6 @@ if (!extension_loaded('gd') && !function_exists('gd_info')) {
 }
 if (!extension_loaded('zip')) {
     $ServerErrors[] = "ZipArchive extension is NOT installed on your web server !";
-}
-
-$query = mysqli_query($sqlConnect, "SET NAMES utf8mb4");
-if (isset($ServerErrors) && !empty($ServerErrors)) {
-    foreach ($ServerErrors as $Error) {
-        echo "<h3>" . $Error . "</h3>";
-    }
-    die();
 }
 
 $baned_ips = Wo_GetBanned('user');
