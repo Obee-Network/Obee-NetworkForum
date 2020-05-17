@@ -5,6 +5,9 @@
      <?php
      $up = Wo_GetUserProType($wo['user']['pro_type']);
      ?>
+      <div class="alert alert-info">
+        <i class="fa fa-check fa-fw"></i> <?php echo $wo['lang']['boosted_pages_viewable'];?>
+      </div>
       <div class="alert alert-warning">
         <i class="fa fa-<?php echo $up['icon'];?> fa-fw"></i> 
         <?php 
@@ -12,9 +15,6 @@
         $string = str_replace('{can_boost}', $up['can_boost'], $string);
         echo $string;
         ?>
-      </div>
-      <div class="alert alert-info">
-        <i class="fa fa-check fa-fw"></i> <?php echo $wo['lang']['boosted_pages_viewable'];?>
       </div>
       <div class="saved-posts">
         <?php
