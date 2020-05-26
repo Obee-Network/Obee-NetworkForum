@@ -364,6 +364,41 @@ $data['welcome_url'] = Wo_SeoLink('index.php?link1=welcome');
 if ($wo['page'] == 'welcome') {
     $data['welcome_page'] = 1;
 }
+$wo         = array();
+// Connect to SQL Server
+$sqlConnect = mysqli_connect($sql_db_host, $sql_db_user, $sql_db_pass, $sql_db_name, 3306);
+function Wo_Secure($string, $censored_words = 1) {
+    global $sqlConnect;
+    $string = trim($string);
+    $string = htmlspecialchars($string, ENT_QUOTES);
+    $string = str_replace('\\n', " <br>", $string);
+    $string = str_replace('\\r', " <br>", $string);
+    $string = str_replace('\\r\\n', " <br>", $string);
+    $string = str_replace('\\n\\r', " <br>", $string);
+    $string = str_replace('&amp;#', '&#', $string);
+    if ($censored_words == 1) {
+        global $config;
+        $censored_words = @explode(",", $config['censored_words']);
+        foreach ($censored_words as $censored_word) {
+            $censored_word = trim($censored_word);
+            $string        = str_replace($censored_word, '****', $string);
+        }
+    }
+    return $string;
+}
+function unzip_file($file, $destination) {
+    // create object
+    $zip = new ZipArchive() ;
+    // open archive
+    if ($zip->open($file) !== TRUE) {
+        return false;
+    }
+    // extract contents to destination directory
+    $zip->extractTo($destination);
+    // close archive
+    $zip->close();
+        return true;
+}
 if ($wo['page'] == 'timeline' && $wo['loggedin'] == true && $wo['config']['css_upload'] == 1 && !empty($wo['user_profile'])) {
     if (!empty($wo['user_profile']['css_file']) && file_exists($wo['user_profile']['css_file'])) {
       $data['is_css_file'] = 1;
