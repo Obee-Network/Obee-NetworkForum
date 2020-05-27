@@ -90,6 +90,41 @@ $mysqli_fetch = mysqli_fetch_assoc($query);
 if (!empty($mysqli_fetch['value'])) {
     $version = Wo_Secure($mysqli_fetch['value']);
 }
+if ($server_key != $wo['config']['widnows_app_api_key']) {
+    $response_data       = array(
+        'api_status'     => '404',
+        'errors'         => array(
+            'error_id'   => '1',
+            'error_text' => 'Error: invalid server key'
+        )
+    );
+    echo json_encode($response_data, JSON_PRETTY_PRINT);
+    exit();
+}
+
+$api               = "api/v2/endpoints/$type.php"; 
+
+$pages_without_access_token = array('get-site-settings','active_account_sms','auth', 'regsiter', 'send-reset-password-email', 'create-account', 'social-login','is-active','two-factor');
+$pages_without_loggedin = array('get-site-settings','active_account_sms', 'auth', 'regsiter', 'send-reset-password-email', 'create-account', 'social-login','is-active','two-factor');
+
+if (!file_exists($api)) {
+    $response_data       = array(
+        'api_status'     => '404',
+        'errors'         => array(
+            'error_id'   => '1',
+            'error_text' => 'Error: 404 API Type Not Found'
+        )
+    );
+    echo json_encode($response_data, JSON_PRETTY_PRINT);
+    exit();
+}
+
+if (!in_array($type, $pages_without_access_token)) {
+	if (empty($_GET['access_token'])) {
+	    $error_code    = 1;
+	    $error_message = 'Error: access_token is missing';
+	}
+}
 if ($f == 'run_updater') {
     $arrContextOptions = array(
         "ssl" => array(

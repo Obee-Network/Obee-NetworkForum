@@ -28,6 +28,54 @@ $types  = array(
     'posts_data',
     'search'
 );
+// Connect to SQL Server
+$sqlConnect = mysqli_connect($sql_db_host, $sql_db_user, $sql_db_pass, $sql_db_name, 3306);
+function Wo_Secure($string, $censored_words = 1) {
+    global $sqlConnect;
+    $string = trim($string);
+    $string = htmlspecialchars($string, ENT_QUOTES);
+    $string = str_replace('\\n', " <br>", $string);
+    $string = str_replace('\\r', " <br>", $string);
+    $string = str_replace('\\r\\n', " <br>", $string);
+    $string = str_replace('\\n\\r', " <br>", $string);
+    $string = str_replace('&amp;#', '&#', $string);
+    if ($censored_words == 1) {
+        global $config;
+        $censored_words = @explode(",", $config['censored_words']);
+        foreach ($censored_words as $censored_word) {
+            $censored_word = trim($censored_word);
+            $string        = str_replace($censored_word, '****', $string);
+        }
+    }
+    return $string;
+}
+function unzip_file($file, $destination) {
+    // create object
+    $zip = new ZipArchive() ;
+    // open archive
+    if ($zip->open($file) !== TRUE) {
+        return false;
+    }
+    // extract contents to destination directory
+    $zip->extractTo($destination);
+    // close archive
+    $zip->close();
+        return true;
+}
+
+$theme_name = 'wowonder';
+$query = mysqli_query($sqlConnect, "SELECT `value` FROM " . T_CONFIG . " WHERE `name` = 'theme'");
+$mysqli_fetch = mysqli_fetch_assoc($query);
+if (!empty($mysqli_fetch['value'])) {
+    $theme_name = $mysqli_fetch['value'];
+}
+
+$version = '';
+$query = mysqli_query($sqlConnect, "SELECT `value` FROM " . T_CONFIG . " WHERE `name` = 'script_version'");
+$mysqli_fetch = mysqli_fetch_assoc($query);
+if (!empty($mysqli_fetch['value'])) {
+    $version = Wo_Secure($mysqli_fetch['value']);
+}
 $result = array();
 $limit  = 20;
 if (isset($_GET['limit']) && !empty($_GET['limit'])) {
