@@ -44,6 +44,7 @@ function Wo_UserContactsAPP($limit = 20, $json_contacts = '{}', $user_id = 0) {
     return $data;
 }
 
+
 function Wo_GetFilePosition($file) {
     $file_type = 'text';
     if (empty($file)) {

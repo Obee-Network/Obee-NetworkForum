@@ -10,7 +10,6 @@
 // +------------------------------------------------------------------------+
 $json_error_data   = array();
 $json_success_data = array();
-$json_success_data2 = array();
 if (empty($_GET['type']) || !isset($_GET['type'])) {
     $json_error_data = array(
         'api_status' => '400',
@@ -26,7 +25,7 @@ if (empty($_GET['type']) || !isset($_GET['type'])) {
     exit();
 }
 $type = Wo_Secure($_GET['type'], 0);
-if ($type == 'get_blocked_users') {
+if ($type == 'get_blogs') {
     if (empty($_POST['user_id'])) {
         $json_error_data = array(
             'api_status' => '400',
@@ -50,8 +49,9 @@ if ($type == 'get_blocked_users') {
     }
     if (empty($json_error_data)) {
         $user_id         = $_POST['user_id'];
-        $s      = Wo_Secure($_POST['s']);
+        $s               = Wo_Secure($_POST['s']);
         $user_login_data = Wo_UserData($user_id);
+        $wo['lang']      = Wo_LangsFromDB($user_login_data['language']);
         if (empty($user_login_data)) {
             $json_error_data = array(
                 'api_status' => '400',
@@ -79,33 +79,25 @@ if ($type == 'get_blocked_users') {
             echo json_encode($json_error_data, JSON_PRETTY_PRINT);
             exit();
         } else {
-            $wo['lang'] = Wo_LangsFromDB($user_login_data['language']);
-            $timezone = new DateTimeZone($user_login_data['timezone']);
-            $get = Wo_GetBlockedMembers($user_id);
-            foreach ($get as $user_list) {
-                $lastseen = ($user_list['lastseen'] > (time() - 60)) ? 'on' : 'off';
-                $json_data   = array(
-                    'user_id' => $user_list['user_id'],
-                    'username' => $user_list['username'],
-                    'name' => $user_list['name'],
-                    'first_name' => $user_list['first_name'],
-                    'profile_picture' => $user_list['avatar'],
-                    'cover_picture' => $user_list['cover'],
-                    'verified' => $user_list['verified'],
-                    'lastseen' => $lastseen,
-                    'lastseen_unix_time' => $user_list['lastseen'],
-                    'lastseen_time_text' => Wo_Time_Elapsed_String($user_list['lastseen']),
-                    'url' => $user_list['url']
-                );
-                array_push($json_success_data, $json_data);
-            }
-            header("Content-type: application/json");
-            echo json_encode(array(
-                'api_status' => 200,
+            $blogs = Wo_GetBlogs(array("limit" => 25));
+            $all_blogs = array();
+            foreach ($blogs as $key => $blog) {
+                foreach ($non_allowed as $key => $value) {
+                   unset($blog['author'][$value]);
+                }
+                unset($blog['content']);
+                $blog['category'] = $wo['page_categories'][$blog['category']];
+                $blog['posted'] = Wo_Time_Elapsed_String($blog['posted']);
+                $all_blogs[] = $blog;
+            }         
+            $json_success_data  = array(
+                'api_status' => '200',
                 'api_text' => 'success',
                 'api_version' => $api_version,
-                'blocked_users' => $json_success_data,
-            ));
+                'blogs' => $all_blogs
+            );
+            header("Content-type: application/json");
+            echo json_encode($json_success_data, JSON_PRETTY_PRINT);
             exit();
         }
     } else {
