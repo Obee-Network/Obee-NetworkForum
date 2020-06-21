@@ -310,17 +310,17 @@ $wo['call_action'] = array(
     '24'  => 'Registrati ora'
 );
 
-$wo['products_categories'] = array(
-    '0' => 'All',
-    '1' => 'Apparel & Accessories',
-    '2' => 'Autos & Vehicles',
-    '3' => 'Baby & Children\'s Products',
-    '4' => 'Beauty Products & Services',
-    '5' => 'Computers & Peripherals',
-    '6' => 'Consumer Electronics',
-    '7' => 'Dating Services',
-    '8' => 'Financial Services',
-    '9' => 'Gifts & Occasions',
-    '10' => 'Home & Garden'
-);
+// $wo['products_categories'] = array(
+//     '0' => 'All',
+//     '1' => 'Apparel & Accessories',
+//     '2' => 'Autos & Vehicles',
+//     '3' => 'Baby & Children\'s Products',
+//     '4' => 'Beauty Products & Services',
+//     '5' => 'Computers & Peripherals',
+//     '6' => 'Consumer Electronics',
+//     '7' => 'Dating Services',
+//     '8' => 'Financial Services',
+//     '9' => 'Gifts & Occasions',
+//     '10' => 'Home & Garden'
+// );
 ?>
