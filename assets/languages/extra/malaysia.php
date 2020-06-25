@@ -262,12 +262,7 @@ $wo['page_categories'] = array(
     '1' => 'Other'
 );
 
-$wo['relationship'] = array(
-    '1' => 'Single',
-    '2' => 'In a relationship',
-    '3' => 'Married',
-    '4' => 'Engaged'
-);
+
 
 $wo['months'] = array(
     '1' => 'January',
