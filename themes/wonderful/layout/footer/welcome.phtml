@@ -26,7 +26,7 @@
                $langs = Wo_LangsNamesFromDB();
                if (count($langs) > 0) {
                    foreach ($langs as $key => $wo['langs']) {
-                     $language = $wo['langs'];
+                     $language = $wo['langs'];//todo
                      $languages_name = ucfirst($wo['langs']);
                      $link = ($wo['config']['seoLink'] == 1) ? '?lang=' . $language: '?&lang=' . $language;
                 ?>

@@ -7,7 +7,6 @@ $pages = Wo_GetCustomPages();
       <ul class="list-inline <?php echo Wo_RightToLeft('pull-left');?>">
          <li><a href="<?php echo $wo['config']['site_url'];?>"><?php echo $wo['lang']['home'];?></a></li><li> - </li>
          <li><a href="<?php echo Wo_SeoLink('index.php?link1=terms&type=about-us');?>"><?php echo $wo['lang']['about'];?></a></li><li> - </li>
-         <li><a href="<?php echo Wo_SeoLink('index.php?link1=contact-us');?>"><?php echo $wo['lang']['contact_us'];?></a></li><li> - </li>
          <li><a href="<?php echo Wo_SeoLink('index.php?link1=terms&type=privacy-policy');?>"><?php echo $wo['lang']['privacy_policy'];?></a></li><li> - </li>
          <li><a href="<?php echo Wo_SeoLink('index.php?link1=terms&type=terms');?>"><?php echo $wo['lang']['terms_of_use'];?></a></li><li><?php if ($wo['config']['developers_page'] == 1)  { ?> - </li>
          <?php  if ($wo['config']['blogs'] == 1) { ?><li><a href="<?php echo Wo_SeoLink('index.php?link1=blogs');?>"><?php echo $wo['lang']['blog'];?></a></li><li> - </li><?php }?>
