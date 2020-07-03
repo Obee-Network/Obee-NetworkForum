@@ -18,7 +18,11 @@
 		</div>
 		<div class="comment-heading reply-heading wo_fb_comm">
 			<div class="innr_div">
-				<div class="comm_head">
+				
+				<div class="comment-text" data-post-comm-reply-text="<?php echo $wo['reply']['id']?>"><?php echo $wo['reply']['text']?></div>
+			</div>
+
+			<div class="comm_head">
 					<span class="user-popover" data-id="<?php echo $wo['reply']['publisher']['id'];?>" data-type="<?php echo $wo['reply']['publisher']['type'];?>">
 						<a href="<?php echo $wo['reply']['publisher']['url']?>" data-ajax="?link1=timeline&u=<?php echo $wo['reply']['publisher']['username'];?>"  onclick="InjectAPI('{&quot;profile_id&quot; : &quot;<?php echo $wo['reply']['publisher']['id']?>&quot;, &quot;type&quot;:&quot;<?php echo $wo['reply']['publisher']['type']?>&quot;}', event);">
 							<h4 class="user"><?php echo $wo['reply']['publisher']['name']?></h4>
@@ -28,20 +32,13 @@
 						<span class="verified-color" data-toggle="tooltip" title="<?php echo $wo['lang']['verified_user'];?>"><i class="fa fa-check-circle"></i></span>
 					<?php } ?>
 				</div>
-				
-				<div class="comment-text" data-post-comm-reply-text="<?php echo $wo['reply']['id']?>"><?php echo $wo['reply']['text']?></div>
-			</div>
 			<div class="clear"></div>   
 		</div>
 
 		<?php if ($wo['config']['second_post_button'] == 'reaction') { ?>
             <!-- reaction -->
 
-            <div class="like-stat  stat-item " style="<?php if ($wo['language_type'] == 'rtl') {?> float: right;margin: -2px 10px 0px 0px; <?php }else{ ?> float: left;margin: -2px 10px 0px 0px; <?php }?>">
-              <span class="like-emo replay-reactions-icons-<?php echo $wo['reply']['id']; ?>">
-              <?php echo Wo_GetPostReactions($wo['reply']['id'],"replay");?>
-              </span>
-            </div>
+          
 
             <div class="wo-reaction wo-reaction-replay stat-item" data-id="<?php echo $wo['reply']['id']; ?>" id="comment_reactions" data-id="<?php echo $wo['comment']['id']; ?>">
                 <span class="like-btn like-btn-replay" data-id="<?php echo $wo['reply']['id']; ?>">
