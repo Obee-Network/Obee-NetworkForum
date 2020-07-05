@@ -57,6 +57,14 @@ if (!empty($wo['activity']['activity_type'])) {
         $wo['activity']['type_text'] = str_replace($orginal_txt, $replaced_txt, $wo['lang']['activity_is_friend']);
         $wo['activity']['icon'] .= 'account-add';
     }
+    if ($wo['activity']['activity_type'] == 'shared_post') {
+        $wo['activity']['type_text'] = str_replace($orginal_txt, $replaced_txt, $wo['lang']['activity_share_post']);
+        $wo['activity']['icon'] .= 'share';
+    }
+    if ($wo['activity']['activity_type'] == 'commented_post') {
+        $wo['activity']['type_text'] = str_replace($orginal_txt, $replaced_txt, $wo['lang']['activity_commented_on_post']);
+        $wo['activity']['icon'] .= 'comment';
+    }
     if ($wo['activity']['activity_type'] == 'following') {
         $wo['activity']['type_text'] = str_replace($orginal_txt, $replaced_txt, $wo['lang']['activity_is_following']);
         $wo['activity']['icon'] .= 'account-add';
@@ -69,14 +77,6 @@ if (!empty($wo['activity']['activity_type'])) {
         $lang_type = ($wo['config']['second_post_button'] == 'wonder') ? $wo['lang']['activity_wondered_post'] : $wo['lang']['activity_disliked_post'];
         $wo['activity']['type_text'] = str_replace($orginal_txt, $replaced_txt, $lang_type);
         $wo['activity']['icon'] .= $wo['second_post_button_icon'];
-    }
-    if ($wo['activity']['activity_type'] == 'shared_post') {
-        $wo['activity']['type_text'] = str_replace($orginal_txt, $replaced_txt, $wo['lang']['activity_share_post']);
-        $wo['activity']['icon'] .= 'share';
-    }
-    if ($wo['activity']['activity_type'] == 'commented_post') {
-        $wo['activity']['type_text'] = str_replace($orginal_txt, $replaced_txt, $wo['lang']['activity_commented_on_post']);
-        $wo['activity']['icon'] .= 'comment';
     }
 }
 ?>
