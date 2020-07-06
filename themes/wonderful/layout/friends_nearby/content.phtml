@@ -92,7 +92,25 @@
 				</ul>
           </div>
 	  </div>
-	  <div id="search-nearby-users">		 
+	 
+	  <div id="search-nearby-users">
+          <div class="nearby-users-gender nearby-users-relationship"><?php echo $wo['lang']['relationship']; ?></div>
+          <div class="nearby-users-gender-collapse nearby-users-relationship-collapse">
+	          <ul>
+	          	<li class="active" data-relation-ship="5"><?php echo $wo['lang']['all'];?></li>
+	            <?php foreach ($wo['relationship'] as $relationship_ids => $relationship): ?>
+	            	<li class="" data-relation-ship="<?php echo $relationship_ids; ?>"><?php echo $relationship;?></li>
+	            <?php endforeach; ?>
+	          </ul>
+          </div>
+          
+          <div class="search-nearby-users-btn">
+	          <button type="button" class="wabe mdbtn btn btn-main form-control" onclick="Wo_LoadNearByUsers(this);">
+	          	<i class="fa fa-search progress-icon" data-icon="search"></i>
+	          	<?php echo $wo['lang']['search']; ?>
+	          </button>
+          </div>
+		  <div id="search-nearby-users">		 
           <div class="nearby-users-gender nearby-users-status"><?php echo $wo['lang']['status']; ?></div>
           <div class="nearby-users-gender-collapse nearby-users-status-collapse">
 	          <ul class="friends_nearby_status_ul">
@@ -111,24 +129,6 @@
 				</ul>
           </div>
 	  </div>
-	  <div id="search-nearby-users">
-          <div class="nearby-users-gender nearby-users-relationship"><?php echo $wo['lang']['relationship']; ?></div>
-          <div class="nearby-users-gender-collapse nearby-users-relationship-collapse">
-	          <ul>
-	          	<li class="active" data-relation-ship="5"><?php echo $wo['lang']['all'];?></li>
-	            <?php foreach ($wo['relationship'] as $relationship_ids => $relationship): ?>
-	            	<li class="" data-relation-ship="<?php echo $relationship_ids; ?>"><?php echo $relationship;?></li>
-	            <?php endforeach; ?>
-	          </ul>
-          </div>
-          
-          <div class="search-nearby-users-btn">
-	          <button type="button" class="wabe mdbtn btn btn-main form-control" onclick="Wo_LoadNearByUsers(this);">
-	          	<i class="fa fa-search progress-icon" data-icon="search"></i>
-	          	<?php echo $wo['lang']['search']; ?>
-	          </button>
-          </div>
-
        </div>
        <?php echo Wo_LoadPage('footer/sidebar-footer')?>
        <div class="clear"></div>
