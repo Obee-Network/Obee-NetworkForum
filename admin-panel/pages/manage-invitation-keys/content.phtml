@@ -1,0 +1,94 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>工具 > 邀请码</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>管理邀请码</h2> 
+                     <form id="add-invitation"><button type="submit" class="btn btn-warning waves-effect waves-light m-t-20">生成新邀请码</button></form>
+                     <br>
+                     <div>如果注册系统已关闭，此系统用于邀请用户访问您的站点.</div>
+                </div>
+                
+                <div class="body">
+                   <div class="table-responsive1">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                   <th>生成</th>
+					               <th>邀请码</th>
+					               <th>状态</th>
+					               <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="manage-invitation-list">
+                                <?php 
+				                foreach (Wo_GetAdminInvitation() as $wo['invitation']) {
+				                    echo Wo_LoadAdminPage('manage-invitation-keys/list');
+				                }
+				                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    </div>
+    <!-- #END# Vertical Layout -->
+<script>
+jQuery(document).ready(function($) {
+      $('#add-invitation').ajaxForm({
+      url: Wo_Ajax_Requests_File(),
+      type:'GET',
+      dataType:'json',
+      data: {f: 'admincp',s:'insert-invitation'},
+      beforeSend: function() {
+        $('#add-invitation').find('button').text('请稍后..');
+      },
+      success: function(data) {
+        if (data.status == 200) {
+            if ($('tr.setting-invitation').length > 0) {
+               $('.manage-invitation-list').prepend(data.html);            
+            }
+            else{
+               $('.manage-invitation-list').html(data.html); 
+            }
+        } 
+        $('#add-invitation').find('button').text('生成新邀请码');
+      }});
+
+      $(document).on('click', '.delete-admin-invitation', function(event) {
+         var id = $(this).attr('id');
+         $("tr[data-invitation='"+id+"']").remove();
+         $.ajax({
+            url:  Wo_Ajax_Requests_File(),
+            type: 'GET',
+            dataType: 'json',
+            data: {f: 'admincp',s:'rm-invitation',id:id},
+         })
+         .done(function(data) {
+            if (data.status == 200) {
+               
+            }
+         })
+         .fail(function() {
+            console.log("error");
+         })
+      });
+
+      $(document).on('click', '.copy-invitation-url', function(event) {
+         event.preventDefault();
+           var $temp = $("<input>");
+           $("body").append($temp);
+           $temp.val($(this).attr('data-link')).select();
+           document.execCommand("copy");
+           $temp.remove();
+           $(this).addClass('main');
+      });
+
+   });
+</script>

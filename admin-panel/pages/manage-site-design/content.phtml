@@ -1,0 +1,183 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>设计 > 自定义设计</h2>
+    </div>
+    <!-- Vertical Layout -->
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h2>自定义站点设计</h2><br>
+                    <p>此系统仅支持默认主题，对于sunshine主题，您可以通过CSS文件编辑颜色：:</p>
+                    <p>./themes/sunshine/css/style.css</p>
+                    <p>./themes/sunshine/layout/style.phtml</p>
+                </div>
+                <div class="body">
+                    <div class="alert alert-success d-settings-alert"></div>
+                    <form class="d-settings" method="POST">
+                    	<h4>欢迎页面</h4><hr>
+                        <div class="input-group">
+                    	   <span>Favicon图标</span>
+                           <span class="btn btn-default btn-file">
+		                     <i class="fa fa-camera"></i>
+		                     <input type="file" id="favicon" accept="image/x-png, image/gif, image/jpeg" name="favicon">
+		                   </span>
+		                    <div class="form-group hidden" id="favicon-i">
+					            <input type="text" class="form-control" readonly>
+					        </div>
+                        </div>
+                        <br><h4>页头</h4><hr>
+                        <div class="input-group">
+                    	   <span>Logo推荐尺寸 (470x75)</span>
+                           <span class="btn btn-default btn-file">
+		                     <i class="fa fa-camera"></i>
+		                     <input type="file" id="logo" accept="image/x-png, image/gif, image/jpeg" name="logo">
+		                   </span>
+		                    <div class="form-group hidden" id="logo-i">
+					            <input type="text" class="form-control" readonly>
+					        </div>
+                        </div>
+                    	<span>页头背景颜色</span>
+                        <div class="input-group colorpicker colorpicker-element">
+                            <div class="form-line">
+                                <input type="text" class="form-control" value="<?php echo $wo['config']['header_background'] ?>" name="header_background">
+                            </div>
+                            <span class="input-group-addon">
+                                <i></i>
+                            </span>
+                        </div>
+                        <span>页头图标/文字颜色</span>
+                        <div class="input-group colorpicker colorpicker-element">
+                            <div class="form-line">
+                                <input type="text" class="form-control" value="<?php echo $wo['config']['header_color'] ?>" name="header_color">
+                            </div>
+                            <span class="input-group-addon">
+                                <i></i>
+                            </span>
+                        </div>
+                        <span>标题搜索输入背景颜色</span>
+                        <div class="input-group colorpicker colorpicker-element">
+                            <div class="form-line">
+                                <input type="text" class="form-control" value="<?php echo $wo['config']['header_search_color'] ?>" name="header_search_color">
+                            </div>
+                            <span class="input-group-addon">
+                                <i></i>
+                            </span>
+                        </div>
+                        <span>标题图标阴影颜色</span>
+                        <div class="input-group colorpicker colorpicker-element">
+                            <div class="form-line">
+                                <input type="text" class="form-control" value="<?php echo $wo['config']['header_button_shadow'] ?>" name="header_button_shadow">
+                            </div>
+                            <span class="input-group-addon">
+                                <i></i>
+                            </span>
+                        </div>
+                        <br><h4>身体</h4><hr>
+                        <span>身体背景颜色</span>
+                        <div class="input-group colorpicker colorpicker-element">
+                            <div class="form-line">
+                                <input type="text" class="form-control" value="<?php echo $wo['config']['body_background'] ?>" name="body_background">
+                            </div>
+                            <span class="input-group-addon">
+                                <i></i>
+                            </span>
+                        </div>
+                        <br><h4>按钮</h4><hr>
+                        <span>文本颜色</span>
+                        <div class="input-group colorpicker colorpicker-element">
+                            <div class="form-line">
+                                <input type="text" class="form-control" value="<?php echo $wo['config']['btn_color'] ?>" name="btn_color">
+                            </div>
+                            <span class="input-group-addon">
+                                <i></i>
+                            </span>
+                        </div>
+                        <span>背景颜色</span>
+                        <div class="input-group colorpicker colorpicker-element">
+                            <div class="form-line">
+                                <input type="text" class="form-control" value="<?php echo $wo['config']['btn_background_color'] ?>" name="btn_background_color">
+                            </div>
+                            <span class="input-group-addon">
+                                <i></i>
+                            </span>
+                        </div>
+                        <span>悬停文字颜色</span>
+                        <div class="input-group colorpicker colorpicker-element">
+                            <div class="form-line">
+                                <input type="text" class="form-control" value="<?php echo $wo['config']['btn_hover_color'] ?>" name="btn_hover_color">
+                            </div>
+                            <span class="input-group-addon">
+                                <i></i>
+                            </span>
+                        </div>
+                        <span>悬停背景颜色</span>
+                        <div class="input-group colorpicker colorpicker-element">
+                            <div class="form-line">
+                                <input type="text" class="form-control" value="<?php echo $wo['config']['btn_hover_background_color'] ?>" name="btn_hover_background_color">
+                            </div>
+                            <span class="input-group-addon">
+                                <i></i>
+                            </span>
+                        </div>
+                        <span>禁用的背景颜色</span>
+                        <div class="input-group colorpicker colorpicker-element">
+                            <div class="form-line">
+                                <input type="text" class="form-control" value="<?php echo $wo['config']['btn_disabled'] ?>" name="btn_disabled">
+                            </div>
+                            <span class="input-group-addon">
+                                <i></i>
+                            </span>
+                        </div>
+                        <div>更改设计设置后，请务必清理浏览器缓存.</div>
+                        <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">保存</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- #END# Vertical Layout -->
+<script>
+$(function() {
+	$('.colorpicker').colorpicker();
+	$("#background-image").change(function () {
+         var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+         $("#background-image-i input").val(filename);
+         $("#background-image-i").removeClass('hidden');
+    });
+    $("#favicon").change(function () {
+         var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+         $("#favicon-i input").val(filename);
+         $("#favicon-i").removeClass('hidden');
+    });
+    $("#logo").change(function () {
+         var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+         $("#logo-i input").val(filename);
+         $("#logo-i").removeClass('hidden');
+    });
+    var form_d_settings = $('form.d-settings');
+    form_d_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_design_setting',
+        beforeSend: function() {
+            form_d_settings.find('.waves-effect').text('Please wait..');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_d_settings.find('.waves-effect').text('Save');
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                $('.d-settings-alert').html('<i class="fa fa-check"></i> Settings updated successfully');
+                setTimeout(function () {
+                    $('.d-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+});
+</script>
+<style>
+.colorpicker {
+    z-index: 0 !important;
+}
+</style>

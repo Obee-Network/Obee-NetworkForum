@@ -1,0 +1,15 @@
+<tr class="setting-postlist" id="<?php echo $wo['langs_'];?>">
+   <td style="text-align: center;"><?php echo $wo['langs'];?></td>
+   <td style="text-align: center;">
+      <a class="pointer black" href="<?php echo Wo_LoadAdminLinkSettings('edit-lang?id=' . $wo['langs_']);?>"><i class="fa fa-pencil-square progress-icon" data-icon="trash-o"></i> 编辑</a> | 
+      <span class="delete-field pointer black" onclick="Wo_DeleteLang('<?php echo $wo['langs_'];?>');"><i class="fa fa-trash-o progress-icon" data-icon="trash-o"></i> 删除</span>
+      |
+      <span class="delete-field pointer black" onclick="update_lang_status(this,'<?php echo $wo['langs_'];?>')" data-type="<?php echo ($wo['config'][$wo['langs_']] == 1) ? 'disable': 'enable';?>"><?php if($wo['config'][$wo['langs_']] == 1){ ?> <i class="fa fa-times"></i> <?php }else{ ?><i class="fa fa-check"></i>  <?php } ?> <?php echo ($wo['config'][$wo['langs_']] == 1) ? '禁用': '启用';?></span>
+
+
+        <!-- <input type="radio" name="<?php echo $wo['langs_'];?>" id="<?php echo $wo['langs_'];?>-enabled" value="1" <?php echo ($wo['config'][$wo['langs_']] == 1) ? 'checked': '';?> onclick="update_lang_status('enabled','<?php echo $wo['langs_'];?>')">
+        <label for="<?php echo $wo['langs_'];?>-enabled">Enabled</label>
+        <input type="radio" name="<?php echo $wo['langs_'];?>" id="<?php echo $wo['langs_'];?>-disabled" value="0" <?php echo ($wo['config'][$wo['langs_']] == 0) ? 'checked': '';?> onclick="update_lang_status('disabled','<?php echo $wo['langs_'];?>')">
+        <label for="<?php echo $wo['langs_'];?>-disabled" class="m-l-20">Disabled</label> -->
+   </td>
+</tr>

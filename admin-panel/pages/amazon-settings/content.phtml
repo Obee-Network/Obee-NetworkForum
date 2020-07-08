@@ -1,0 +1,294 @@
+<div class="container-fluid">
+    <div class="alert alert-warning">
+        <i class="fa fa-fw fa-exclamation-triangle"></i> <strong>提示:</strong>您无法同时启用两个或三个存储，如果启用又拍云，则会自动禁用amazon s3，对于amazon s3和Digitalocean也是如此。
+      </div>
+    <div class="block-header">
+        <h2>常规设置 > 上传设置 > 配置第三方存储</h2>
+    </div>
+    <!-- Vertical Layout -->
+    <div class="row">
+        <div class="col-lg-6 col-md-6 ">
+            <div class="card">
+                <div class="header">
+                    <h2>Amazon S3 设置</h2>
+                </div>
+                <div class="body">
+                    <div class="alert alert-success general-settings-alert"></div>
+                    <form class="general-settings" method="POST">
+                        <label for="amazone_s3">Amazon S3 存储</label>
+                        <div class="form-group">
+                            <input type="radio" name="amazone_s3" id="amazone_s3-enabled" value="1" <?php echo ($wo['config']['amazone_s3'] == 1) ? 'checked': '';?>>
+                            <label for="amazone_s3-enabled">启用</label>
+                            <input type="radio" name="amazone_s3" id="amazone_s3-disabled" value="0" <?php echo ($wo['config']['amazone_s3'] == 0) ? 'checked': '';?>>
+                            <label for="amazone_s3-disabled" class="m-l-20">禁用</label>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="bucket_name" name="bucket_name" class="form-control" value="<?php echo $wo['config']['bucket_name']?>">
+                                <label class="form-label">Amazon Bucket 名称</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="amazone_s3_key" name="amazone_s3_key" class="form-control" value="<?php echo $wo['config']['amazone_s3_key']?>">
+                                <label class="form-label">Amazon S3 Key</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="amazone_s3_s_key" name="amazone_s3_s_key" class="form-control" value="<?php echo $wo['config']['amazone_s3_s_key']?>">
+                                <label class="form-label">Amazon S3 Secret Key</label>
+                            </div>
+                        </div>
+                        <label for="region">Amazon S3 bucket 区域</label>
+                        <select class="form-control show-tick" id="region" name="region">
+                          <option value="us-east-1" <?php echo ($wo['config']['region'] == 'us-east-1')   ? ' selected' : '';?> >US East (N. Virginia)</option>
+		                  <option value="us-east-2" <?php echo ($wo['config']['region'] == 'us-east-2')   ? ' selected' : '';?> >US East (Ohio)</option>
+                          <option value="us-west-1" <?php echo ($wo['config']['region'] == 'us-west-1')   ? ' selected' : '';?> >US West (N. California)</option>
+                          <option value="us-west-2" <?php echo ($wo['config']['region'] == 'us-west-2')   ? ' selected' : '';?> >US West (Oregon)</option>
+		                  <option value="ap-northeast-2" <?php echo ($wo['config']['region'] == 'ap-northeast-2')   ? ' selected' : '';?> >Asia Pacific (Seoul)</option>
+                          <option value="ap-south-1" <?php echo ($wo['config']['region'] == 'ap-south-1')   ? ' selected' : '';?> >Asia Pacific (Mumbai)</option>
+		                  <option value="ap-southeast-1" <?php echo ($wo['config']['region'] == 'ap-southeast-1')   ? ' selected' : '';?> >Asia Pacific (Singapore)</option>
+		                  <option value="ap-southeast-2" <?php echo ($wo['config']['region'] == 'ap-southeast-2')   ? ' selected' : '';?> >Asia Pacific (Sydney)</option>
+		                  <option value="ap-northeast-1" <?php echo ($wo['config']['region'] == 'ap-northeast-1')   ? ' selected' : '';?> >Asia Pacific (Tokyo)</option>
+                          <option value="ca-central-1" <?php echo ($wo['config']['region'] == 'ca-central-1')   ? ' selected' : '';?> >Canada (Central)</option>
+		                  <option value="eu-central-1" <?php echo ($wo['config']['region'] == 'eu-central-1')   ? ' selected' : '';?> >EU (Frankfurt)</option>
+		                  <option value="eu-west-1" <?php echo ($wo['config']['region'] == 'eu-west-1')   ? ' selected' : '';?> >EU (Ireland)</option>
+                          <option value="eu-west-2" <?php echo ($wo['config']['region'] == 'eu-west-2')   ? ' selected' : '';?> >EU (London)</option>
+                          <option value="sa-east-1" <?php echo ($wo['config']['region'] == 'sa-east-1')   ? ' selected' : '';?> >South America (São Paulo)</option>
+                        </select>
+                        <div class="clearfix"></div>
+                        <br><br>
+                        <span class="help-block ">1. 在启用Amazon S3之前，请确保将整个“upload /”文件夹上传到您的存储桶.</span>
+		                <span class="help-block ">2. 在禁用Amazon S3之前，请确保将整个“upload /”文件夹下载到您的服务器.</span>
+		                <span class="help-block ">3. 我们建议通过上传文件夹和文件 <a href="http://s3tools.org/s3cmd">S3cmd</a>.</span>
+		                <span class="help-block ">4. 如果您的网站仍然是全新的，您可以逃避上传步骤，但请务必点击“测试连接”.</span>
+                        <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">Save</button>
+                        <button type="button" class="btn btn-warning m-t-15 waves-effect" onclick="Wo_TestS3()">测试配置</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 ">
+            <div class="card">
+                <div class="header">
+                    <h2>Digitalocean Spaces 设置</h2>
+                </div>
+                <div class="body">
+                    <div class="alert alert-success spaces-settings-alert"></div>
+                    <form class="spaces-settings" method="POST">
+                        <label for="spaces">Digitalocean Spaces Storage</label>
+                        <div class="form-group">
+                            <input type="radio" name="spaces" id="spaces-enabled" value="1" <?php echo ($wo['config']['spaces'] == 1) ? 'checked': '';?>>
+                            <label for="spaces-enabled">启用</label>
+                            <input type="radio" name="spaces" id="spaces-disabled" value="0" <?php echo ($wo['config']['spaces'] == 0) ? 'checked': '';?>>
+                            <label for="spaces-disabled" class="m-l-20">禁用</label>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="space_name" name="space_name" class="form-control" value="<?php echo $wo['config']['space_name']?>">
+                                <label class="form-label">Digitalocean Space Name</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="spaces_key" name="spaces_key" class="form-control" value="<?php echo $wo['config']['spaces_key']?>">
+                                <label class="form-label">Digitalocean Key</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="spaces_secret" name="spaces_secret" class="form-control" value="<?php echo $wo['config']['spaces_secret']?>">
+                                <label class="form-label">Digitalocean Secret</label>
+                            </div>
+                        </div>
+                        <label for="space_region">Digitalocean bucket 区域</label>
+                        <select class="form-control show-tick" id="space_region" name="space_region">
+                          <option value="nyc3" <?php echo ($wo['config']['space_region'] == 'nyc3')   ? ' selected' : '';?> >New York</option>
+                          <option value="ams3" <?php echo ($wo['config']['space_region'] == 'ams3')   ? ' selected' : '';?> >Amsterdam</option>
+                          <option value="sgp1" <?php echo ($wo['config']['space_region'] == 'sgp1')   ? ' selected' : '';?> >Singapore</option>
+                        </select>
+                        <div class="clearfix"></div>
+                        <br><br>
+                        <span class="help-block ">1. 在启用Digitalocean之前，请确保将整个“upload /”文件夹上传到存储桶.</span>
+                        <span class="help-block ">2. 在禁用Digitalocean之前，请确保将整个“upload /”文件夹下载到您的服务器.</span>
+                        <span class="help-block ">4. 如果您的网站仍然是全新的，您可以逃避上传步骤，但请务必点击“测试连接”.</span>
+                        <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">保存</button>
+                        <button type="button" class="btn btn-warning m-t-15 waves-effect" onclick="Wo_TestSpaces()">测试配置</button>
+                    </form>
+                </div>
+            </div>
+            <br><br>
+        </div>
+        <div class="col-lg-6 col-md-6 ">
+            <div class="card">
+                <div class="header">
+                    <h2>又拍云设置</h2><br>
+                    <small>您可以直接从服务器上传文件到另一台又拍云服务器并从那里加载它们.</small><br>
+                    <small>重要提示：这可能会降低网站的上传/删除速度，请确保使用快速的服务器.</small>
+                </div>
+                <div class="body">
+                    <div class="alert alert-success ftp-settings-alert"></div>
+                    <form class="ftp-settings" method="POST">
+                        <label for="ftp_upload">又拍云存储</label>
+                        <div class="form-group">
+                            <input type="radio" name="ftp_upload" id="ftp_upload-enabled" value="1" <?php echo ($wo['config']['ftp_upload'] == 1) ? 'checked': '';?>>
+                            <label for="ftp_upload-enabled">启用</label>
+                            <input type="radio" name="ftp_upload" id="ftp_upload-disabled" value="0" <?php echo ($wo['config']['ftp_upload'] == 0) ? 'checked': '';?>>
+                            <label for="ftp_upload-disabled" class="m-l-20">禁用</label>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="ftp_host" name="ftp_host" class="form-control" value="<?php echo $wo['config']['ftp_host']?>">
+                                <label class="form-label">又拍云地址</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="ftp_username" name="ftp_username" class="form-control" value="<?php echo $wo['config']['ftp_username']?>">
+                                <label class="form-label">又拍云空间名称</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="ftp_password" name="ftp_password" class="form-control" value="<?php echo $wo['config']['ftp_password']?>">
+                                <label class="form-label">操作员密码</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="ftp_port" name="ftp_port" class="form-control" value="<?php echo $wo['config']['ftp_port']?>">
+                                <label class="form-label">又拍云端口</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="ftp_path" name="ftp_path" class="form-control" value="<?php echo $wo['config']['ftp_path']?>">
+                                <label class="form-label">又拍云路径</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="ftp_endpoint" name="ftp_endpoint" class="form-control" value="<?php echo $wo['config']['ftp_endpoint']?>">
+                                <label class="form-label">又拍云路径.</label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <span class="help-block ">1. 在启用又拍云之前，请确保将整个“upload /”文件夹上传到又拍云服务器.</span>
+                        <span class="help-block ">2. 在禁用又拍云之前，请确保将整个“upload /”文件夹下载到服务器.</span>
+                        <span class="help-block ">3. 如果您的网站仍然是全新的，您可以逃避上传步骤，但请务必点击“测试连接”.</span>
+                        <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">保存</button>
+                        <button type="button" class="btn btn-warning m-t-15 waves-effect" onclick="Wo_TestFTP()">测试又拍云</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- #END# Vertical Layout -->
+<script>
+function Wo_TestS3() {
+	$('form.general-settings').find('.btn-warning').text('请稍后..');
+	$.get(Wo_Ajax_Requests_File(), {f:'admin_setting', s: 'test_s3'}, function (data) {
+		if (data.status == 200) {
+			alert('Connection established!');
+		} else if (data.status == 300) {
+			alert('Bucket doesn\'t exists');
+		} else if (data.status == 500) {
+			alert('Your s3 account doesn\'t have any buckets, please create one.');
+		} else if (data.status == 400) {
+			alert(data.message);
+		} else  {
+			alert('Error while connecting to amazone, please check your details');
+		}
+		$('form.general-settings').find('.btn-warning').text('测试配置');
+	});
+}
+
+function Wo_TestSpaces() {
+    $('form.spaces-settings').find('.btn-warning').text('请稍后..');
+    $.get(Wo_Ajax_Requests_File(), {f:'admin_setting', s: 'test_spaces'}, function (data) {
+        if (data.status == 200) {
+            alert('Connection established!');
+        } else if (data.status == 300) {
+            alert('Bucket doesn\'t exists');
+        } else if (data.status == 500) {
+            alert('Your s3 account doesn\'t have any buckets, please create one.');
+        } else if (data.status == 400) {
+            alert(data.message);
+        } else  {
+            alert('Error while connecting to amazone, please check your details');
+        }
+        $('form.spaces-settings').find('.btn-warning').text('测试配置');
+    });
+}
+function Wo_TestFTP() {
+    $('form.ftp-settings').find('.btn-warning').text('Please wait..');
+    $.get(Wo_Ajax_Requests_File(), {f:'admin_setting', s: 'test_ftp'}, function (data) {
+        if (data.status == 200) {
+            alert('Connection established!');
+        } else if (data.status == 400) {
+            alert(data.message);
+        }
+        $('form.ftp-settings').find('.btn-warning').text('测试又拍云');
+    });
+}
+
+$(function() {
+    var form_general_settings = $('form.general-settings');
+    form_general_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_general_setting',
+        beforeSend: function() {
+            form_general_settings.find('.btn-primary').text('请稍后..');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+            	form_general_settings.find('.btn-primary').text('保存');
+            	$('.general-settings-alert').html('<i class="fa fa-check"></i> 设置更新成功');
+            	setTimeout(function () {
+            		$('.general-settings-alert').empty();
+            	}, 2000);
+            }
+        }
+    });
+
+    var form_ftp_settings = $('form.ftp-settings');
+    form_ftp_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_general_setting',
+        beforeSend: function() {
+            form_ftp_settings.find('.btn-primary').text('请稍后..');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_ftp_settings.find('.btn-primary').text('保存');
+                $('.ftp-settings-alert').html('<i class="fa fa-check"></i> 设置更新成功');
+                setTimeout(function () {
+                    $('.ftp-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+
+    var form_spaces_settings = $('form.spaces-settings');
+    form_spaces_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_general_setting',
+        beforeSend: function() {
+            form_spaces_settings.find('.btn-primary').text('请稍后..');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_spaces_settings.find('.btn-primary').text('Save');
+                $('.spaces-settings-alert').html('<i class="fa fa-check"></i> 设置更新成功');
+                setTimeout(function () {
+                    $('.spaces-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+
+});
+
+</script>

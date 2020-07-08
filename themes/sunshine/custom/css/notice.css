@@ -1,0 +1,198 @@
+.well {
+    padding: 30px;
+    background: #f4f4f4;
+    -webkit-box-shadow: 0px 0px 10px #f4f4f4;
+    -moz-box-shadow: 0px 0px 10px #f4f4f4;
+    box-shadow: 0px 0px 10px #f4f4f4;
+    border: none;
+    background: #f4f4f4;
+}
+
+.well li {
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #ddd
+}
+
+.well li i {
+    display: inline-block;
+    background: url(../images/right-normal.png);
+    width: 11px;
+    height: 11px;
+    background-size: contain;
+    vertical-align: text-top;
+    margin: 1px 5px;
+}
+
+.well li a {
+    color: #666;
+    word-break: break-word;
+}
+
+.well li:hover a {
+    color: #f99320;
+    text-decoration: none;
+}
+
+.well li:hover i {
+    background: url(../images/right-active.png);
+    background-size: contain;
+}
+
+.flex {
+    display: -webkit-box; /* 老版本语法: Safari, iOS, Android browser, older WebKit browsers. */
+    display: -moz-box; /* 老版本语法: Firefox (buggy) */
+    display: -ms-flexbox; /* 混合版本语法: IE 10 */
+    display: -webkit-flex; /* 新版本语法: Chrome 21+ */
+    display: flex; /* 新版本语法: Opera 12.1, Firefox 22+ */
+    align-items: center;
+    flex-flow: row wrap;
+    -webkit-flex-flow: row wrap;
+}
+
+.justify-space-between {
+    justify-content: space-between;
+    -webkit-box-pack: center;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: center;
+}
+
+.flex-a-set {
+    flex: 2
+}
+
+.flex-span-set {
+    flex: 1;
+    text-align: right;
+    font-size: 12px;
+    color: #aaa
+}
+
+.announcement {
+    word-break: break-all;
+}
+
+.pagination > .active > a {
+    color: #f99320;
+    background-color: #eee;
+    border-color: #fff;
+    border-radius: 4px;
+}
+
+.pagination > li > a, .pagination > li > span {
+    border-color: #fff;
+    cursor: pointer;
+    color: #666;
+}
+
+.pagination > li:hover a {
+    color: #f99320 !important;
+    border-color: #fff !important;
+    background-color: #eee !important;
+    border-radius: 4px;
+}
+
+/* li,
+ol,
+p,
+table,
+ul {
+	margin: 0;
+	padding: 0
+}
+
+table {
+	width: auto;
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+.footer,
+.header,
+.wrap,
+.wrapper {
+	width: 100%;
+	left: 0
+}
+
+li {
+	list-style: none;
+	vertical-align: bottom
+}
+
+em,
+i {
+	font-style: normal
+}
+
+a {
+	text-decoration: none
+}
+
+a:hover {
+	text-decoration: underline
+}
+
+.btn_download:hover,
+.header .nav_box a:hover {
+	text-decoration: none
+}
+
+img {
+	border: 0
+}
+
+.hidden {
+	display: none
+} */
+.mask-paging {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.06);
+    display: none;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    justify-content: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.mrt60 {
+    margin-top: 60px;
+}
+
+.mrt80 {
+    margin-top: 120px;
+}
+
+@media (max-width: 767px) {
+    .well {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 640px) {
+
+    .well li a:nth-of-type(2) {
+        display: none
+    }
+}
+
+@media (max-width: 584px) {
+    .flex-a-set {
+        flex: auto
+    }
+
+    .flex-span-set {
+        flex: auto;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+}

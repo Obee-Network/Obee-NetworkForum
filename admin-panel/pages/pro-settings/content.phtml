@@ -1,0 +1,308 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>VIP系统 > VIP系统设置</h2>
+    </div>
+    <!-- Vertical Layout -->
+    <div class="row">
+        <div class="col-lg-5 col-md-5">
+            <div class="card">
+                <div class="header">
+                    <h2>VIP系统设置</h2>
+                </div>
+                <div class="body">
+                    <div class="alert alert-success pro-settings-alert"></div>
+                    <form class="pro-settings" method="POST">
+                        <label for="pro">VIP系统 <span class="black" data-toggle="popover" data-trigger="hover" data-content="If you disbale Pro Mode, All features will be free and activated without the boost feature."><i class="fa fa-question-circle fa-fw"></i></span></label>
+                        <div class="form-group">
+                            <input type="radio" name="pro" id="pro-enabled" value="1" <?php echo ($wo['config']['pro'] == 1) ? 'checked': '';?>>
+                            <label for="pro-enabled">启用</label>
+                            <input type="radio" name="pro" id="pro-disabled" value="0" <?php echo ($wo['config']['pro'] == 0) ? 'checked': '';?>>
+                            <label for="pro-disabled" class="m-l-20">禁用</label>
+                        </div>
+                        <!-- <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="weekly_price" name="weekly_price" class="form-control" value="<?php echo $wo['config']['weekly_price'];?>">
+                                <label class="form-label">Weekly Price (USD)</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="monthly_price" name="monthly_price" class="form-control" value="<?php echo $wo['config']['monthly_price'];?>">
+                                <label class="form-label">Monthly Price (USD)</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="yearly_price" name="yearly_price" class="form-control" value="<?php echo $wo['config']['yearly_price'];?>">
+                                <label class="form-label">Yearly Price (USD)</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="lifetime_price" name="lifetime_price" class="form-control" value="<?php echo $wo['config']['lifetime_price'];?>">
+                                <label class="form-label">LifeTime Price (USD)</label>
+                            </div>
+                        </div> -->
+                        <!-- <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="monthly_boosts" name="monthly_boosts" class="form-control" value="<?php echo $wo['config']['monthly_boosts'];?>">
+                                <label class="form-label">Monthly Boosts <small>Monthly Max posts/pages boosts allowed.</small></label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="yearly_boosts" name="yearly_boosts" class="form-control" value="<?php echo $wo['config']['yearly_boosts'];?>">
+                                <label class="form-label">Yearly Boosts <small>Yearly Max posts/pages boosts allowed.</small></label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="lifetime_boosts" name="lifetime_boosts" class="form-control" value="<?php echo $wo['config']['lifetime_boosts'];?>">
+                                <label class="form-label">Lifetime Boosts <small>Lifetime Max posts/pages boosts allowed.</small></label>
+                            </div>
+                        </div> -->
+                        <br>
+                        <div class="clearfix"></div>
+                        <br><br>
+                        <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">保存</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-7">
+            <div class="card">
+                <div class="header">
+                    <h2>编辑VIP包</h2>
+                </div>
+                <div class="body">
+                  <div class="table-responsive1">
+                        <table class="table table-bordered table-striped table-hover">
+                          <thead>
+                            <tr>
+                              <th>名称</th>
+                              <th>状态</th>
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+
+                             <tr class="setting-userlist">
+                                <?php $pro_info = Wo_GetUserProType(1); ?>
+                               <td style="color:<?php echo $pro_info['color_name']?>">
+                                <?php if (!empty($wo['pro_packages']['star']['image'])) { ?>
+                                    <img src="<?php echo($wo['pro_packages']['star']['image']) ?>" class="pro_packages_icon_inline">
+                                   <?php }else{ ?>
+                                    <i class="fa fa-star fa-fw"></i> 
+                                   <?php } ?>
+                                   &nbsp;<?php echo $wo['lang']['star']?>
+                               </td>
+                               <td><?php echo ($wo['pro_packages']['star']['status'] == 1) ? '<span class="label label-success">Enabled</span>': '<span class="label label-danger">Disabled</span>';?></td>
+                               <td>
+                                  <a class="btn btn-info waves-effect" href="javascript:void(0)" onclick="ShowEditPro(this)" data_pro_type="star">编辑</a>
+                               </td>
+                            </tr>
+
+                            <tr class="setting-userlist">
+                                <?php $pro_info = Wo_GetUserProType(2); ?>
+                               <td style="color:<?php echo $pro_info['color_name']?>">
+                                <?php if (!empty($wo['pro_packages']['hot']['image'])) { ?>
+                                    <img src="<?php echo($wo['pro_packages']['hot']['image']) ?>" class="pro_packages_icon_inline">
+                                   <?php }else{ ?>
+                                    <i class="fa fa-fire fa-fw"></i> 
+                                   <?php } ?>
+                                   &nbsp;<?php echo $wo['lang']['hot']?>
+                               </td>
+                               <td><?php echo ($wo['pro_packages']['hot']['status'] == 1) ? '<span class="label label-success">Enabled</span>': '<span class="label label-danger">Disabled</span>';?></td>
+                               <td>
+                                  <a class="btn btn-info waves-effect" href="javascript:void(0)" onclick="ShowEditPro(this)" data_pro_type="hot">编辑</a>
+                               </td>
+                            </tr>
+
+                            <tr class="setting-userlist">
+                                <?php $pro_info = Wo_GetUserProType(3); ?>
+                               <td style="color:<?php echo $pro_info['color_name']?>">
+                                <?php if (!empty($wo['pro_packages']['ultima']['image'])) { ?>
+                                    <img src="<?php echo($wo['pro_packages']['ultima']['image']) ?>" class="pro_packages_icon_inline">
+                                   <?php }else{ ?>
+                                    <i class="fa fa-bolt fa-fw"></i> 
+                                   <?php } ?>
+                                   &nbsp;<?php echo $wo['lang']['ultima']?>
+                               </td>
+                               <td><?php echo ($wo['pro_packages']['ultima']['status'] == 1) ? '<span class="label label-success">Enabled</span>': '<span class="label label-danger">Disabled</span>';?></td>
+                               <td>
+                                  <a class="btn btn-info waves-effect" href="javascript:void(0)" onclick="ShowEditPro(this)" data_pro_type="ultima">编辑</a>
+                               </td>
+                            </tr>
+
+                            <tr class="setting-userlist">
+                                <?php $pro_info = Wo_GetUserProType(4); ?>
+                               <td style="color:<?php echo $pro_info['color_name']?>">
+                                <?php if (!empty($wo['pro_packages']['vip']['image'])) { ?>
+                                    <img src="<?php echo($wo['pro_packages']['vip']['image']) ?>" class="pro_packages_icon_inline">
+                                   <?php }else{ ?>
+                                    <i class="fa fa-rocket fa-fw"></i> 
+                                   <?php } ?>
+                                   &nbsp;<?php echo $wo['lang']['vip']?>
+                               </td>
+                               <td><?php echo ($wo['pro_packages']['vip']['status'] == 1) ? '<span class="label label-success">Enabled</span>': '<span class="label label-danger">Disabled</span>';?></td>
+                               <td>
+                                  <a class="btn btn-info waves-effect" href="javascript:void(0)" onclick="ShowEditPro(this)" data_pro_type="vip">编辑</a>
+                               </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        
+    </div>
+    <!-- #END# Vertical Layout -->
+<script>
+function ShowEditPro(self) {
+    $(self).text('Please wait ..');
+    type = $(self).attr('data_pro_type');
+    $.post(Wo_Ajax_Requests_File() + '?f=admin_setting&s=get_pro', {type: type}, function(data, textStatus, xhr) {
+        $(self).text('EDIT');
+        if (data.status == 200) {
+            $('#pro_form_data').html(data.html);
+            $('#proModal').modal('show');
+        }
+    });
+}
+
+$(function() {
+    var form_pro = $('form.proModalForm');
+    form_pro.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_pro_member',
+        beforeSend: function() {
+            form_pro.find('.waves-effect').text('Please wait..');
+        },
+        success: function(data) {
+            $('#proModal').animate({
+                scrollTop : 0                       // Scroll to top of body
+            }, 500);
+            $('#save_pro_btn').text('SAVE CHANGES');
+            if (data.status == 200) {
+                form_pro.find('.waves-effect').text('Save');
+                $('#proModalAlert').html('<div class="alert alert-success"><i class="fa fa-check"></i> Settings updated successfully</div>');
+                setTimeout(function () {
+                    $('#proModalAlert').empty();
+                    $('#proModal').modal('hide');
+                    if (data.html != '') {
+                        setTimeout(function () {
+                            $('.modal-body form .data').html('<div class="preloader pl-size-xl "><div class="spinner-layer pl-teal"><div class="circle-clipper left"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>');
+                            $('#defaultModalLabel').html('Edit key: ' + data.type);
+                            $('#id_of_key').val(data.type);
+                            $('.modal-body form .data').html(data.html);
+                            $('#defaultModal').modal('show');
+                        },500);
+                        
+                    }
+                    else{
+                        setTimeout(function () {
+                            location.reload();
+                        },1000);
+                    }
+                }, 2000);
+            }
+            else{
+                $('#proModalAlert').html('<div class="alert alert-danger">'+data.message+'</div>');
+            }
+        }
+    });
+
+    var form_lang_settings = $('form.edit-key-settings');
+    form_lang_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_lang_key&hash=' + $('.main_session').val(),
+        beforeSend: function() {
+            $('.btn-save').text('Please wait..');
+        },
+        success: function(data) {
+            $('#defaultModal').animate({
+                scrollTop : 0                       // Scroll to top of body
+            }, 10);
+            setTimeout(function () {
+                if (data.status == 200) {
+                    $('.btn-save').text('SAVE CHANGES');
+                    var value_to_use = $('[data-editable=1]').val();
+                    var id_of_key = $('#id_of_key').val();
+                    $('#edit_' + id_of_key).text(value_to_use);
+                    $('#defaultModal').modal('hide');
+                    setTimeout(function () {
+                        location.reload();
+                    },1000);
+                }
+            },300);
+        }
+    });
+   var form_site_settings = $('form.pro-settings');
+    form_site_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_general_setting',
+        beforeSend: function() {
+            form_site_settings.find('.waves-effect').text('Please wait..');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_site_settings.find('.waves-effect').text('Save');
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                $('.pro-settings-alert').html('<i class="fa fa-check"></i> Settings updated successfully');
+                setTimeout(function () {
+                    $('.pro-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+});
+function Wo_SubmitProForm(self) {
+    $('#save_pro_btn').text('Please wait..');
+    $('.proModalForm').submit();
+}
+function Wo_SubmitLangForm() {
+    $('.edit-key-settings').submit();
+}
+</script>
+<div class="modal fade" id="proModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h4 class="modal-title" id="proModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert" id="proModalAlert"></div>
+                <form class="proModalForm" method="POST">
+                    <div id="pro_form_data"></div>
+                    <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" onclick="Wo_SubmitProForm(this);" class="btn-save btn btn-link waves-effect" id="save_pro_btn">保存更改</button>
+                <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h4>请输入VIP包名称</h4>
+                <h4 class="modal-title" id="defaultModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success edit-lang-settings-alert"></div>
+                <form class="edit-key-settings" method="POST">
+                    <div class="data"></div>
+                    <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                    <input type="hidden" name="id_of_key" id="id_of_key" value="">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="Wo_SubmitLangForm();" class="btn-save btn btn-link waves-effect">保存更改</button>
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

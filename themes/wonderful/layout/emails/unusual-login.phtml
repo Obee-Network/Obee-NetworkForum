@@ -1,0 +1,21 @@
+你好 <?php echo $wo['email']['username']; ?>,<br><br>
+
+我们需要验证是不是你本人<br><br>
+
+您的登录尝试似乎与平时略有不同。 这可能是因为您从其他设备或其他位置登录.<br><br>
+
+如果您尝试登录，请使用以下验证码认证您的身份:<br><br>
+
+<?php echo $wo['email']['code']; ?><br><br>
+
+以下是登录尝试的详细信息:<br>
+日期: <?php echo $wo['email']['date']; ?><br>
+账号: <?php echo $wo['email']['email']; ?><br>
+位置: <?php echo $wo['email']['countryCode']; ?><br>
+IP地址: <?php echo $wo['email']['ip_address']; ?><br>
+城市: <?php echo $wo['email']['city']; ?><br><br>
+
+如果不是您，请修改你的密码.<br><br>
+
+你的安全中心,<br>
+团队 <?php echo $wo['config']['siteName']?>

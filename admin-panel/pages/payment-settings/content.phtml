@@ -1,0 +1,487 @@
+<div class="container-fluid">
+    <div class="alert alert-warning">
+      <i class="fa fa-question-circle fa-fw"></i>请注意，每种付款方式仅显示付款提供商支持的货币.
+    </div>
+    <div class="block-header">
+        <h2>设置 > 支付设置</h2>
+    </div>
+    <!-- Vertical Layout -->
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h2>PayPal支付设置</h2>
+                </div>
+                <div class="body">
+                    <div class="alert alert-success paypal-settings-alert"></div>
+                    <form class="paypal-settings" method="POST">
+                      <label for="transaction_log">显示日志</label>
+                        <div class="form-group">
+                            <input type="radio" name="transaction_log" id="transaction_log-enabled" value="yes" <?php echo ($wo['config']['transaction_log'] == 'yes') ? 'checked': '';?>>
+                            <label for="transaction_log-enabled">启用</label>
+                            <input type="radio" name="transaction_log" id="transaction_log-disabled" value="no" <?php echo ($wo['config']['transaction_log'] == 'no') ? 'checked': '';?>>
+                            <label for="transaction_log-disabled" class="m-l-20">禁用</label>
+                        </div>
+                        <label for="paypal">PayPal</label>
+                        <div class="form-group">
+                            <input type="radio" name="paypal" id="paypal-enabled" value="yes" <?php echo ($wo['config']['paypal'] == 'yes') ? 'checked': '';?>>
+                            <label for="paypal-enabled">启用</label>
+                            <input type="radio" name="paypal" id="paypal-disabled" value="no" <?php echo ($wo['config']['paypal'] == 'no') ? 'checked': '';?>>
+                            <label for="paypal-disabled" class="m-l-20">禁用</label>
+                        </div> 
+                        <label for="paypal_mode">PayPal Mode</label>
+                        <div class="form-group">
+                            <input type="radio" name="paypal_mode" id="paypal_mode-enabled" value="live" <?php echo ($wo['config']['paypal_mode'] == 'live') ? 'checked': '';?>>
+                            <label for="paypal_mode-enabled">Live</label>
+                            <input type="radio" name="paypal_mode" id="paypal_mode-disabled" value="sandbox" <?php echo ($wo['config']['paypal_mode'] == 'sandbox') ? 'checked': '';?>>
+                            <label for="paypal_mode-disabled" class="m-l-20">SandBox</label>
+                        </div> 
+                        <br>
+                        <label for="paypal_currency">PayPal货币</label>
+                        <select class="form-control show-tick" id="paypal_currency" name="paypal_currency">
+                          <option value="USD" <?php echo ($wo['config']['paypal_currency'] == 'USD')  ? ' selected': '';?>>USD</option>
+                          <option value="EUR" <?php echo ($wo['config']['paypal_currency'] == 'EUR')  ? ' selected': '';?>>EUR</option>
+                          <option value="AUD" <?php echo ($wo['config']['paypal_currency'] == 'AUD')  ? ' selected': '';?>>AUD</option>
+                          <option value="BRL" <?php echo ($wo['config']['paypal_currency'] == 'BRL')  ? ' selected': '';?>>BRL</option>
+                          <option value="CAD" <?php echo ($wo['config']['paypal_currency'] == 'CAD')  ? ' selected': '';?>>CAD</option>
+                          <option value="CZK" <?php echo ($wo['config']['paypal_currency'] == 'CZK')  ? ' selected': '';?>>CZK</option>
+                          <option value="DKK" <?php echo ($wo['config']['paypal_currency'] == 'DKK')  ? ' selected': '';?>>DKK</option>
+                          <option value="HKD" <?php echo ($wo['config']['paypal_currency'] == 'HKD')  ? ' selected': '';?>>HKD</option>
+                          <option value="HUF" <?php echo ($wo['config']['paypal_currency'] == 'HUF')  ? ' selected': '';?>>HUF</option>
+                          <option value="INR" <?php echo ($wo['config']['paypal_currency'] == 'INR')  ? ' selected': '';?>>INR</option>
+                          <option value="ILS" <?php echo ($wo['config']['paypal_currency'] == 'ILS')  ? ' selected': '';?>>ILS</option>
+                          <option value="JPY" <?php echo ($wo['config']['paypal_currency'] == 'JPY')  ? ' selected': '';?>>JPY</option>
+                          <option value="MYR" <?php echo ($wo['config']['paypal_currency'] == 'MYR')  ? ' selected': '';?>>MYR</option>
+                          <option value="MXN" <?php echo ($wo['config']['paypal_currency'] == 'MXN')  ? ' selected': '';?>>MXN</option>
+                          <option value="TWD" <?php echo ($wo['config']['paypal_currency'] == 'TWD')  ? ' selected': '';?>>TWD</option>
+                          <option value="NZD" <?php echo ($wo['config']['paypal_currency'] == 'NZD')  ? ' selected': '';?>>NZD</option>
+                          <option value="NOK" <?php echo ($wo['config']['paypal_currency'] == 'NOK')  ? ' selected': '';?>>NOK</option>
+                          <option value="PHP" <?php echo ($wo['config']['paypal_currency'] == 'PHP')  ? ' selected': '';?>>PHP</option>
+                          <option value="PLN" <?php echo ($wo['config']['paypal_currency'] == 'PLN')  ? ' selected': '';?>>PLN</option>
+                          <option value="GBP" <?php echo ($wo['config']['paypal_currency'] == 'GBP')  ? ' selected': '';?>>GBP</option>
+                          <option value="RUB" <?php echo ($wo['config']['paypal_currency'] == 'RUB')  ? ' selected': '';?>>RUB</option>
+                          <option value="SGD" <?php echo ($wo['config']['paypal_currency'] == 'SGD')  ? ' selected': '';?>>SGD</option>
+                          <option value="SEK" <?php echo ($wo['config']['paypal_currency'] == 'SEK')  ? ' selected': '';?>>SEK</option>
+                          <option value="CHF" <?php echo ($wo['config']['paypal_currency'] == 'CHF')  ? ' selected': '';?>>CHF</option>
+                          <option value="THB" <?php echo ($wo['config']['paypal_currency'] == 'THB')  ? ' selected': '';?>>THB</option>
+                        </select>
+                        <div class="clearfix"></div>
+                        <br>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="paypal_id" name="paypal_id" class="form-control" value="<?php echo $wo['config']['paypal_id'];?>">
+                                <label class="form-label">PayPal Clinet ID</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="paypal_secret" name="paypal_secret" class="form-control" value="<?php echo $wo['config']['paypal_secret'];?>">
+                                <label class="form-label">PayPal Secret Key</label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">保存</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h2>Bitcoin设置</h2>
+                </div>
+                <div class="body">
+                    <div class="alert alert-success bitcoin-settings-alert"></div>
+                    <form class="bitcoin-settings" method="POST">
+                       <label for="bitcoin">Bitcoin支付 </label>
+                        <div class="form-group">
+                            <input type="radio" name="bitcoin" id="bitcoin-enabled" value="yes" <?php echo ($wo['config']['bitcoin'] == 'yes') ? 'checked': '';?>>
+                            <label for="bitcoin-enabled">启用</label>
+                            <input type="radio" name="bitcoin" id="bitcoin-disabled" value="no" <?php echo ($wo['config']['bitcoin'] == 'no') ? 'checked': '';?>>
+                            <label for="bitcoin-disabled" class="m-l-20">禁用</label>
+                        </div>
+                        <p>注册商家账号 : <a href="https://www.coinpayments.net" target="_blank">coinpayments.net</a></p>
+                        <br>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="coinpayments_secret" name="coinpayments_secret" class="form-control" value="<?php echo $wo['config']['coinpayments_secret'];?>">
+                                <label class="form-label">Coinpayments API Secret Key <small>Your coinpayments secret key</small></label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="coinpayments_id" name="coinpayments_id" class="form-control" value="<?php echo $wo['config']['coinpayments_id'];?>">
+                                <label class="form-label">Coinpayments Publishable Key <small>Your coinpayments publishable key</small></label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">保存</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 pull-right">
+            <div class="card">
+                <div class="header">
+                    <h2>Stripe设置</h2>
+                </div>
+                <div class="body">
+                    <div class="alert alert-success payment-settings-alert"></div>
+                    <form class="payment-settings" method="POST">
+                        <br>
+
+                        <label for="credit_card">Stripe设置 </label>
+                        <div class="form-group">
+                            <input type="radio" name="credit_card" id="credit_card-enabled" value="yes" <?php echo ($wo['config']['credit_card'] == 'yes') ? 'checked': '';?>>
+                            <label for="credit_card-enabled">启用</label>
+                            <input type="radio" name="credit_card" id="credit_card-disabled" value="no" <?php echo ($wo['config']['credit_card'] == 'no') ? 'checked': '';?>>
+                            <label for="credit_card-disabled" class="m-l-20">禁用</label>
+                        </div> 
+                        <label for="alipay">Alipay Payment Method </label>
+                        <div class="form-group">
+                            <input type="radio" name="alipay" id="alipay-enabled" value="yes" <?php echo ($wo['config']['alipay'] == 'yes') ? 'checked': '';?>>
+                            <label for="alipay-enabled">启用</label>
+                            <input type="radio" name="alipay" id="alipay-disabled" value="no" <?php echo ($wo['config']['alipay'] == 'no') ? 'checked': '';?>>
+                            <label for="alipay-disabled" class="m-l-20">禁用</label>
+                        </div> 
+                        <br>
+                        <br>
+                        <label for="stripe_currency">Stripe货币</label>
+                        <select class="form-control show-tick" id="stripe_currency" name="stripe_currency">
+                          <option value="USD" <?php echo ($wo['config']['stripe_currency'] == 'USD')  ? ' selected': '';?>>USD</option>
+                          <option value="EUR" <?php echo ($wo['config']['stripe_currency'] == 'EUR')  ? ' selected': '';?>>EUR</option>
+                          <option value="AUD" <?php echo ($wo['config']['stripe_currency'] == 'AUD')  ? ' selected': '';?>>AUD</option>
+                          <option value="BRL" <?php echo ($wo['config']['stripe_currency'] == 'BRL')  ? ' selected': '';?>>BRL</option>
+                          <option value="CAD" <?php echo ($wo['config']['stripe_currency'] == 'CAD')  ? ' selected': '';?>>CAD</option>
+                          <option value="CZK" <?php echo ($wo['config']['stripe_currency'] == 'CZK')  ? ' selected': '';?>>CZK</option>
+                          <option value="DKK" <?php echo ($wo['config']['stripe_currency'] == 'DKK')  ? ' selected': '';?>>DKK</option>
+                          <option value="HKD" <?php echo ($wo['config']['stripe_currency'] == 'HKD')  ? ' selected': '';?>>HKD</option>
+                          <option value="HUF" <?php echo ($wo['config']['stripe_currency'] == 'HUF')  ? ' selected': '';?>>HUF</option>
+                          <option value="ILS" <?php echo ($wo['config']['stripe_currency'] == 'ILS')  ? ' selected': '';?>>ILS</option>
+                          <option value="JPY" <?php echo ($wo['config']['stripe_currency'] == 'JPY')  ? ' selected': '';?>>JPY</option>
+                          <option value="MYR" <?php echo ($wo['config']['stripe_currency'] == 'MYR')  ? ' selected': '';?>>MYR</option>
+                          <option value="MXN" <?php echo ($wo['config']['stripe_currency'] == 'MXN')  ? ' selected': '';?>>MXN</option>
+                          <option value="TWD" <?php echo ($wo['config']['stripe_currency'] == 'TWD')  ? ' selected': '';?>>TWD</option>
+                          <option value="NZD" <?php echo ($wo['config']['stripe_currency'] == 'NZD')  ? ' selected': '';?>>NZD</option>
+                          <option value="NOK" <?php echo ($wo['config']['stripe_currency'] == 'NOK')  ? ' selected': '';?>>NOK</option>
+                          <option value="PHP" <?php echo ($wo['config']['stripe_currency'] == 'PHP')  ? ' selected': '';?>>PHP</option>
+                          <option value="PLN" <?php echo ($wo['config']['stripe_currency'] == 'PLN')  ? ' selected': '';?>>PLN</option>
+                          <option value="RUB" <?php echo ($wo['config']['stripe_currency'] == 'RUB')  ? ' selected': '';?>>RUB</option>
+                          <option value="SGD" <?php echo ($wo['config']['stripe_currency'] == 'SGD')  ? ' selected': '';?>>SGD</option>
+                          <option value="SEK" <?php echo ($wo['config']['stripe_currency'] == 'SEK')  ? ' selected': '';?>>SEK</option>
+                          <option value="CHF" <?php echo ($wo['config']['stripe_currency'] == 'CHF')  ? ' selected': '';?>>CHF</option>
+                          <option value="THB" <?php echo ($wo['config']['stripe_currency'] == 'THB')  ? ' selected': '';?>>THB</option>
+                          <option value="GBP" <?php echo ($wo['config']['stripe_currency'] == 'GBP')  ? ' selected': '';?>>GBP</option>
+                        </select>
+                        <div class="clearfix"></div>
+                        <br>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="stripe_secret" name="stripe_secret" class="form-control" value="<?php echo $wo['config']['stripe_secret'];?>">
+                                <label class="form-label">Stripe API Secret Key <small>Your Stripe secret key that starts with sk_</small></label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="stripe_id" name="stripe_id" class="form-control" value="<?php echo $wo['config']['stripe_id'];?>">
+                                <label class="form-label">Stripe Publishable Key <small>Your Stripe publishable key that starts with pk_</small></label>
+                            </div>
+                        </div>
+                        <br>
+                        
+                        <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">保存</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h2>本地银行或扫码</h2>
+                </div>
+                <div class="body">
+                    <div class="alert alert-success bank-settings-alert"></div>
+                    <form class="bank-settings" method="POST">
+                        <label for="bank_payment">本地银行或扫码 </label>
+                        <div class="form-group">
+                            <input type="radio" name="bank_payment" id="bank_payment-enabled" value="yes" <?php echo ($wo['config']['bank_payment'] == 'yes') ? 'checked': '';?>>
+                            <label for="bank_payment-enabled">启用</label>
+                            <input type="radio" name="bank_payment" id="bank_payment-disabled" value="no" <?php echo ($wo['config']['bank_payment'] == 'no') ? 'checked': '';?>>
+                            <label for="bank_payment-disabled" class="m-l-20">禁用</label>
+                        </div> 
+                        <div class="form-group form-float">
+                            <div class="form-line focused">
+                                <textarea name="bank_description" id="bank_description" class="form-control" cols="30" rows="5"><?php echo $wo['config']['bank_description'];?>
+                                </textarea>
+                                <label class="form-label">支付信息描述</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line focused">
+                                <textarea name="bank_transfer_note" id="bank_transfer_note" class="form-control" cols="30" rows="5"><?php echo $wo['config']['bank_transfer_note'];?></textarea>
+                                <label class="form-label">付款记录</label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">保存</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h2>2Checkout支付</h2>
+                </div>
+                <div class="body">
+                    <div class="alert alert-success checkout-settings-alert"></div>
+                    <form class="checkout-settings" method="POST">
+                        <label for="checkout_payment">2Checkout Payment Method </label>
+                        <div class="form-group">
+                            <input type="radio" name="checkout_payment" id="checkout_payment-enabled" value="yes" <?php echo ($wo['config']['checkout_payment'] == 'yes') ? 'checked': '';?>>
+                            <label for="checkout_payment-enabled">启用</label>
+                            <input type="radio" name="checkout_payment" id="checkout_payment-disabled" value="no" <?php echo ($wo['config']['checkout_payment'] == 'no') ? 'checked': '';?>>
+                            <label for="checkout_payment-disabled" class="m-l-20">禁用</label>
+                        </div>
+                        <label for="checkout_mode">2Checkout Mode</label>
+                        <div class="form-group">
+                            <input type="radio" name="checkout_mode" id="checkout_mode-enabled" value="live" <?php echo ($wo['config']['checkout_mode'] == 'live') ? 'checked': '';?>>
+                            <label for="checkout_mode-enabled">Live</label>
+                            <input type="radio" name="checkout_mode" id="checkout_mode-disabled" value="sandbox" <?php echo ($wo['config']['checkout_mode'] == 'sandbox') ? 'checked': '';?>>
+                            <label for="checkout_mode-disabled" class="m-l-20">SandBox</label>
+                        </div> 
+                        <br>
+                        <label for="2checkout_currency">2Checkout货币</label>
+                        <select class="form-control show-tick" id="2checkout_currency" name="2checkout_currency">
+                          <option value="USD" <?php echo ($wo['config']['2checkout_currency'] == 'USD')  ? ' selected': '';?>>USD</option>
+                          <option value="EUR" <?php echo ($wo['config']['2checkout_currency'] == 'EUR')  ? ' selected': '';?>>EUR</option>
+                          <option value="AED" <?php echo ($wo['config']['2checkout_currency'] == 'AED')  ? ' selected': '';?>>AED</option>
+                          <option value="AFN" <?php echo ($wo['config']['2checkout_currency'] == 'AFN')  ? ' selected': '';?>>AFN</option>
+                          <option value="ALL" <?php echo ($wo['config']['2checkout_currency'] == 'ALL')  ? ' selected': '';?>>ALL</option>
+                          <option value="ARS" <?php echo ($wo['config']['2checkout_currency'] == 'ARS')  ? ' selected': '';?>>ARS</option>
+                          <option value="AUD" <?php echo ($wo['config']['2checkout_currency'] == 'AUD')  ? ' selected': '';?>>AUD</option>
+                          <option value="AZN" <?php echo ($wo['config']['2checkout_currency'] == 'AZN')  ? ' selected': '';?>>AZN</option>
+                          <option value="BBD" <?php echo ($wo['config']['2checkout_currency'] == 'BBD')  ? ' selected': '';?>>BBD</option>
+                          <option value="BDT" <?php echo ($wo['config']['2checkout_currency'] == 'BDT')  ? ' selected': '';?>>BDT</option>
+                          <option value="BGN" <?php echo ($wo['config']['2checkout_currency'] == 'BGN')  ? ' selected': '';?>>BGN</option>
+                          <option value="BMD" <?php echo ($wo['config']['2checkout_currency'] == 'BMD')  ? ' selected': '';?>>BMD</option>
+                          <option value="BND" <?php echo ($wo['config']['2checkout_currency'] == 'BND')  ? ' selected': '';?>>BND</option>
+                          <option value="BOB" <?php echo ($wo['config']['2checkout_currency'] == 'BOB')  ? ' selected': '';?>>BOB</option>
+                          <option value="BRL" <?php echo ($wo['config']['2checkout_currency'] == 'BRL')  ? ' selected': '';?>>BRL</option>
+                          <option value="BSD" <?php echo ($wo['config']['2checkout_currency'] == 'BSD')  ? ' selected': '';?>>BSD</option>
+                          <option value="BWP" <?php echo ($wo['config']['2checkout_currency'] == 'BWP')  ? ' selected': '';?>>BWP</option>
+                          <option value="BYN" <?php echo ($wo['config']['2checkout_currency'] == 'BYN')  ? ' selected': '';?>>BYN</option>
+                          <option value="BZD" <?php echo ($wo['config']['2checkout_currency'] == 'BZD')  ? ' selected': '';?>>BZD</option>
+                          <option value="CAD" <?php echo ($wo['config']['2checkout_currency'] == 'CAD')  ? ' selected': '';?>>CAD</option>
+                          <option value="CHF" <?php echo ($wo['config']['2checkout_currency'] == 'CHF')  ? ' selected': '';?>>CHF</option>
+                          <option value="CLP" <?php echo ($wo['config']['2checkout_currency'] == 'CLP')  ? ' selected': '';?>>CLP</option>
+                          <option value="CNY" <?php echo ($wo['config']['2checkout_currency'] == 'CNY')  ? ' selected': '';?>>CNY</option>
+                          <option value="COP" <?php echo ($wo['config']['2checkout_currency'] == 'COP')  ? ' selected': '';?>>COP</option>
+                          <option value="CRC" <?php echo ($wo['config']['2checkout_currency'] == 'CRC')  ? ' selected': '';?>>CRC</option>
+                          <option value="CZK" <?php echo ($wo['config']['2checkout_currency'] == 'CZK')  ? ' selected': '';?>>CZK</option>
+                          <option value="DKK" <?php echo ($wo['config']['2checkout_currency'] == 'DKK')  ? ' selected': '';?>>DKK</option>
+                          <option value="DOP" <?php echo ($wo['config']['2checkout_currency'] == 'DOP')  ? ' selected': '';?>>DOP</option>
+                          <option value="DZD" <?php echo ($wo['config']['2checkout_currency'] == 'DZD')  ? ' selected': '';?>>DZD</option>
+                          <option value="EGP" <?php echo ($wo['config']['2checkout_currency'] == 'EGP')  ? ' selected': '';?>>EGP</option>
+                          <option value="FJD" <?php echo ($wo['config']['2checkout_currency'] == 'FJD')  ? ' selected': '';?>>FJD</option>
+                          <option value="GBP" <?php echo ($wo['config']['2checkout_currency'] == 'GBP')  ? ' selected': '';?>>GBP</option>
+                          <option value="GTQ" <?php echo ($wo['config']['2checkout_currency'] == 'GTQ')  ? ' selected': '';?>>GTQ</option>
+                          <option value="HKD" <?php echo ($wo['config']['2checkout_currency'] == 'HKD')  ? ' selected': '';?>>HKD</option>
+                          <option value="HNL" <?php echo ($wo['config']['2checkout_currency'] == 'HNL')  ? ' selected': '';?>>HNL</option>
+                          <option value="HRK" <?php echo ($wo['config']['2checkout_currency'] == 'HRK')  ? ' selected': '';?>>HRK</option>
+                          <option value="HUF" <?php echo ($wo['config']['2checkout_currency'] == 'HUF')  ? ' selected': '';?>>HUF</option>
+                          <option value="IDR" <?php echo ($wo['config']['2checkout_currency'] == 'IDR')  ? ' selected': '';?>>IDR</option>
+                          <option value="ILS" <?php echo ($wo['config']['2checkout_currency'] == 'ILS')  ? ' selected': '';?>>ILS</option>
+                          <option value="INR" <?php echo ($wo['config']['2checkout_currency'] == 'INR')  ? ' selected': '';?>>INR</option>
+                          <option value="JMD" <?php echo ($wo['config']['2checkout_currency'] == 'JMD')  ? ' selected': '';?>>JMD</option>
+                          <option value="JOD" <?php echo ($wo['config']['2checkout_currency'] == 'JOD')  ? ' selected': '';?>>JOD</option>
+                          <option value="JPY" <?php echo ($wo['config']['2checkout_currency'] == 'JPY')  ? ' selected': '';?>>JPY</option>
+                          <option value="KES" <?php echo ($wo['config']['2checkout_currency'] == 'KES')  ? ' selected': '';?>>KES</option>
+                          <option value="KRW" <?php echo ($wo['config']['2checkout_currency'] == 'KRW')  ? ' selected': '';?>>KRW</option>
+                          <option value="KWD" <?php echo ($wo['config']['2checkout_currency'] == 'KWD')  ? ' selected': '';?>>KWD</option>
+                          <option value="KZT" <?php echo ($wo['config']['2checkout_currency'] == 'KZT')  ? ' selected': '';?>>KZT</option>
+                          <option value="LAK" <?php echo ($wo['config']['2checkout_currency'] == 'LAK')  ? ' selected': '';?>>LAK</option>
+                          <option value="LBP" <?php echo ($wo['config']['2checkout_currency'] == 'LBP')  ? ' selected': '';?>>LBP</option>
+                          <option value="LKR" <?php echo ($wo['config']['2checkout_currency'] == 'LKR')  ? ' selected': '';?>>LKR</option>
+                          <option value="LRD" <?php echo ($wo['config']['2checkout_currency'] == 'LRD')  ? ' selected': '';?>>LRD</option>
+                          <option value="MAD" <?php echo ($wo['config']['2checkout_currency'] == 'MAD')  ? ' selected': '';?>>MAD</option>
+                          <option value="MDL" <?php echo ($wo['config']['2checkout_currency'] == 'MDL')  ? ' selected': '';?>>MDL</option>
+                          <option value="MMK" <?php echo ($wo['config']['2checkout_currency'] == 'MMK')  ? ' selected': '';?>>MMK</option>
+                          <option value="MOP" <?php echo ($wo['config']['2checkout_currency'] == 'MOP')  ? ' selected': '';?>>MOP</option>
+                          <option value="MRO" <?php echo ($wo['config']['2checkout_currency'] == 'MRO')  ? ' selected': '';?>>MRO</option>
+                          <option value="MUR" <?php echo ($wo['config']['2checkout_currency'] == 'MUR')  ? ' selected': '';?>>MUR</option>
+                          <option value="MVR" <?php echo ($wo['config']['2checkout_currency'] == 'MVR')  ? ' selected': '';?>>MVR</option>
+                          <option value="MXN" <?php echo ($wo['config']['2checkout_currency'] == 'MXN')  ? ' selected': '';?>>MXN</option>
+                          <option value="MYR" <?php echo ($wo['config']['2checkout_currency'] == 'MYR')  ? ' selected': '';?>>MYR</option>
+                          <option value="NAD" <?php echo ($wo['config']['2checkout_currency'] == 'NAD')  ? ' selected': '';?>>NAD</option>
+                          <option value="NGN" <?php echo ($wo['config']['2checkout_currency'] == 'NGN')  ? ' selected': '';?>>NGN</option>
+                          <option value="NIO" <?php echo ($wo['config']['2checkout_currency'] == 'NIO')  ? ' selected': '';?>>NIO</option>
+                          <option value="NOK" <?php echo ($wo['config']['2checkout_currency'] == 'NOK')  ? ' selected': '';?>>NOK</option>
+                          <option value="NPR" <?php echo ($wo['config']['2checkout_currency'] == 'NPR')  ? ' selected': '';?>>NPR</option>
+                          <option value="NZD" <?php echo ($wo['config']['2checkout_currency'] == 'NZD')  ? ' selected': '';?>>NZD</option>
+                          <option value="OMR" <?php echo ($wo['config']['2checkout_currency'] == 'OMR')  ? ' selected': '';?>>OMR</option>
+                          <option value="PEN" <?php echo ($wo['config']['2checkout_currency'] == 'PEN')  ? ' selected': '';?>>PEN</option>
+                          <option value="PGK" <?php echo ($wo['config']['2checkout_currency'] == 'PGK')  ? ' selected': '';?>>PGK</option>
+                          <option value="PHP" <?php echo ($wo['config']['2checkout_currency'] == 'PHP')  ? ' selected': '';?>>PHP</option>
+                          <option value="PKR" <?php echo ($wo['config']['2checkout_currency'] == 'PKR')  ? ' selected': '';?>>PKR</option>
+                          <option value="PLN" <?php echo ($wo['config']['2checkout_currency'] == 'PLN')  ? ' selected': '';?>>PLN</option>
+                          <option value="PYG" <?php echo ($wo['config']['2checkout_currency'] == 'PYG')  ? ' selected': '';?>>PYG</option>
+                          <option value="QAR" <?php echo ($wo['config']['2checkout_currency'] == 'QAR')  ? ' selected': '';?>>QAR</option>
+                          <option value="RON" <?php echo ($wo['config']['2checkout_currency'] == 'RON')  ? ' selected': '';?>>RON</option>
+                          <option value="RSD" <?php echo ($wo['config']['2checkout_currency'] == 'RSD')  ? ' selected': '';?>>RSD</option>
+                          <option value="RUB" <?php echo ($wo['config']['2checkout_currency'] == 'RUB')  ? ' selected': '';?>>RUB</option>
+                          <option value="SAR" <?php echo ($wo['config']['2checkout_currency'] == 'SAR')  ? ' selected': '';?>>SAR</option>
+                          <option value="SBD" <?php echo ($wo['config']['2checkout_currency'] == 'SBD')  ? ' selected': '';?>>SBD</option>
+                          <option value="SCR" <?php echo ($wo['config']['2checkout_currency'] == 'SCR')  ? ' selected': '';?>>SCR</option>
+                          <option value="SEK" <?php echo ($wo['config']['2checkout_currency'] == 'SEK')  ? ' selected': '';?>>SEK</option>
+                          <option value="SGD" <?php echo ($wo['config']['2checkout_currency'] == 'SGD')  ? ' selected': '';?>>SGD</option>
+                          <option value="SYP" <?php echo ($wo['config']['2checkout_currency'] == 'SYP')  ? ' selected': '';?>>SYP</option>
+                          <option value="THB" <?php echo ($wo['config']['2checkout_currency'] == 'THB')  ? ' selected': '';?>>THB</option>
+                          <option value="TND" <?php echo ($wo['config']['2checkout_currency'] == 'TND')  ? ' selected': '';?>>TND</option>
+                          <option value="TOP" <?php echo ($wo['config']['2checkout_currency'] == 'TOP')  ? ' selected': '';?>>TOP</option>
+                          <option value="TRY" <?php echo ($wo['config']['2checkout_currency'] == 'TRY')  ? ' selected': '';?>>TRY</option>
+                          <option value="TTD" <?php echo ($wo['config']['2checkout_currency'] == 'TTD')  ? ' selected': '';?>>TTD</option>
+                          <option value="TWD" <?php echo ($wo['config']['2checkout_currency'] == 'TWD')  ? ' selected': '';?>>TWD</option>
+                          <option value="UAH" <?php echo ($wo['config']['2checkout_currency'] == 'UAH')  ? ' selected': '';?>>UAH</option>
+                          <option value="UYU" <?php echo ($wo['config']['2checkout_currency'] == 'UYU')  ? ' selected': '';?>>UYU</option>
+                          <option value="VND" <?php echo ($wo['config']['2checkout_currency'] == 'VND')  ? ' selected': '';?>>VND</option>
+                          <option value="VUV" <?php echo ($wo['config']['2checkout_currency'] == 'VUV')  ? ' selected': '';?>>VUV</option>
+                          <option value="WST" <?php echo ($wo['config']['2checkout_currency'] == 'WST')  ? ' selected': '';?>>WST</option>
+                          <option value="XCD" <?php echo ($wo['config']['2checkout_currency'] == 'XCD')  ? ' selected': '';?>>XCD</option>
+                          <option value="XOF" <?php echo ($wo['config']['2checkout_currency'] == 'XOF')  ? ' selected': '';?>>XOF</option>
+                          <option value="YER" <?php echo ($wo['config']['2checkout_currency'] == 'YER')  ? ' selected': '';?>>YER</option>
+                          <option value="ZAR" <?php echo ($wo['config']['2checkout_currency'] == 'ZAR')  ? ' selected': '';?>>ZAR</option>
+                        </select>
+                        <div class="clearfix"></div>
+                        <br>
+                        <br>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="checkout_seller_id" name="checkout_seller_id" class="form-control" value="<?php echo $wo['config']['checkout_seller_id'];?>">
+                                <label class="form-label">Seller ID</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="checkout_publishable_key" name="checkout_publishable_key" class="form-control" value="<?php echo $wo['config']['checkout_publishable_key'];?>">
+                                <label class="form-label">Publishable Key</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="checkout_private_key" name="checkout_private_key" class="form-control" value="<?php echo $wo['config']['checkout_private_key'];?>">
+                                <label class="form-label">Private Key</label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">保存</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- #END# Vertical Layout -->
+<script>
+$(function() {
+    var form_bitcoin_settings = $('form.bitcoin-settings');
+    form_bitcoin_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_general_setting',
+        beforeSend: function() {
+            form_bitcoin_settings.find('.waves-effect').text('Please wait..');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_bitcoin_settings.find('.waves-effect').text('Save');
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                $('.bitcoin-settings-alert').html('<i class="fa fa-check"></i> Settings updated successfully');
+                setTimeout(function () {
+                    $('.bitcoin-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+
+
+var form_paypal_settings = $('form.paypal-settings');
+    form_paypal_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_general_setting',
+        beforeSend: function() {
+            form_paypal_settings.find('.waves-effect').text('Please wait..');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_paypal_settings.find('.waves-effect').text('Save');
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                $('.paypal-settings-alert').html('<i class="fa fa-check"></i> Settings updated successfully');
+                setTimeout(function () {
+                    $('.paypal-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+
+
+
+    var form_checkout_settings = $('form.checkout-settings');
+    form_checkout_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_general_setting',
+        beforeSend: function() {
+            form_checkout_settings.find('.waves-effect').text('Please wait..');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_checkout_settings.find('.waves-effect').text('Save');
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                $('.checkout-settings-alert').html('<i class="fa fa-check"></i> Settings updated successfully');
+                setTimeout(function () {
+                    $('.checkout-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+
+
+    var form_payment_settings = $('form.payment-settings');
+    form_payment_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_general_setting',
+        beforeSend: function() {
+            form_payment_settings.find('.waves-effect').text('Please wait..');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_payment_settings.find('.waves-effect').text('Save');
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                $('.payment-settings-alert').html('<i class="fa fa-check"></i> Settings updated successfully');
+                setTimeout(function () {
+                    $('.payment-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+
+    var form_bank_settings = $('form.bank-settings');
+    form_bank_settings.ajaxForm({
+        url: Wo_Ajax_Requests_File() + '?f=admin_setting&s=update_general_setting',
+        beforeSend: function() {
+            form_bank_settings.find('.waves-effect').text('Please wait..');
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_bank_settings.find('.waves-effect').text('Save');
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                $('.bank-settings-alert').html('<i class="fa fa-check"></i> Settings updated successfully');
+                setTimeout(function () {
+                    $('.bank-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+});
+</script>
