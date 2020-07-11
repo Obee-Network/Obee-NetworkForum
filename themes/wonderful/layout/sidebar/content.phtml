@@ -123,17 +123,6 @@
                 <i class="fa fa-repeat progress-icon" data-icon="repeat"></i>
                 </span>
             </li>
-            <li>
-                <div class="sidebar-pages-may-know-container">
-                    <?php 
-                        foreach ($pages as $wo['PageList']) {
-                            $wo['PageList']['user_name'] = $wo['PageList']['name'];
-                            echo Wo_LoadPage('sidebar/sidebar-home-page-list');
-                        } 
-                        ?>
-                </div>
-                <div class="clear"></div>
-            </li>
         </ul>
         <?php } }  ?>
         <?php
@@ -292,10 +281,6 @@
           } else {
             $('#activities-wrapper').append(data.html);
           }
-          $("#activities-wrapper").animate({
-            scrollTop: $('#activities-wrapper')[0].scrollHeight
-          }, 100);
-          Wo_progressIconLoader(activity_container);
         }
       });
     }
