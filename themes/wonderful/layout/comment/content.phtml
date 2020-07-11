@@ -36,14 +36,6 @@
 
 				<div class="comment-text"><?php echo $wo['comment']['text']?></div>
 		 
-				<div class="comment-image">
-					<?php if (!empty($wo['comment']['c_file'])): ?>
-					<span data-href="<?php echo Wo_GetMedia($wo['comment']['c_file']);?>" onclick="Wo_OpenLighteBox(this,event);" class="pointer">
-						<img src="<?php echo Wo_GetMedia($wo['comment']['c_file']);?>" alt="Comment image">
-					</span>
-					<?php endif ?>
-				</div>
-		 
 				<?php if (!empty($wo['comment']['record'])): ?>
 					<div class="comment-record">
 						<audio controls preload="auto">
@@ -54,6 +46,14 @@
 					</div>
 				<?php endif;?>
 			</div>
+
+			<div class="comment-image">
+					<?php if (!empty($wo['comment']['c_file'])): ?>
+					<span data-href="<?php echo Wo_GetMedia($wo['comment']['c_file']);?>" onclick="Wo_OpenLighteBox(this,event);" class="pointer">
+						<img src="<?php echo Wo_GetMedia($wo['comment']['c_file']);?>" alt="Comment image">
+					</span>
+					<?php endif ?>
+				</div>
 			<div class="clear"></div>
 		</div>
 
@@ -76,27 +76,6 @@
                     }
                     ?>
                 </span>
-                <ul class="reactions-box reactions-comment-container-<?php echo $wo['comment']['id']; ?>" data-id="<?php echo $wo['comment']['id']; ?>" style="<?php if ($wo['language_type'] == 'rtl') {?> left: auto; <?php }else{ ?> right: auto; <?php }?>">
-                    <li class="reaction reaction-like" data-reaction="Like" onclick="Wo_RegisterCommentReaction(<?php echo $wo['comment']['id']; ?>,'Like');">
-						<div class="emoji emoji--like">
-							<div class="emoji__hand"><div class="emoji__thumb"></div></div>
-						</div>
-					</li>
-                    <li class="reaction reaction-love" data-reaction="Love" onclick="Wo_RegisterCommentReaction(<?php echo $wo['comment']['id']; ?>,'Love');">
-						<div class="emoji emoji--love">
-							<div class="emoji__heart"></div>
-						</div>
-					</li>
-                    <li class="reaction reaction-haha" data-reaction="HaHa" onclick="Wo_RegisterCommentReaction(<?php echo $wo['comment']['id']; ?>,'HaHa');">
-						<div class="emoji emoji--haha">
-							<div class="emoji__face">
-								<div class="emoji__eyes"></div>
-								<div class="emoji__mouth">
-									<div class="emoji__tongue"></div>
-								</div>
-							</div>
-						</div>
-					</li>
                     <li class="reaction reaction-wow" data-reaction="Wow" onclick="Wo_RegisterCommentReaction(<?php echo $wo['comment']['id']; ?>,'Wow');">
 						<div class="emoji emoji--wow">
 							<div class="emoji__face">

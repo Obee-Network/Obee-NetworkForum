@@ -6,6 +6,21 @@ if (file_exists('updatev2.php') && empty($wo['config']['updatev2'])) {
         exit();
     }
 }
+
+if (!empty($_GET['ref']) && $wo['loggedin'] == false && !isset($_COOKIE['src'])) {
+    $get_ip = get_ip_address();
+    if (!isset($_SESSION['ref']) && !empty($get_ip)) {
+        $_GET['ref'] = Wo_Secure($_GET['ref']);
+        $ref_user_id = Wo_UserIdFromUsername($_GET['ref']);
+        $user_date = Wo_UserData($ref_user_id);
+        if (!empty($user_date)) {
+            if (ip_in_range($user_date['ip_address'], '/24') === false && $user_date['ip_address'] != $get_ip) {
+                $_SESSION['ref'] = $user_date['username'];
+            }
+        }
+    }
+}
+
 if ($wo['loggedin'] == true) {
     $update_last_seen = Wo_LastSeen($wo['user']['user_id']);
 } else if (!empty($_SERVER['HTTP_HOST'])) {
@@ -23,19 +38,6 @@ if ($wo['loggedin'] == true) {
             if ($http_url != 'https://' . $url['host']) { 
                header('Location: ' . $wo['config']['site_url']);
                exit();
-            }
-        }
-    }
-}
-if (!empty($_GET['ref']) && $wo['loggedin'] == false && !isset($_COOKIE['src'])) {
-    $get_ip = get_ip_address();
-    if (!isset($_SESSION['ref']) && !empty($get_ip)) {
-        $_GET['ref'] = Wo_Secure($_GET['ref']);
-        $ref_user_id = Wo_UserIdFromUsername($_GET['ref']);
-        $user_date = Wo_UserData($ref_user_id);
-        if (!empty($user_date)) {
-            if (ip_in_range($user_date['ip_address'], '/24') === false && $user_date['ip_address'] != $get_ip) {
-                $_SESSION['ref'] = $user_date['username'];
             }
         }
     }

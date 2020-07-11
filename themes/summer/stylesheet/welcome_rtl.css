@@ -8,7 +8,6 @@
 .terms label{padding-right: 30px;}
 .terms label::before{left: auto;right: 0;}
 
-
 @media (max-width: 880px) {
 .wo_r_features {margin: auto;}
 }
@@ -21,12 +20,6 @@
 .login_left_combo_parent {float: none;height: 270px;}
 .login_left_combo {width: 100%;}
 .login .col-md-6 {margin-right: 0;}
-}
-
-
-@media (max-width: 992px) {
-.login .col-md-6 {margin-right: 50%;}
-.login .col-md-7 {margin-right: 41.66666667%;}
 }
 
 @media (max-width: 670px) {

@@ -47,14 +47,6 @@
 						<?php endif ?>
 					</div>
 				</div>
-				<div class="col-xs-4 col-md-4">
-					<ul class="event_cdown">
-						<li><span id="days"></span>days</li>
-						<li><span id="hours"></span>Hours</li>
-						<li><span id="minutes"></span>Minutes</li>
-						<li><span id="seconds"></span>Seconds</li>
-					</ul>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -73,18 +65,6 @@
 						echo Wo_LoadPage('story/content');
 					}
 				}
-				?>
-			</div>
-			<div id="posts-hashtag">	     
-				<?php
-					$stories = Wo_GetPosts(array('filter_by' => 'all', 'event_id' => $wo['event']['id'])); 
-					if (count($stories) == 0 ) {
-						echo Wo_LoadPage('story/no-event-stories');
-					} else {
-					foreach ($stories as $wo['story']) {
-						echo Wo_LoadPage('story/content');
-					}
-					}
 				?>
 			</div>
 		</div>

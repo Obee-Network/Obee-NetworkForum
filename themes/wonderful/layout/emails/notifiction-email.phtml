@@ -32,13 +32,7 @@ if ($wo['emailNotification']['type'] == 'wondered_comment') {
     $lang_type = ($wo['config']['second_post_button'] == 'wonder') ? 'wondered your comment' : 'disliked your comment';
     $wo['emailNotification']['type_text'] .= $lang_type . ' "' . $wo['emailNotification']['text'] . '"';
 }
-if ($wo['emailNotification']['type'] == 'profile_wall_post') {
-    $wo['emailNotification']['type_text'] .= 'posted on your timeline';
-}
-if ($wo['emailNotification']['type'] == 'accepted_request') {
-    $request_type = ($wo['config']['connectivitySystem'] == 1) ? 'friend' : 'follow';
-    $wo['emailNotification']['type_text'] .= "accepted your {$request_type} request.";
-}
+
 if ($wo['emailNotification']['type'] == 'liked_page') {
     $page = Wo_PageData($wo['emailNotification']['page_id']);
     $wo['emailNotification']['type_text'] = 'liked your page (' . $page['name'] . ')';
@@ -47,6 +41,16 @@ if ($wo['emailNotification']['type'] == 'joined_group') {
     $group = Wo_GroupData($wo['emailNotification']['group_id']);
     $wo['emailNotification']['type_text'] = 'joined your group (' . $group['name'] . ')';
 }
+
+
+if ($wo['emailNotification']['type'] == 'profile_wall_post') {
+  $wo['emailNotification']['type_text'] .= 'posted on your timeline';
+}
+if ($wo['emailNotification']['type'] == 'accepted_request') {
+  $request_type = ($wo['config']['connectivitySystem'] == 1) ? 'friend' : 'follow';
+  $wo['emailNotification']['type_text'] .= "accepted your {$request_type} request.";
+}
+
 
 if ($wo['emailNotification']['type'] == 'sent_message') {
   $wo['emailNotification']['type_text'] = 'Sent you a new message';

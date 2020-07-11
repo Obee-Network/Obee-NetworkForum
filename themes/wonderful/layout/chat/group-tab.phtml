@@ -84,14 +84,14 @@
         dataType: 'json',
         data: {f: 'chat',s:'clear_group_chat',id:'<?php echo $wo['chat']['group']['group_id'];?>'},
       })
-      .done(function(data) {
+      .fail(function() {
+        console.log("error");
+    });
+    .done(function(data) {
         if (data.status == 200) {
           $(".group-messages-wrapper-<?php echo $wo['chat']['group']['group_id'];?>").empty();
         }
       })
-      .fail(function() {
-        console.log("error");
-    });
     });
 
     var chat_messages_wrapper = $('.group-messages-wrapper-<?php echo $wo['chat']['group']['group_id'];?>');
@@ -111,13 +111,6 @@
               else{
                 $(".group-messages-wrapper-<?php echo $wo['chat']['group']['group_id'];?>").find('.chat-messages').append(data.html);
               }
-              if (data.invalid_file == 1) {
-                  $("#invalid_file").modal('show');
-                  Wo_Delay(function(){
-                    $("#invalid_file").modal('hide');
-                  },3000);
-                  
-              }
               if (data.invalid_file == 2) {
                   $("#file_not_supported").modal('show');
                   Wo_Delay(function(){
@@ -126,6 +119,13 @@
               }
               if (data.file == true) {
                 $('form.group-chat-sending-<?php echo $wo['chat']['group']['group_id'];?>').find('.ball-pulse').fadeOut(100);
+              }
+              if (data.invalid_file == 1) {
+                  $("#invalid_file").modal('show');
+                  Wo_Delay(function(){
+                    $("#invalid_file").modal('hide');
+                  },3000);
+                  
               }
               
             }
