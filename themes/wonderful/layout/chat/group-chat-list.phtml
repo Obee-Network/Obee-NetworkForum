@@ -21,16 +21,6 @@
          <?php endif;?>
       </p>
       <?php endif; ?>
-      <div class="clear"></div>
-      <div class="message-media" style="max-width: 100%; overflow: hidden;">
-         <?php  
-         if(isset($wo['chatMessage']['media']) && !empty($wo['chatMessage']['media'])) {
-            $media = array('type' => 'chatMessage', 'storyId' => $wo['chatMessage']['id'], 'filename' => $wo['chatMessage']['media'], 'name' => $wo['chatMessage']['mediaFileName']); 
-            echo Wo_DisplaySharedFile($media, 'chat');   
-         } 
-         ?>
-         
-      </div>
    </div>
 
    <div class="clear"></div>
