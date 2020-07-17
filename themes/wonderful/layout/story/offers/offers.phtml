@@ -1,0 +1,18 @@
+<div class="product wo_jobs_list col-lg-6 wow_main_offer_list" id="product-<?php echo $wo['offer']['id']?>" data-id="<?php echo $wo['offer']['id']?>">
+	<div class="panel panel-white">
+		<div class="wo_jlist_headimg">
+			<a href="<?php echo $wo['offer']['url']?>"><img src="<?php echo $wo['offer']['image'];?>"></a>
+			<?php if (Wo_IsModerator() || Wo_IsAdmin() || $wo['offer']['user_id'] == $wo['user']['id']) { ?>
+				<a class="btn btn-danger btn-mat" href="javascript:void(0)" onclick="Wo_OpenOfferDeleteBox(<?php echo  $wo['offer']['id']; ?>);"><?php echo $wo['lang']['delete'] ?></a>
+			<?php } ?>
+			<div class="wo_jlist_info_main"><?php echo $wo['lang']['end_date']." ".$wo['offer']['expire_date'];?></div>
+		</div>
+		<div class="wo_jlist_info">
+			<div class="wo_jlist_info_head">
+				<h2><a href="<?php echo $wo['offer']['url']?>" title="<?php echo $wo['offer']['offer_text']?>"><?php echo $wo['offer']['offer_text'].' '.$wo['offer']['discounted_items']; ?></a></h2>
+			</div>
+			<!--<p><?php echo stripslashes(mb_substr($wo['offer']['description'], 0, 150, "UTF-8")) . '...';?></p>-->
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
