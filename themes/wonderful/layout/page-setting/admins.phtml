@@ -1,25 +1,26 @@
-<div class="wo_settings_page profile-lists">
-   <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
-    <?php echo $wo['lang']['admin']; ?> 
-   <input type="text" placeholder="<?php echo $wo['lang']['search']; ?>.." class='pull-right' id='search-page-admins' onkeydown="Wo_SearchPageAdminUsers(this.value)">
-   <div class="clear"></div>
-   </h3>
-      <div class="setting-well" id="page_admins">
-                  <?php
-                     $requests = Wo_GetPageAdmins($wo['setting']['page_id']);
-                     if (count($requests) > 0) {
-                        foreach ($requests as $wo['member']) {
-                            echo Wo_LoadPage('page-setting/admin-list');
-                        }
-                     } else {
-                        echo '<h5 class="search-filter-center-text empty_state"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg> ' . $wo['lang']['no_members_found'] . '</h5>';
-                     }
-                  ?>
-      </div>
-
+<div class="wow_content wow_sett_content profile-lists">
+	<div class="wo_page_hdng pag_neg_padd">
+		<div class="wo_page_hdng_innr">
+			<span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M22.7,19L13.6,9.9C14.5,7.6 14,4.9 12.1,3C10.1,1 7.1,0.6 4.7,1.7L9,6L6,9L1.6,4.7C0.4,7.1 0.9,10.1 2.9,12.1C4.8,14 7.5,14.5 9.8,13.6L18.9,22.7C19.3,23.1 19.9,23.1 20.3,22.7L22.6,20.4C23.1,20 23.1,19.3 22.7,19Z"></path></svg></span> <?php echo $wo['lang']['admin'];?>
+			<input type="text" placeholder="<?php echo $wo['lang']['search']; ?>.." class='form-control' id='search-page-admins' onkeydown="Wo_SearchPageAdminUsers(this.value)">
+		</div>
+	</div>
+	<div class="setting-well" id="page_admins">
+		<?php
+			$requests = Wo_GetPageAdmins($wo['setting']['page_id']);
+			if (count($requests) > 0) {
+				foreach ($requests as $wo['member']) {
+          $wo['member']['page_name'] = $wo['setting']['page_name'];
+					echo Wo_LoadPage('page-setting/admin-list');
+				}
+			} else {
+				echo '<div class="empty_state"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16 17V19H2V17S2 13 9 13 16 17 16 17M12.5 7.5A3.5 3.5 0 1 0 9 11A3.5 3.5 0 0 0 12.5 7.5M15.94 13A5.32 5.32 0 0 1 18 17V19H22V17S22 13.37 15.94 13M15 4A3.39 3.39 0 0 0 13.07 4.59A5 5 0 0 1 13.07 10.41A3.39 3.39 0 0 0 15 11A3.5 3.5 0 0 0 15 4Z" /></svg>' . $wo['lang']['no_members_found'] . '</div>';
+			}
+		?>
+	</div>
 </div>
 
-<style>#search-page-admins{margin-top: -5px;margin-bottom: -8px;width:60%;border: 1px solid #ebeaea;border-radius: 2px;padding-left: 10px;height: 30px;margin-top: -4px;}</style>
+<style>#search-page-admins{margin-bottom: -2px;width:60%;border: 1px solid #ebeaea;border-radius: 2px;padding-left: 10px;height: 30px;margin-top: -4px;margin-left: auto;}</style>
 
 <script>
    function Wo_SearchPageAdminUsers(name = '') {
