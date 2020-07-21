@@ -6,30 +6,77 @@ if (isset($_POST['game'])) {
 	   if (!filter_var($_POST['game'], FILTER_VALIDATE_URL)) {
        	  $error = '<i class="fa fa-fw fa-exclamation-triangle"></i> ' . $wo['lang']['website_invalid_characters'];
        } else {
+        $upload = false;
+        $game_name = '';
+        $game_link = '';
         $reg = '#([A-Za-z0-9_-]+)://([A-Za-z0-9_-]+).miniclip.com/games/([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)#s';
-       	  if (preg_match($reg, $_POST['game'], $match)) {
-       	  	  $get_url = $_POST['game'];
-              include_once("assets/libraries/simple_html_dom.inc.php");
-              $get_content = str_get_html(file_get_contents($get_url));
-              foreach ($get_content->find('title') as $element) {
-                   $page_title = $element->plaintext;
+        if (preg_match($reg, $_POST['game'], $match)) {
+          $upload = true;
+          include_once("assets/libraries/simple_html_dom.inc.php");
+          $get_content = str_get_html(file_get_contents($_POST['game']));
+          foreach ($get_content->find('title') as $element) {
+               $page_title = $element->plaintext;
+          }
+          $game_link = "https://www.miniclip.com/games/".Wo_Secure($match[3])."/en/webgame.php";
+          if (!empty($_POST['name'])) {
+            $game_name = Wo_Secure($_POST['name']);
+          }
+          else{
+            $game_name = Wo_Secure($page_title[0]);
+          }
+        }
+        elseif (preg_match('#([A-Za-z0-9_-]+)://([A-Za-z0-9_-]+).y8.com/games/([A-Za-z0-9_-]+)#s', $_POST['game'], $match)) {
+          $upload = true;
+          $game_link = Wo_Secure($_POST['game']);
+          
+          if (!empty($_POST['name'])) {
+            $game_name = Wo_Secure($_POST['name']);
+          }
+          else{
+            $game_name = Wo_Secure($match[3]);
+          }
+        }
+        elseif (preg_match('#([A-Za-z0-9_-]+)://([A-Za-z0-9_-]+).freeonlinegames.com/embed/([A-Za-z0-9_-]+)#s', $_POST['game'], $match)) {
+          $upload = true;
+          $game_link = Wo_Secure($_POST['game']);
+          if (!empty($_POST['name'])) {
+            $game_name = Wo_Secure($_POST['name']);
+          }
+          else{
+            $game_name = Wo_Secure($match[3]);
+          }
+        }
+        elseif (preg_match('/([A-Za-z0-9_-]+):\/\/zone.msn.com\/gameplayer\/gameplayerHTML.aspx(.*)game=([A-Za-z0-9_-]+)/m', $_POST['game'], $match)) {
+          $upload = true;
+          $game_link = Wo_Secure($_POST['game']);
+          if (!empty($_POST['name'])) {
+            $game_name = Wo_Secure($_POST['name']);
+          }
+          else{
+            $game_name = Wo_Secure($match[3]);
+          }
+        }
+
+        if ($upload == true) {
+          $img = $wo['config']['site_url'].'/upload/photos/game-icon.png';
+          if (!empty($_POST['avatar'])) {
+            if (filter_var($_POST['avatar'], FILTER_VALIDATE_URL)) {
+                 $img = $_POST['avatar'];
               }
-             $img = 'upload/photos/game-icon.png';
-             if (!empty($_POST['avatar'])) {
-             	if (filter_var($_POST['avatar'], FILTER_VALIDATE_URL)) {
-       	           $img = $_POST['avatar'];
-                }
-             }
-             $page_title = explode("-", $page_title);
-             $data_array = array('game_avatar' => Wo_Secure(Wo_ImportImageFromUrl($img)), 'game_name' => Wo_Secure($page_title[0]), 'game_link' => Wo_Secure($match[3]), 'time' => time());
-       	  	 $add_game = Wo_AddGame($data_array);
-       	  	 if ($add_game === true) {
-       	  	 	$succuss = '<i class="fa fa-fw fa-check"></i> ' . $wo['lang']['game_added'];
-       	  	 }
-       	  } else {
-       	  	 $error = '<i class="fa fa-fw fa-exclamation-triangle"></i> ' . $wo['lang']['url_not_supported_game'];
-       	  }
-       	  
+          }
+
+          $data_array = array('game_avatar' => Wo_Secure(Wo_ImportImageFromUrl($img)), 'game_name' => $game_name, 'game_link' => $game_link, 'time' => time());
+          $add_game = Wo_AddGame($data_array);
+          if ($add_game === true) {
+            $succuss = '<i class="fa fa-fw fa-check"></i> ' . $wo['lang']['game_added'];
+          }
+
+
+        }
+        else{
+          $error = '<i class="fa fa-fw fa-exclamation-triangle"></i> ' . $wo['lang']['url_not_supported_game'];
+        }
+
        }
     } else {
        $error = '<i class="fa fa-fw fa-exclamation-triangle"></i> ' . $wo['lang']['please_add_a_game'];
@@ -43,14 +90,22 @@ if (!empty($_GET['delete_ip'])) {
 ?>
 <div class="container-fluid">
     <div class="block-header">
-        <h2>功能管理 > 游戏 > 添加游戏</h2>
+        <h2>Manage Features > Games > Add New Game</h2>
     </div>
     <!-- Vertical Layout -->
     <div class="row">
         <div class="col-lg-6 col-md-6">
             <div class="card">
                 <div class="header">
-                    <h2>添加游戏 <small>来自miniclip.com</small></h2>
+                    <h2>Add New Game <small>Supported from (miniclip.com , y8.com , freeonlinegames.com , zone.msn.com) </small></h2>
+                    <br>
+                    <p>Supported Sites Links Exampels</p>
+                    <p>miniclip.com <small>https://www.miniclip.com/games/8-ball-pool-multiplayer/en/</small></p>
+                    <p>y8.com <small>https://www.y8.com/games/penalty_shooters_2</small></p>
+                    <p>freeonlinegames.com <small>http://www.freeonlinegames.com/embed/125874</small></p>
+                    <p>zone.msn.com <small>https://zone.msn.com/gameplayer/gameplayerHTML.aspx?game=bubbletown&instance=default</small></p>
+
+
                 </div>
                 <div class="body">
                       <?php if (!empty($error)) { ?>
@@ -67,17 +122,23 @@ if (!empty($_GET['delete_ip'])) {
                         <div class="form-group form-float">
                             <div class="form-line">
                                 <input type="text" id="game" name="game" class="form-control">
-                                <label class="form-label">游戏链接 <small>比如: https://www.miniclip.com/games/8-ball-pool-multiplayer/en/</small></label>
+                                <label class="form-label">Game URL <small>Example: https://www.miniclip.com/games/8-ball-pool-multiplayer/en/</small></label>
                             </div>
                         </div>
                         <div class="form-group form-float">
                             <div class="form-line">
                                 <input type="text" id="avatar" name="avatar" class="form-control">
-                                <label class="form-label">游戏图片 URL <small>比如: https://static.miniclipcdn.com/content/game-icons/medium/8-Ball-Pool_26-02-2015.jpg</small></label>
+                                <label class="form-label">Game Image URL <small>Example: https://static.miniclipcdn.com/content/game-icons/medium/8-Ball-Pool_26-02-2015.jpg</small></label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="name" name="name" class="form-control">
+                                <label class="form-label">Game Name</label>
                             </div>
                         </div>
                         <input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
-                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">添加游戏</button>
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">Add Game</button>
                     </form>
                 </div>
             </div>
