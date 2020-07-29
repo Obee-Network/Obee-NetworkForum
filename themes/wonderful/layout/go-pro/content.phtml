@@ -1,191 +1,799 @@
 <script src="https://checkout.stripe.com/checkout.js"></script>
-<div class="page-margin list-group">
-	<div class="list-group text-center wo_pro_features">
-		<div class="col-md-12">
-			<h2><?php 
-			echo str_replace('{sitename}', $wo['config']['siteName'], $wo['lang']['discover_pro_types']);
-			?></h2>
-		</div>
+
+<style>.wow_main_float_head > .container.wo_go_pro:after {background-image: url(<?php echo $wo['config']['theme_url'];?>/img/go-pro/rocket.svg)}</style>
+
+<div class="wow_main_float_head gopro">
+	<div class="container wo_go_pro">
+		<h1 class="head_pro"><?php echo $wo['config']['siteName'];?> <span class="pro-badge">PRO</span></h1>
+		<p class="main_head_pro"><?php echo $wo['lang']['pro_feature_control_profile'];?></p>
+	</div>
+</div>
+	
+<div class="wow_main_blogs_bg"></div>
+
+<div class="wow_content wow_price_plans">
+	<?php $loadPage = Wo_LoadPage('thirdparty/paypal-demo'); echo (!empty($loadPage)) ? $loadPage : '';?>
+	<h3 class="pick_plan text-center"><?php echo $wo['lang']['pick_your_plan'];?></h3>
+	<div class="table-responsive">
+	<table class="wow_price_plan table-hover">
+		<thead>
+			<tr>
+				<td class="t-cell labels_col"></td>
+				<?php if ($wo['pro_packages']['star']['status'] == 1) { ?>
+				<th class="text-center">
+					<?php
+					if (!empty($wo['pro_packages']['star']['image']) && $_COOKIE['mode'] == 'day') { ?>
+						<div>
+							<img src="<?php echo($wo['pro_packages']['star']['image']) ?>" class="pro_packages_icon">
+						</div>
+					<?php }
+					elseif (!empty($wo['pro_packages']['star']['night_image']) && $_COOKIE['mode'] == 'night') { ?>
+						<div>
+							<img src="<?php echo($wo['pro_packages']['star']['night_image']) ?>" class="pro_packages_icon">
+						</div>
+					<?php }
+					else{ ?>
+						<span style="color: #4c7737;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" /></svg></span>
+					<?php } ?>
+					<?php echo $wo['lang']['star'];?>
+				</th>
+				<?php } ?>
+				<?php if ($wo['pro_packages']['hot']['status'] == 1) { ?>
+				<th class="text-center">
+					<?php if (!empty($wo['pro_packages']['hot']['image']) && $_COOKIE['mode'] == 'day') { ?>
+						<div>
+							<img src="<?php echo($wo['pro_packages']['hot']['image']) ?>" class="pro_packages_icon">
+						</div>
+					<?php }
+					elseif (!empty($wo['pro_packages']['hot']['night_image']) && $_COOKIE['mode'] == 'night') { ?>
+						<div>
+							<img src="<?php echo($wo['pro_packages']['hot']['night_image']) ?>" class="pro_packages_icon">
+						</div>
+					<?php }
+					else{ ?>
+						<span style="color: #ff9800;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11.71,19C9.93,19 8.5,17.59 8.5,15.86C8.5,14.24 9.53,13.1 11.3,12.74C13.07,12.38 14.9,11.53 15.92,10.16C16.31,11.45 16.5,12.81 16.5,14.2C16.5,16.84 14.36,19 11.71,19M13.5,0.67C13.5,0.67 14.24,3.32 14.24,5.47C14.24,7.53 12.89,9.2 10.83,9.2C8.76,9.2 7.2,7.53 7.2,5.47L7.23,5.1C5.21,7.5 4,10.61 4,14A8,8 0 0,0 12,22A8,8 0 0,0 20,14C20,8.6 17.41,3.8 13.5,0.67Z" /></svg></span>
+					<?php } ?>
+					 <?php echo $wo['lang']['hot'];?>
+				</th>
+				<?php } ?>
+				<?php if ($wo['pro_packages']['ultima']['status'] == 1) { ?>
+				<th class="text-center">
+					<?php if (!empty($wo['pro_packages']['ultima']['image']) && $_COOKIE['mode'] == 'day') { ?>
+						<div>
+							<img src="<?php echo($wo['pro_packages']['ultima']['image']) ?>" class="pro_packages_icon">
+						</div>
+					<?php }
+					elseif (!empty($wo['pro_packages']['ultima']['night_image']) && $_COOKIE['mode'] == 'night') { ?>
+						<div>
+							<img src="<?php echo($wo['pro_packages']['hot']['night_image']) ?>" class="pro_packages_icon">
+						</div>
+					<?php }
+					else{ ?>
+						<span style="color: #e13c4c;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7,2V13H10V22L17,10H13L17,2H7Z" /></svg></span>
+					<?php } ?>
+					 <?php echo $wo['lang']['ultima'];?>
+				</th>
+				<?php } ?>
+				<?php if ($wo['pro_packages']['vip']['status'] == 1) { ?>
+				<th class="text-center">
+					<?php if (!empty($wo['pro_packages']['vip']['image']) && $_COOKIE['mode'] == 'day') { ?>
+						<div>
+							<img src="<?php echo($wo['pro_packages']['vip']['image']) ?>" class="pro_packages_icon">
+						</div>
+					<?php }
+					elseif (!empty($wo['pro_packages']['vip']['night_image']) && $_COOKIE['mode'] == 'night') { ?>
+						<div>
+							<img src="<?php echo($wo['pro_packages']['vip']['night_image']) ?>" class="pro_packages_icon">
+						</div>
+					<?php }
+					else{ ?>
+						<span style="color: #3f4bb8;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M2.81,14.12L5.64,11.29L8.17,10.79C11.39,6.41 17.55,4.22 19.78,4.22C19.78,6.45 17.59,12.61 13.21,15.83L12.71,18.36L9.88,21.19L9.17,17.66C7.76,17.66 7.76,17.66 7.05,16.95C6.34,16.24 6.34,16.24 6.34,14.83L2.81,14.12M5.64,16.95L7.05,18.36L4.39,21.03H2.97V19.61L5.64,16.95M4.22,15.54L5.46,15.71L3,18.16V16.74L4.22,15.54M8.29,18.54L8.46,19.78L7.26,21H5.84L8.29,18.54M13,9.5A1.5,1.5 0 0,0 11.5,11A1.5,1.5 0 0,0 13,12.5A1.5,1.5 0 0,0 14.5,11A1.5,1.5 0 0,0 13,9.5Z" /></svg></span>
+					<?php } ?>
+					 <?php echo $wo['lang']['vip'];?>
+				</th>
+				<?php } ?>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><?php echo $wo['lang']['price'];?></td>
+				<?php if ($wo['pro_packages']['star']['status'] == 1) { ?>
+				<td class="text-center"><?php echo Wo_GetCurrency($wo['config']['currency']);?><?php echo $wo['pro_packages']['star']['price'];?>/ <?php 
+				if ($wo['pro_packages']['star']['time'] == 7) {
+					echo $wo['lang']['per_week'];
+				}
+				elseif ($wo['pro_packages']['star']['time'] == 30) {
+					echo $wo['lang']['per_month'];
+				}
+				elseif ($wo['pro_packages']['star']['time'] == 365) {
+					echo $wo['lang']['per_year'];
+				}
+				elseif ($wo['pro_packages']['star']['time'] == 0) {
+					echo $wo['lang']['life_time'];
+				}
+				else{
+					echo $wo['pro_packages']['star']['time'].' '.$wo['lang']['day'];
+				}
+				?></td>
+				<?php } ?>
+				<?php if ($wo['pro_packages']['hot']['status'] == 1) { ?>
+				<td class="text-center"><?php echo Wo_GetCurrency($wo['config']['currency']);?><?php echo $wo['pro_packages']['hot']['price'];?>/ <?php 
+				if ($wo['pro_packages']['hot']['time'] == 7) {
+					echo $wo['lang']['per_week'];
+				}
+				elseif ($wo['pro_packages']['hot']['time'] == 30) {
+					echo $wo['lang']['per_month'];
+				}
+				elseif ($wo['pro_packages']['hot']['time'] == 365) {
+					echo $wo['lang']['per_year'];
+				}
+				elseif ($wo['pro_packages']['hot']['time'] == 0) {
+					echo $wo['lang']['life_time'];
+				}
+				else{
+					echo $wo['pro_packages']['hot']['time'].' '.$wo['lang']['day'];
+				} ?></td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['ultima']['status'] == 1) { ?>
+				<td class="text-center"><?php echo Wo_GetCurrency($wo['config']['currency']);?><?php echo $wo['pro_packages']['ultima']['price'];?> /<?php 
+				if ($wo['pro_packages']['ultima']['time'] == 7) {
+					echo $wo['lang']['per_week'];
+				}
+				elseif ($wo['pro_packages']['ultima']['time'] == 30) {
+					echo $wo['lang']['per_month'];
+				}
+				elseif ($wo['pro_packages']['ultima']['time'] == 365) {
+					echo $wo['lang']['per_year'];
+				}
+				elseif ($wo['pro_packages']['ultima']['time'] == 0) {
+					echo $wo['lang']['life_time'];
+				}
+				else{
+					echo $wo['pro_packages']['ultima']['time'].' '.$wo['lang']['day'];
+				} ?></td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['vip']['status'] == 1) { ?>
+				<td class="text-center"><?php echo Wo_GetCurrency($wo['config']['currency']);?><?php echo $wo['pro_packages']['vip']['price'];?>/ <?php
+				if ($wo['pro_packages']['vip']['time'] == 7) {
+					echo $wo['lang']['per_week'];
+				}
+				elseif ($wo['pro_packages']['vip']['time'] == 30) {
+					echo $wo['lang']['per_month'];
+				}
+				elseif ($wo['pro_packages']['vip']['time'] == 365) {
+					echo $wo['lang']['per_year'];
+				} 
+				elseif ($wo['pro_packages']['vip']['time'] == 0) {
+					echo $wo['lang']['life_time'];
+				}
+				else{
+					echo $wo['pro_packages']['vip']['time'].' '.$wo['lang']['day'];
+				} ?></td>
+			<?php } ?>
+			</tr>
+			<tr>
+				<td><?php echo $wo['lang']['featured_member'];?></td>
+				<?php if ($wo['pro_packages']['star']['status'] == 1) { ?>
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['star']['featured_member']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+				<?php } ?>
+				<?php if ($wo['pro_packages']['hot']['status'] == 1) { ?>
+
+
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['hot']['featured_member']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+				<?php } ?>
+				<?php if ($wo['pro_packages']['ultima']['status'] == 1) { ?>
+
+
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['ultima']['featured_member']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['vip']['status'] == 1) { ?>
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['vip']['featured_member']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			</tr>
+			<tr>
+				<td><?php echo $wo['lang']['see_profile_visitors'];?></td>
+				<?php if ($wo['pro_packages']['star']['status'] == 1) { ?>
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['star']['profile_visitors']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['hot']['status'] == 1) { ?>
+
+
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['hot']['profile_visitors']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+				<?php } ?>
+					<?php if ($wo['pro_packages']['ultima']['status'] == 1) { ?>
+
+
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['ultima']['profile_visitors']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+
+				<?php } ?>
+					<?php if ($wo['pro_packages']['vip']['status'] == 1) { ?>
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['vip']['profile_visitors']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			</tr>
+			<tr>
+				<td><?php echo $wo['lang']['show_hide_lastseen'];?></td>
+				<?php if ($wo['pro_packages']['star']['status'] == 1) { ?>
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['star']['last_seen']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['hot']['status'] == 1) { ?>
+
+
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['hot']['last_seen']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['ultima']['status'] == 1) { ?>
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['ultima']['last_seen']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['vip']['status'] == 1) { ?>
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['vip']['last_seen']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			</tr>
+			<tr>
+				<td><?php echo $wo['lang']['verified_badge'];?></td>
+
+				<?php if ($wo['pro_packages']['star']['status'] == 1) { ?>
+
+
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['star']['verified_badge']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+
+				<?php if ($wo['pro_packages']['hot']['status'] == 1) { ?>
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['hot']['verified_badge']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['ultima']['status'] == 1) { ?>
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['ultima']['verified_badge']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['vip']['status'] == 1) { ?>
+
+
+				<td class="text-center">
+					<?php if ($wo['pro_packages']['vip']['verified_badge']) { ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#4CAF50" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			</tr>
+			<tr>
+				<td><?php echo $wo['lang']['post_promotion_star'];?></td>
+
+				<?php if ($wo['pro_packages']['star']['status'] == 1) { ?>
+
+				<td class="text-center">
+					<?php if (!empty($wo['pro_packages']['star']['posts_promotion']) && is_numeric($wo['pro_packages']['star']['posts_promotion']) && $wo['pro_packages']['star']['posts_promotion'] > 0) { ?>
+						<?php echo $wo['pro_packages']['star']['posts_promotion']." ".($wo['pro_packages']['star']['posts_promotion'] == 1 ? $wo['lang']['post'] : $wo['lang']['posts']); ?>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['hot']['status'] == 1) { ?>
+
+
+				<td class="text-center">
+					<?php if (!empty($wo['pro_packages']['hot']['posts_promotion']) && is_numeric($wo['pro_packages']['hot']['posts_promotion']) && $wo['pro_packages']['hot']['posts_promotion'] > 0) { ?>
+						<?php echo $wo['pro_packages']['hot']['posts_promotion']." ".($wo['pro_packages']['hot']['posts_promotion'] == 1 ? $wo['lang']['post'] : $wo['lang']['posts']); ?>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['ultima']['status'] == 1) { ?>
+
+
+				<td class="text-center">
+					<?php if (!empty($wo['pro_packages']['ultima']['posts_promotion']) && is_numeric($wo['pro_packages']['ultima']['posts_promotion']) && $wo['pro_packages']['ultima']['posts_promotion'] > 0) { ?>
+						<?php echo $wo['pro_packages']['ultima']['posts_promotion']." ".($wo['pro_packages']['ultima']['posts_promotion'] == 1 ? $wo['lang']['post'] : $wo['lang']['posts']); ?>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['vip']['status'] == 1) { ?>
+				<td class="text-center">
+					<?php if (!empty($wo['pro_packages']['vip']['posts_promotion']) && is_numeric($wo['pro_packages']['vip']['posts_promotion']) && $wo['pro_packages']['vip']['posts_promotion'] > 0) { ?>
+						<?php echo $wo['pro_packages']['vip']['posts_promotion']." ".($wo['pro_packages']['vip']['posts_promotion'] == 1 ? $wo['lang']['post'] : $wo['lang']['posts']); ?>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			</tr>
+			<?php if ($wo['config']['pages'] == 1) { ?>
+				<tr>
+					<td><?php echo $wo['lang']['page_promotion_star'];?></td>
+
+					<?php if ($wo['pro_packages']['star']['status'] == 1) { ?>
+					<td class="text-center">
+						<?php if (!empty($wo['pro_packages']['star']['pages_promotion']) && is_numeric($wo['pro_packages']['star']['pages_promotion']) && $wo['pro_packages']['star']['pages_promotion'] > 0) { ?>
+							<?php echo $wo['pro_packages']['star']['pages_promotion']." ".($wo['pro_packages']['star']['pages_promotion'] == 1 ? $wo['lang']['page'] : $wo['lang']['pages']); ?>
+						<?php }else{ ?>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+						<?php } ?>
+					</td>
+				<?php } ?>
+				<?php if ($wo['pro_packages']['hot']['status'] == 1) { ?>
+					<td class="text-center">
+						<?php if (!empty($wo['pro_packages']['hot']['pages_promotion']) && is_numeric($wo['pro_packages']['hot']['pages_promotion']) && $wo['pro_packages']['hot']['pages_promotion'] > 0) { ?>
+							<?php echo $wo['pro_packages']['hot']['pages_promotion']." ".($wo['pro_packages']['hot']['pages_promotion'] == 1 ? $wo['lang']['page'] : $wo['lang']['pages']); ?>
+						<?php }else{ ?>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+						<?php } ?>
+					</td>
+				<?php } ?>
+				<?php if ($wo['pro_packages']['ultima']['status'] == 1) { ?>
+					<td class="text-center">
+						<?php if (!empty($wo['pro_packages']['ultima']['pages_promotion']) && is_numeric($wo['pro_packages']['ultima']['pages_promotion']) && $wo['pro_packages']['ultima']['pages_promotion'] > 0) { ?>
+							<?php echo $wo['pro_packages']['ultima']['pages_promotion']." ".($wo['pro_packages']['ultima']['pages_promotion'] == 1 ? $wo['lang']['page'] : $wo['lang']['pages']); ?>
+						<?php }else{ ?>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+						<?php } ?>
+					</td>
+				<?php } ?>
+				<?php if ($wo['pro_packages']['vip']['status'] == 1) { ?>
+					<td class="text-center">
+						<?php if (!empty($wo['pro_packages']['vip']['pages_promotion']) && is_numeric($wo['pro_packages']['vip']['pages_promotion']) && $wo['pro_packages']['vip']['pages_promotion'] > 0) { ?>
+							<?php echo $wo['pro_packages']['vip']['pages_promotion']." ".($wo['pro_packages']['vip']['pages_promotion'] == 1 ? $wo['lang']['page'] : $wo['lang']['pages']); ?>
+						<?php }else{ ?>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+						<?php } ?>
+					</td>
+				<?php } ?>
+				</tr>
+			<?php } ?>
+			<tr>
+				<td><?php echo $wo['lang']['discount'];?></td>
+				<?php if ($wo['pro_packages']['star']['status'] == 1) { ?>
+				<td class="text-center">
+					<?php if (!empty($wo['pro_packages']['star']['discount']) && is_numeric($wo['pro_packages']['star']['discount']) && $wo['pro_packages']['star']['discount'] > 0) { ?>
+						<?php echo $wo['pro_packages']['star']['discount']."% ".$wo['lang']['discount']; ?>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['hot']['status'] == 1) { ?>
+
+
+				<td class="text-center">
+					<?php if (!empty($wo['pro_packages']['hot']['discount']) && is_numeric($wo['pro_packages']['hot']['discount']) && $wo['pro_packages']['hot']['discount'] > 0) { ?>
+						<?php echo $wo['pro_packages']['hot']['discount']."% ".$wo['lang']['discount']; ?>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['ultima']['status'] == 1) { ?>
+				<td class="text-center">
+					<?php if (!empty($wo['pro_packages']['ultima']['discount']) && is_numeric($wo['pro_packages']['ultima']['discount']) && $wo['pro_packages']['ultima']['discount'] > 0) { ?>
+						<?php echo $wo['pro_packages']['ultima']['discount']."% ".$wo['lang']['discount']; ?>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['vip']['status'] == 1) { ?>
+				<td class="text-center">
+					<?php if (!empty($wo['pro_packages']['vip']['discount']) && is_numeric($wo['pro_packages']['vip']['discount']) && $wo['pro_packages']['vip']['discount'] > 0) { ?>
+						<?php echo $wo['pro_packages']['vip']['discount']."% ".$wo['lang']['discount']; ?>
+					<?php }else{ ?>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#bababa" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>
+					<?php } ?>
+				</td>
+			<?php } ?>
+			</tr>
+			<tr>
+				<td class="labels_col"></td>
+				<?php if ($wo['pro_packages']['star']['status'] == 1) { ?>
+				<td class="text-center"><button class="btn btn-mat btn-mat-raised btn_week" onclick="Wo_GetPaymentLink(1);"><?php echo $wo['lang']['upgrade_now'];?></button></td>
+				<?php } ?>
+					<?php if ($wo['pro_packages']['hot']['status'] == 1) { ?>
+				<td class="text-center"><button class="btn btn-mat btn-mat-raised btn_month" onclick="Wo_GetPaymentLink(2);"><?php echo $wo['lang']['upgrade_now'];?></button></td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['ultima']['status'] == 1) { ?>
+				<td class="text-center"><button class="btn btn-mat btn-mat-raised btn_year" onclick="Wo_GetPaymentLink(3);"><?php echo $wo['lang']['upgrade_now'];?></button></td>
+			<?php } ?>
+			<?php if ($wo['pro_packages']['vip']['status'] == 1) { ?>
+				<td class="text-center"><button class="btn btn-mat btn-mat-raised btn_life" onclick="Wo_GetPaymentLink(4);"><?php echo $wo['lang']['upgrade_now'];?></button></td>
+			<?php } ?>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+
+
+<div class="page-margin wow_content text-center wo_pro_features">
+	<h3 class="text-center"><?php echo $wo['lang']['why_choose_pro'];?></h3>
+	<div class="row">
 		<div class="col-sm-6 col-md-3">
 			<img src="<?php echo $wo['config']['theme_url'];?>/img/go-pro/superhero.svg" alt="superhero"/>
-			<h3><?php echo $wo['lang']['featured_member'];?></h3>
+			<p><?php echo $wo['lang']['featured_member'];?></p>
 		</div>
 		<div class="col-sm-6 col-md-3">
 			<img src="<?php echo $wo['config']['theme_url'];?>/img/go-pro/lastseen.svg" alt="lastseen"/>
-			<h3><?php echo $wo['lang']['show_hide_lastseen'];?></h3>
+			<p><?php echo $wo['lang']['show_hide_lastseen'];?></p>
 		</div>
 		<div class="col-sm-6 col-md-3">
 			<img src="<?php echo $wo['config']['theme_url'];?>/img/go-pro/post.svg" alt="post"/>
-			<h3><?php echo $wo['lang']['post_promotion_star'];?></h3>
+			<p><?php echo $wo['lang']['post_promotion_star'];?></p>
 		</div>
 		<div class="col-sm-6 col-md-3">
 			<img src="<?php echo $wo['config']['theme_url'];?>/img/go-pro/verify.svg" alt="verify"/>
-			<h3><?php echo $wo['lang']['verified_badge'];?></h3>
+			<p><?php echo $wo['lang']['verified_badge'];?></p>
 		</div>
 	</div>
-	
-	<section class="container" style="width:100%;">
-		<div class="row">
-			<div class="block">
-				<div class="col-xs-12 col-sm-6 col-md-3" style="padding-left: 10px;padding-right: 10px;">
-					<ul class="pricing p-green">
-						<li class="header-green" style="background: #bfc946;">
-							<big style="color: #fff"><i class="fa fa-star"></i></big><br>
-							<big style="color: #fff"><?php echo $wo['lang']['star'];?></big>
-						</li>
-						<li style="padding-top: 40px;"><i class="fa fa-check green"></i> <?php echo $wo['lang']['featured_member'];?></li>
-						<li><i class="fa fa-check green"></i> <?php echo $wo['lang']['see_profile_visitors'];?></li>
-						<li><i class="fa fa-check green"></i> <?php echo $wo['lang']['show_hide_lastseen'];?></li>
-						<li><i class="fa fa-check green"></i> <?php echo $wo['lang']['verified_badge'];?></li>
-						<li><i class="fa fa-times red"></i> <?php echo $wo['lang']['post_promotion_star'];?></li>
-						<?php
-						if ($wo['config']['pages'] == 1) {
-						?>
-						<li><i class="fa fa-times red"></i> <?php echo $wo['lang']['page_promotion_star'];?></li>
-						<?php } ?>
-						<li><?php echo $wo['lang']['0_discount'];?></li>
-						<li class="foot-price foot-price-green">
-							<h3><?php echo Wo_GetCurrency($wo['config']['currency']);?><?php echo $wo['config']['weekly_price'];?></h3>
-							<span><?php echo $wo['lang']['per_week'];?></span>
-						</li>
-						<li class="footer-greenz">
-							<button class="wabe button-week" onclick="Wo_GetPaymentLink(1);"><?php echo $wo['lang']['upgrade_now'];?></button>
-						</li>
-					</ul>
-				</div>
-
-				<div class="col-xs-12 col-sm-6 col-md-3" style="padding-left: 5px;padding-right: 10px;">
-					<ul class="pricing p-yel" style="border-bottom-color:#36cccb">
-						<li class="header-cyan" style="background: #36cccb;">
-						    <big style="color: #fff"><i class="fa fa-fire"></i></big><br>
-							<big style="color: #fff"><?php echo $wo['lang']['hot'];?></big>
-						</li>
-						<li style="padding-top: 40px;"><i class="fa fa-check green"></i> <?php echo $wo['lang']['featured_member'];?></li>
-						<li><i class="fa fa-check green"></i> <?php echo $wo['lang']['see_profile_visitors'];?></li>
-						<li><i class="fa fa-check green"></i> <?php echo $wo['lang']['show_hide_lastseen'];?></li>
-						<li><i class="fa fa-check green"></i> <?php echo $wo['lang']['verified_badge'];?></li>
-						<li><i class="fa fa-check green"></i> 
-						<?php 
-						$post_promotion_hot = str_replace('{monthly_boosts}', $wo['config']['monthly_boosts'], $wo['lang']['post_promotion_hot']);
-						echo $post_promotion_hot;
-						?>
-						</li>
-						<?php
-						if ($wo['config']['pages'] == 1) {
-						?>
-						<li><i class="fa fa-check green"></i> 
-						<?php 
-						$page_promotion_hot = str_replace('{monthly_boosts}', $wo['config']['monthly_boosts'], $wo['lang']['page_promotion_hot']);
-						echo $page_promotion_hot;
-						?>
-						</li>
-						<?php } ?>
-						<li><?php echo $wo['lang']['10_discount'];?></li>
-						<li class="foot-price foot-price-cyan">
-							<h3><?php echo Wo_GetCurrency($wo['config']['currency']);?><?php echo $wo['config']['monthly_price'];?></h3>
-							<span><?php echo $wo['lang']['per_month'];?></span>
-						</li>
-						<li class="footer-cyanz">
-						    <button class="wabe button-month" onclick="Wo_GetPaymentLink(2);"><?php echo $wo['lang']['upgrade_now'];?></button>
-						</li>
-					</ul>
-				</div>
-
-				<div class="col-xs-12 col-sm-6 col-md-3 " style="padding-left: 5px;padding-right: 10px;">
-					<ul class="pricing p-red" style="border-bottom-color:#e78900">
-						<li class="header-orange" style="background: #e78900;">
-						    <big style="color: #fff"><i class="fa fa-bolt"></i></big><br>
-							<big style="color: #fff"><?php echo $wo['lang']['ultima'];?></big>
-						</li>
-						<li style="padding-top: 40px;"><i class="fa fa-check green"></i> <?php echo $wo['lang']['featured_member'];?></li>
-						<li><i class="fa fa-check green"></i> <?php echo $wo['lang']['see_profile_visitors'];?></li>
-						<li><i class="fa fa-check green"></i> <?php echo $wo['lang']['show_hide_lastseen'];?></li>
-						<li><i class="fa fa-check green"></i> <?php echo $wo['lang']['verified_badge'];?></li>
-						<li><i class="fa fa-check green"></i> 
-						<?php 
-						$post_promotion_ultima = str_replace('{yearly_boosts}', $wo['config']['yearly_boosts'], $wo['lang']['post_promotion_ultima']);
-						echo $post_promotion_ultima;
-						?>
-						</li>
-						<?php
-						if ($wo['config']['pages'] == 1) {
-						?>
-						<li><i class="fa fa-check green"></i>
-						<?php 
-						$page_promotion_ultima = str_replace('{yearly_boosts}', $wo['config']['yearly_boosts'], $wo['lang']['page_promotion_ultima']);
-						echo $page_promotion_ultima;
-						?>
-						</li>
-						<?php } ?>
-						<li><?php echo $wo['lang']['20_discount'];?></li>
-						<li class="foot-price foot-price-orange">
-							<h3><?php echo Wo_GetCurrency($wo['config']['currency']);?><?php echo $wo['config']['yearly_price'];?></h3>
-							<span><?php echo $wo['lang']['per_year'];?></span>
-						</li>
-						<li class="footer-orangez">
-							<button class="wabe button-year" onclick="Wo_GetPaymentLink(3);"><?php echo $wo['lang']['upgrade_now'];?></button>
-						</li>
-					</ul>
-				</div>
-
-				<div class="col-xs-12 col-sm-6 col-md-3" style="padding-left: 5px;padding-right: 10px;">
-					<ul class="pricing p-blue" style="border-bottom-color:#f04e4e">
-						<li class="header-red" style="background: #f04e4e;">
-						    <big style="color: #fff"><i class="fa fa-rocket"></i></big><br>
-							<big style="color: #fff"><?php echo $wo['lang']['vip'];?></big>
-						</li>
-						<li style="padding-top: 40px;"><i class="fa fa-check green"></i> <?php echo $wo['lang']['featured_member'];?></li>
-						<li><i class="fa fa-check green"></i> <?php echo $wo['lang']['see_profile_visitors'];?></li>
-						<li><i class="fa fa-check green"></i> <?php echo $wo['lang']['show_hide_lastseen'];?></li>
-						<li><i class="fa fa-check green"></i> <?php echo $wo['lang']['verified_badge'];?></li>
-						<li><i class="fa fa-check green"></i> 
-						<?php 
-						$post_promotion_vip = str_replace('{lifetime_boosts}', $wo['config']['lifetime_boosts'], $wo['lang']['post_promotion_vip']);
-						echo $post_promotion_vip;
-						?>
-						</li>
-						<?php
-						if ($wo['config']['pages'] == 1) {
-						?>
-						<li><i class="fa fa-check green"></i>
-						<?php 
-						$page_promotion_vip = str_replace('{lifetime_boosts}', $wo['config']['lifetime_boosts'], $wo['lang']['page_promotion_vip']);
-						echo $page_promotion_vip;
-						?>
-						</li>
-						<?php } ?>
-						<li><?php echo $wo['lang']['60_discount'];?></li>
-						<li class="foot-price foot-price-red">
-							<h3><?php echo Wo_GetCurrency($wo['config']['currency']);?><?php echo $wo['config']['lifetime_price'];?></h3>
-							<span><?php echo $wo['lang']['life_time'];?></span>
-						</li>
-						<li class="footer-redz">
-							<button class="wabe button-life-time" onclick="Wo_GetPaymentLink(4);"><?php echo $wo['lang']['upgrade_now'];?></button>
-						</li>
-					</ul>
-				</div>
-			</div><!-- /block -->
-		</div><!-- /row -->
-	</section>
 </div>
+
 <div id="pay-modal"></div>
-<style>
-body {padding-left: 0px;}
-.navbar-default {padding-right: 0px;}
-@media (min-width: 1200px){
-body {padding-left: 0px;padding-right: 205px;}
-.navbar-default {padding-right: 205px;}
-}
-@media (min-width: 1500px){
-body {padding-left: 0px;padding-right: 260px;}
-}
-@media (max-width: 990px) {
-body {padding-left: 0px;overflow-x: auto;}
-}
-</style>
+<div class="modal fade" id="paystack_modal" role="dialog" data-keyboard="false" style="overflow-y: auto;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+				<h4 class="modal-title"><?php echo $wo['lang']['paystack'] ?></h4>
+			</div>
+			<form class="form form-horizontal" method="post" id="paystack_form" action="#">
+				<div class="modal-body twocheckout_modal">
+					<div id="paystack_alert"></div>
+					<div class="clear"></div>
+					<div class="sun_input col-md-12">
+						<label class="plr15" for="paystack_email"><?php echo $wo['lang']['email']; ?></label> 
+						<input id="paystack_email" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['email']; ?>" value="<?php echo($wo['user']['email']) ?>">
+						 
+					</div>
+					<input type="hidden" name="paystack_type" id="paystack_type">
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+				<div class="modal-footer">
+					<div class="ball-pulse"><div></div><div></div><div></div></div>
+					<button type="button" class="btn btn-main" id="paystack_btn" onclick="InitializePaystack()"><?php echo $wo['lang']['pay']; ?></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="cashfree_modal" role="dialog" data-keyboard="false" style="overflow-y: auto;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+				<h4 class="modal-title"><?php echo $wo['lang']['cashfree'] ?></h4>
+			</div>
+			<form class="form form-horizontal" method="post" id="cashfree_form" action="#">
+				<div class="modal-body twocheckout_modal">
+					<div id="cashfree_alert"></div>
+					<div class="clear"></div>
+					<div class="sun_input col-md-6">
+						<label class="plr15" for="cashfree_name"><?php echo $wo['lang']['name']; ?></label> 
+						<input id="cashfree_name" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['name']; ?>" value="<?php echo($wo['user']['name']) ?>">
+						 
+					</div>
+					<div class="sun_input col-md-6">
+						<label class="plr15" for="cashfree_email"><?php echo $wo['lang']['email']; ?></label> 
+						<input id="cashfree_email" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['email']; ?>" value="<?php echo($wo['user']['email']) ?>">
+						 
+					</div>
+					<div class="sun_input col-md-6">
+						<label class="plr15" for="cashfree_phone"><?php echo $wo['lang']['phone_number']; ?></label> 
+						<input id="cashfree_phone" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['phone_number']; ?>" value="<?php echo($wo['user']['phone_number']) ?>">
+						 
+					</div>
+					<input type="hidden" name="cashfree_type" id="cashfree_type">
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+				<div class="modal-footer">
+					<div class="ball-pulse"><div></div><div></div><div></div></div>
+					<button type="button" class="btn btn-main" id="cashfree_btn" onclick="SignatureCashfree()"><?php echo $wo['lang']['pay']; ?></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<?php if ($wo['config']['razorpay_payment'] == 'yes' && !empty($wo['config']['razorpay_key_id']) && !empty($wo['config']['razorpay_key_secret'])) { ?>
+<div class="modal fade" id="razorpay_modal" role="dialog" data-keyboard="false" style="overflow-y: auto;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+				<h4 class="modal-title"><?php echo $wo['lang']['razorpay'] ?></h4>
+			</div>
+			<form class="form form-horizontal" method="post" id="razorpay_form" action="#">
+				<div class="modal-body twocheckout_modal">
+					<div id="razorpay_alert"></div>
+					<div class="clear"></div>
+					<div class="sun_input col-md-6">
+						<input id="razorpay_name" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['name']; ?>" value="<?php echo($wo['user']['name']) ?>">
+					</div>
+					<div class="sun_input col-md-6">
+						<input id="razorpay_email" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['email']; ?>" value="<?php echo($wo['user']['email']) ?>">
+					</div>
+					<div class="sun_input col-md-6">
+						<input id="razorpay_phone" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['phone_number']; ?>" value="<?php echo($wo['user']['phone_number']) ?>">
+					</div>
+					<input type="hidden" name="razorpay_type" id="razorpay_type">
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+				<div class="modal-footer">
+					<div class="ball-pulse"><div></div><div></div><div></div></div>
+					<button type="button" class="btn btn-main" id="razorpay_btn" onclick="SignatureRazorpay()"><?php echo $wo['lang']['pay']; ?></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<?php } ?>
 <script>
+<?php if ($wo['config']['razorpay_payment'] == 'yes' && !empty($wo['config']['razorpay_key_id']) && !empty($wo['config']['razorpay_key_secret'])) { ?>
+function pay_using_razorpay(type) {
+	$("#razorpay_alert").html('');
+	$('#razorpay_type').val(type)
+	$('#pay-go-pro').modal('hide');
+	$('#razorpay_modal').modal({
+        show: true
+    });
+}
+
+function SignatureRazorpay() {
+	$('#razorpay_btn').html("<?php echo($wo['lang']['please_wait']) ?>");
+	$('#razorpay_btn').attr('disabled','true');
+    var merchant_order_id = "<?php echo(round(111111,9999999)) ?>";
+    var card_holder_name_id = $('#razorpay_name').val();
+    var type = $('#razorpay_type').val();
+    var email = $('#razorpay_email').val();
+    var phone = $('#razorpay_phone').val();
+    //var currency_code_id = "<?php echo($wo['config']['currency']) ?>";
+    var currency_code_id = "INR";
+
+    if (!email || !phone || !card_holder_name_id) {
+    	$('#razorpay_alert').html("<div class='alert alert-danger'><?php echo($wo['lang']['please_check_details']) ?></div>");
+		setTimeout(function () {
+			$('#razorpay_alert').html("");
+		},3000);
+		$('#razorpay_btn').html("<?php echo($wo['lang']['pay']) ?>");
+		$('#razorpay_btn').removeAttr('disabled');
+		return false;
+    }
+
+    var img = 'star';
+    var merchant_total = "<?php echo $wo['pro_packages']['star']['price'] * 100; ?>";
+	if (type == 'week') {
+		img = 'star';
+		merchant_total = "<?php echo $wo['pro_packages']['star']['price'] * 100; ?>";
+	} else if (type == 'month') {
+		img = 'hot';
+		merchant_total = "<?php echo $wo['pro_packages']['hot']['price'] * 100; ?>";
+	} else if (type == 'year') {
+		img = 'ultima';
+		merchant_total = "<?php echo $wo['pro_packages']['ultima']['price'] * 100; ?>";
+	} else if (type == 'life-time') {
+		img = 'vip';
+		merchant_total = "<?php echo $wo['pro_packages']['vip']['price'] * 100; ?>";
+	}
+    
+    var razorpay_options = {
+        key: "<?php echo $wo['config']['razorpay_key_id']; ?>",
+        amount: merchant_total,
+        name: "<?php echo $wo['config']['siteName']; ?>",
+        description: "Upgrade to pro",
+        image: '<?php echo $wo['config']['theme_url']?>/img/' + img + '.png',
+        netbanking: true,
+        currency: currency_code_id,
+        prefill: {
+            name: card_holder_name_id,
+            email: email,
+            contact: phone
+        },
+        notes: {
+            soolegal_order_id: merchant_order_id,
+        },
+        handler: function (transaction) {
+            jQuery.ajax({
+                url:Wo_Ajax_Requests_File() + '?f=razorpay&s=upgrade',
+                type: 'post',
+                data: {payment_id: transaction.razorpay_payment_id, order_id: merchant_order_id, card_holder_name_id: card_holder_name_id,  merchant_amount: merchant_total, currency: currency_code_id, type: type}, 
+                dataType: 'json',
+                success: function (data) {
+                	if (data.status == 200) {
+                		window.location = data.url;
+                	}
+                	else{
+                		if (data.url != '') {
+                			window.location = data.url;
+                		}
+                		else{
+                			$('#razorpay_alert').html("<div class='alert alert-danger'>"+data.message+"</div>");
+							setTimeout(function () {
+								$('#razorpay_alert').html("");
+							},3000);
+							$('#razorpay_btn').html("<?php echo($wo['lang']['pay']) ?>");
+							$('#razorpay_btn').removeAttr('disabled');
+
+                		}
+                	}
+                }
+            });
+        },
+        "modal": {
+            "ondismiss": function () {
+                // code here
+            }
+        }
+    };
+    // obj        
+    var objrzpv1 = new Razorpay(razorpay_options);
+    objrzpv1.open();
+    e.preventDefault();
+}
+<?php } ?>
+<?php if ($wo['config']['paysera_payment'] == 'yes' && !empty($wo['config']['paysera_project_id']) && !empty($wo['config']['paysera_sign_password'])) { ?>
+	function pay_using_paysera(type) {
+		$('.btn-paysera').attr('disabled', true).text("<?php echo $wo["lang"]["please_wait"]?>");
+	    $.post(Wo_Ajax_Requests_File() + '?f=paysera&s=get_url', {type:type}, function(data) {
+	        if (data.status == 200) {
+	            window.location.href = data.url;
+	        } else {
+	         	$('.btn-paysera').attr('disabled', false).html("Paysera App not set yet.");
+	        }
+	    });
+	}
+<?php } ?>
+function pay_using_cashfree(type) {
+	$("#cashfree_alert").html('');
+	$('#cashfree_type').val(type)
+	$('#pay-go-pro').modal('hide');
+	$('#cashfree_modal').modal({
+        show: true
+    });
+}
+function SignatureCashfree() {
+	$('#cashfree_btn').html("<?php echo($wo['lang']['please_wait']) ?>");
+	$('#cashfree_btn').attr('disabled','true');
+	type = $('#cashfree_type').val();
+	email = $('#cashfree_email').val();
+	name = $('#cashfree_name').val();
+	phone = $('#cashfree_phone').val();
+	$.post(Wo_Ajax_Requests_File() + '?f=cashfree&s=initialize', {type:type,email:email,name:name,phone:phone}, function(data) {
+		if (data.status == 200) {
+			$('body').append(data.html);
+			document.getElementById("redirectForm").submit();
+		} else {
+			$('#cashfree_alert').html("<div class='alert alert-danger'>"+data.message+"</div>");
+			setTimeout(function () {
+				$('#cashfree_alert').html("");
+			},3000);
+		}
+		$('#cashfree_btn').html("<?php echo($wo['lang']['pay']) ?>");
+		$('#cashfree_btn').removeAttr('disabled');
+	});
+}
+
+function pay_using_paystack(type) {
+	$("#paystack_alert").html('');
+	$('#paystack_type').val(type)
+	$('#pay-go-pro').modal('hide');
+	$('#paystack_modal').modal({
+        show: true
+    });
+}
+
+function InitializePaystack() {
+	$('#paystack_btn').html("<?php echo($wo['lang']['please_wait']) ?>");
+	$('#paystack_btn').attr('disabled','true');
+	type = $('#paystack_type').val();
+	email = $('#paystack_email').val();
+	$.post(Wo_Ajax_Requests_File() + '?f=paystack&s=initialize', {type:type,email:email}, function(data) {
+		if (data.status == 200) {
+			window.location.href = data.url;
+		} else {
+			$('#paystack_alert').html("<div class='alert alert-danger'>"+data.message+"</div>");
+			setTimeout(function () {
+				$('#paystack_alert').html("");
+			},3000);
+		}
+		$('#paystack_btn').html("<?php echo($wo['lang']['pay']) ?>");
+		$('#paystack_btn').removeAttr('disabled');
+	});
+}
+
+$('.wow_main_blogs_bg').css('height', ($('.wow_main_float_head').height()) + 'px');
+
 function pay_using_wallet(type,description){
-	var result = confirm("Are you want to buy "+ description +" using your wallet balance?");
+	var result = confirm("Are you want to buy "+ description + " using your wallet balance?");
 	if (result) {
 		
 		$('.btn-walletpay').attr('disabled', true).text("<?php echo $wo["lang"]["please_wait"]?>");
@@ -227,30 +835,33 @@ function Wo_CheckOutCard(type, description, amount, payment_type) {
 	} else if (type == 4) {
 		img = 'vip';
 	}
-	var handler = StripeCheckout.configure({
-        key: "<?php echo $wo['config']['stripe_id'];?>",
-        locale: 'english',
-        image: '<?php echo $wo['config']['theme_url']?>/img/' + img + '.png',
-        token: function(token) {
-          $('.modal-body').html('<i class="fa fa-spin fa-spinner"></i> <?php echo $wo['lang']['c_payment'] ?>');
-          $('#pay-go-pro').modal({
-             show: true
-            });
-          $.post(Wo_Ajax_Requests_File() + '?f=stripe_payment&pro_type=' + type, {stripeToken:token.id, amount:amount}, function (data) {
-          	 if (data.status == 200) {
-          	 	window.location.href = data.location;
-          	 } else {
-          	 	$('.modal-body').html('<i class="fa fa-spin fa-spinner"></i> <?php echo $wo['lang']['payment_declined'] ?>');
-          	 }
-          });
-        }
-    });
+	if (payment_type != 'bank_payment') {
+		var handler = StripeCheckout.configure({
+	        key: "<?php echo $wo['config']['stripe_id'];?>",
+	        locale: 'english',
+	        image: '<?php echo $wo['config']['theme_url']?>/img/' + img + '.png',
+	        token: function(token) {
+	          $('.modal-body').html('<i class="fa fa-spin fa-spinner"></i> <?php echo $wo['lang']['c_payment'] ?>');
+	          $('#pay-go-pro').modal({
+	             show: true
+	            });
+	          $.post(Wo_Ajax_Requests_File() + '?f=stripe_payment&pro_type=' + type, {stripeToken:token.id, amount:amount}, function (data) {
+	          	 if (data.status == 200) {
+	          	 	window.location.href = data.location;
+	          	 } else {
+	          	 	$('.modal-body').html('<i class="fa fa-spin fa-spinner"></i> <?php echo $wo['lang']['payment_declined'] ?>');
+	          	 }
+	          });
+	        }
+	    });
+	}
     if (payment_type == 'bitcoin') {
 		$.get(Wo_Ajax_Requests_File() + '?f=paypro_with_bitcoin&amount=' + (amount/100) + '&desc=' + description + '&usertype=' + type  , function (data) {
 			if (data.status == 200) {
 				$(data.html).appendTo('body').submit();
 			}
 		});
+
     	// handler.open({
         //    name: "<?php echo $wo['config']['siteName']?>",
         //    description: description,
@@ -267,7 +878,7 @@ function Wo_CheckOutCard(type, description, amount, payment_type) {
            name: "<?php echo $wo['config']['siteName']?>",
            description: description,
            amount: amount,
-           currency: '<?php echo $wo['config']['currency']?>',
+           currency: '<?php echo $wo['config']['stripe_currency']?>',
            opened: function () {
            	  $('#pay-go-pro').modal('hide');
            	  $('.btn-cart').attr('disabled', false).html("<i class='fa fa-credit-card'></i> <?php echo $wo['lang']['credit_card'] ?>");
@@ -279,17 +890,50 @@ function Wo_CheckOutCard(type, description, amount, payment_type) {
            description: description,
            amount: amount,
            alipay: true,
-           currency: '<?php echo $wo['config']['currency']?>',
+           currency: '<?php echo $wo['config']['stripe_currency']?>',
            opened: function () {
            	  $('#pay-go-pro').modal('hide');
            	  $('.btn-alipay').attr('disabled', false).html("<i class='fa fa-credit-card'></i> Alipay");
            }
         });
-    }
+    } else if (payment_type == 'bank_payment') {
+    	$('#configreset').click();
+    	$(".prv-img").html('<div class="thumbnail-rendderer"><div><h4 class="bold"><?php echo $wo['lang']['drop_img_here']; ?></h4><div class="error-text-renderer"></div><div><span><?php echo $wo['lang']['or']; ?></span><p><?php echo $wo['lang']['browse_to_upload']; ?></p></div></div> </div>');
+		$("#blog-alert").html('');
+    	$('#bank_transfer_des').val(description);
+    	$('#bank_transfer_type').val(type);
+    	$('#pay-go-pro').modal('hide');
+    	$('#bank_transfer_modal').modal({
+             show: true
+            });
+    	
+   	  
+	} else if (payment_type == 'checkout') {
+		$("#2checkout_alert").html('');
+		$('#pay-go-pro').modal('hide');
+		$('#2checkout_type').val(type);
+    	$('#2checkout_modal').modal({
+            show: true
+        });
+	}
     $(window).on('popstate', function() {
        handler.close();
     });
 }
+$(document).on('click', '#select-img', function(event) {
+	$("#thumbnail").click()
+});
+$(document).on('change', '#thumbnail', function(event) {
+	let imgPath = $(this)[0].files[0].name;
+    if (typeof(FileReader) != "undefined") {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+			$('#receipt_img_preview').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
+	$('#bank_transfer_modal').addClass('up_rec_img_ready');
+});
 
 function Wo_GetPaymentLink(type) {
 	$.get(Wo_Ajax_Requests_File() + '?f=get_payment_method&type=' + type, function (data) {
@@ -302,4 +946,245 @@ function Wo_GetPaymentLink(type) {
         }
     });
 }
+jQuery(document).ready(function($) {
+	$('#bank_transfer_form').ajaxForm({
+	  url: Wo_Ajax_Requests_File() + '?f=bank_transfer',
+	  beforeSend: function() {
+	    $('#bank_transfer_form').find('.ball-pulse').fadeIn(100);
+	  },
+	  success: function(data) {
+	    if (data['status'] == 200) {
+	    	$("#blog-alert").html('<div class="alert alert-success">'+ data['message'] +'</div>');
+	    	setTimeout(function () {
+	    		window.location = "<?php echo $wo['config']['site_url'];?>";
+	    		$(".prv-img").html('<div class="thumbnail-rendderer"><div><h4 class="bold"><?php echo $wo['lang']['drop_img_here']; ?></h4><div class="error-text-renderer"></div><div><span><?php echo $wo['lang']['or']; ?></span><p><?php echo $wo['lang']['browse_to_upload']; ?></p></div></div> </div>');
+	    		$("#blog-alert").html('');
+	    		$('#configreset').click();
+
+	    	},3000)
+	    } else if (data['message']) {
+	      $("#blog-alert").html('<div class="alert alert-danger">' + data['message'] + '</div>');
+	    } 
+	    $('#bank_transfer_form').find('.ball-pulse').fadeOut(100);
+	}});
+});
+
+
+
+
+// Called when token created successfully.
+var successCallback = function(data) {
+	console.log(data);
+    var myForm = document.getElementById('2checkout_form');
+    $.post(Wo_Ajax_Requests_File() + '?f=2checkout_pro', {card_number: $("#card_number").val(),card_cvc: $("#card_cvc").val(),card_month: $("#card_month").val(),card_year: $("#card_year").val(),card_name: $("#card_name").val(),card_address: $("#card_address").val(),card_city: $("#card_city").val(),card_state: $("#card_state").val(),card_zip: $("#card_zip").val(),card_country: $("#card_country").val(),card_email: $("#card_email").val(),card_phone: $("#card_phone").val(),type: $("#2checkout_type").val(),token: data.response.token.token}, function(data, textStatus, xhr) {
+    	$('#2checkout_btn').html("<?php echo($wo['lang']['pay']) ?>");
+    	$('#2checkout_btn').attr('disabled');
+    	$('#2checkout_btn').removeAttr('disabled');
+    	$('#2checkout_form').find('.ball-pulse').fadeOut(100);
+    	if (data.status == 200) {
+      	 	window.location.href = data.location;
+      	} else {
+      	 	$('#2checkout_alert').html("<div class='alert alert-danger'>"+data.error+"</div>");
+			setTimeout(function () {
+				$('#2checkout_alert').html("");
+			},3000);
+      	}
+    	/*optional stuff to do after success */
+    });
+};
+
+// Called when token creation fails.
+var errorCallback = function(data) {
+	$('#2checkout_btn').html("<?php echo($wo['lang']['pay']) ?>");
+	$('#2checkout_btn').removeAttr('disabled');
+	$('#2checkout_form').find('.ball-pulse').fadeOut(100);
+    if (data.errorCode === 200) {
+        tokenRequest();
+    } else {
+    	$('#2checkout_alert').html("<div class='alert alert-danger'>"+data.errorMsg+"</div>");
+		setTimeout(function () {
+			$('#2checkout_alert').html("");
+		},3000);
+    }
+};
+
+var tokenRequest = function() {
+	$('#card_number').val($('#_number_').val());
+	$('#2checkout_btn').html("<?php echo($wo['lang']['please_wait']) ?>");
+	$('#2checkout_btn').attr('disabled','true');
+	if ($("#card_number").val() != '' && $("#card_cvc").val() != '' && $("#card_month").val() != '' && $("#card_year").val() != '' && $("#card_name").val() != '' && $("#card_address").val() != '' && $("#card_city").val() != '' && $("#card_state").val() != '' && $("#card_zip").val() != '' && $("#card_country").val() != 0 && $("#card_email").val() != '' && $("#card_phone").val() != '') {
+		$('#2checkout_form').find('.ball-pulse').fadeIn(100);
+		// Setup token request arguments
+	    var args = {
+	        sellerId: "<?php echo($wo['config']['checkout_seller_id']) ?>",
+	        publishableKey: "<?php echo($wo['config']['checkout_publishable_key']) ?>",
+	        ccNo: $("#card_number").val(),
+	        cvv: $("#card_cvc").val(),
+	        expMonth: $("#card_month").val(),
+	        expYear: $("#card_year").val()
+	    };
+
+	    // Make the token request
+	    TCO.requestToken(successCallback, errorCallback, args);
+	}
+	else{
+		$('#2checkout_btn').html("<?php echo($wo['lang']['pay']) ?>");
+		$('#2checkout_btn').removeAttr('disabled');
+		$('#2checkout_alert').html("<div class='alert alert-danger'><?php echo($wo['lang']['please_check_details']) ?></div>");
+		setTimeout(function () {
+			$('#2checkout_alert').html("");
+		},3000);
+
+	}
+	
+    
+};
+
+$(function() {
+    // Pull in the public encryption key for our environment
+    TCO.loadPubKey("<?php echo($wo['config']['checkout_mode']) ?>");
+});
+
 </script>
+
+<div class="modal fade" id="2checkout_modal" role="dialog" data-keyboard="false" style="overflow-y: auto;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+				<h4 class="modal-title"><?php echo $wo['lang']['2checkout'] ?></h4>
+			</div>
+			<form class="form form-horizontal" method="post" id="2checkout_form" action="#">
+				<div class="modal-body twocheckout_modal">
+					<div id="2checkout_alert"></div>
+					<div class="clear"></div>
+					<div class="sun_input col-md-6">
+						<input id="card_name" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['name']; ?>" value="<?php echo($wo['user']['name']) ?>">
+					</div>
+					<div class="sun_input col-md-6">
+						<input id="card_address" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['address']; ?>" value="<?php echo($wo['user']['address']) ?>"> 
+					</div>
+					<div class="sun_input col-md-6">
+						<input id="card_city" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['city']; ?>" value="<?php echo($wo['user']['city']) ?>">
+					</div>
+					<div class="sun_input col-md-6">
+						<input id="card_state" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['state']; ?>" value="<?php echo($wo['user']['state']) ?>">
+					</div>
+					<div class="sun_input col-md-6">
+						<input id="card_zip" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['zip']; ?>" value="<?php echo($wo['user']['zip']) ?>">
+					</div>
+					<div class="sun_input col-md-6">
+						<select id="card_country" name="card_country" class="form-control">
+							<?php 
+								foreach ($wo['countries_name'] as $country_ids => $country) { 
+									$country_id = $wo['user']['country_id'];
+									$selected_contry = ($country_ids == $country_id) ? ' selected' : '' ;
+							?>
+								<option value="<?php echo $country_ids;?>" <?php echo $selected_contry;?> ><?php echo $country;?></option>
+							<?php } ?>
+						</select>
+					</div>
+					<div class="sun_input col-md-6">
+						<input id="card_email" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['email']; ?>" value="<?php echo($wo['user']['email']) ?>">
+					</div>
+					<div class="sun_input col-md-6">
+						<input id="card_phone" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['phone_number']; ?>" value="<?php echo($wo['user']['phone_number']) ?>">
+					</div>
+					<div class="clear"></div>
+					<hr>
+					<div class="row two_check_card">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" /></svg>
+						<div class="sun_input col-xs-12">
+							<input id="_number_" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['card_number']; ?>">
+							<input id="card_number" name="card_number" type="hidden" class="form-control input-md" autocomplete="off">
+						</div>
+						<div class="sun_input col-xs-4">
+							<select id="card_month" name="card_month" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['month']; ?> (01)">
+								<option value="01">01</option>
+								<option value="02">02</option>
+								<option value="03">03</option>
+								<option value="04">04</option>
+								<option value="05">05</option>
+								<option value="06">06</option>
+								<option value="07">07</option>
+								<option value="08">08</option>
+								<option value="09">09</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+							</select>
+							<!-- <input id="card_month" name="card_month" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['month']; ?> (01)"> -->
+						</div>
+						<div class="sun_input col-xs-4 no-padding-both">
+							<select id="card_year" name="card_year" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['year']; ?> (2019)">
+								<?php for ($i=date('Y'); $i <= date('Y')+15; $i++) {  ?>
+									<option value="<?php echo($i) ?>"><?php echo($i) ?></option>
+								<?php } ?>
+							</select>
+							<!-- <input id="card_year" name="card_year" type="text" class="form-control input-md" autocomplete="off" placeholder="<?php echo $wo['lang']['year']; ?> (2019)"> -->
+						</div>
+						<div class="sun_input col-xs-4">
+							<input id="card_cvc" name="card_cvc" type="text" class="form-control input-md" autocomplete="off" placeholder="CVC" maxlength="3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+						</div>
+					</div>
+					<div class="clear"></div>
+					<input type="text" id="2checkout_type" class="hidden" name="type">
+					<input id="card_token" name="token" type="hidden" value="">
+				</div>
+				<div class="clear"></div>
+				<div class="modal-footer">
+					<div class="ball-pulse"><div></div><div></div><div></div></div>
+					<button type="button" class="btn btn-main btn-mat" onclick="tokenRequest()" id="2checkout_btn"><?php echo $wo['lang']['pay']; ?></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="bank_transfer_modal" role="dialog" data-keyboard="false" style="overflow-y: auto;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></button>
+				<h4 class="modal-title"><?php echo $wo['lang']['bank_transfer'] ?></h4>
+			</div>
+			<form class="form form-horizontal" method="post" id="bank_transfer_form" action="#">
+				<div class="modal-body dt_bank_trans_modal">
+					<div id="blog-alert"></div>
+					
+					<?php echo $wo['config']['bank_description'];?>
+					
+					<?php if (!empty($wo['config']['bank_transfer_note'])) { ?>
+						<div class="dt_user_profile hide_alert_info_bank_trans">
+							<span class="valign-wrapper">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> Note:
+							</span>
+							<ul class="dt_prof_vrfy">
+								<li><?php echo $wo['config']['bank_transfer_note'];?></li>
+							</ul>
+						</div>
+					<?php } ?>
+					<p class="dt_bank_trans_upl_rec"><a href="javascript:void(0);" onclick="$('#bank_transfer_modal').addClass('up_rec_active'); return false"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z"></path></svg> <?php echo $wo['lang']['upload'] ?></a></p>
+					<div class="upload_bank_receipts">
+						<div onclick="document.getElementById('thumbnail').click(); return false">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z"></path></svg>
+							<p><?php echo $wo['lang']['browse_to_upload']; ?></p>
+							<img id="receipt_img_preview" src="">
+						</div>
+					</div>
+					<input type="file" class="hidden" id="thumbnail" name="thumbnail" accept="image/*">
+					<input type="hidden" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+					<input name="image" type="file" id="upload" class="hidden">
+					<input name="type" type="hidden" id="bank_transfer_type" class="hidden">
+					<input name="description" type="hidden" id="bank_transfer_des" class="hidden">
+					<input type="reset" id="configreset" value="Reset" class="hidden">
+				</div>
+				<div class="modal-footer">
+					<div class="ball-pulse"><div></div><div></div><div></div></div>
+					<button type="submit" class="btn btn-main btn-mat"><?php echo $wo['lang']['publish']; ?></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

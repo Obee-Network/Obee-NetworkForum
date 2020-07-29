@@ -19,5 +19,8 @@
    
    <span class="button-text"> <?php echo $wo['lang']['admin'];?></span>
    </button>
+<?php if (Wo_IsPageAdminExists($wo['member']['user_id'],$wo['member']['page_id'])) { ?>
+   <button type="button" class="btn btn-default btn-sm"><a href="<?php echo Wo_SeoLink('index.php?link1=page-setting&page=' . $wo['member']['page_name'] . '&link3=admins');?>?name=<?php echo $wo['member']['username']?>"  data-ajax="?link1=page-setting&page=<?php echo $wo['member']['page_name'];?>&link3=admins&name=<?php echo $wo['member']['username']?>"><?php echo $wo['lang']['privileges'];?></a></button>
+<?php } ?>
    </div>
 </div>
