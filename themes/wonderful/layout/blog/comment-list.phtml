@@ -22,16 +22,6 @@
             <i class="zmdi zmdi-comment"></i>
           </span>
           &nbsp;
-          <span class="pointer add-blog-commlikes-<?php echo $wo['comment']['id']; ?>" onclick="Wo_AddBlogCommentLike(<?php echo $wo['comment']['id']; ?>)">
-          	<i class="zmdi zmdi-thumb-up"></i>
-          </span> 
-          
-          <span id="blog-comment-likes" data-blog-comlikes="<?php echo $wo['comment']['id']; ?>">
-          <?php if ($wo['comment']['likes'] > 0): ?>
-            <?php echo $wo['comment']['likes']; ?>
-          <?php endif; ?>
-          </span>
-          &nbsp;
           <?php if ($wo['config']['second_post_button'] != 'disabled') { ?>
           <span class="pointer add-blog-commdislikes-<?php echo $wo['comment']['id']; ?>" onclick="Wo_AddBlogCommentDisLike(<?php echo $wo['comment']['id']; ?>)" >
             <i class="zmdi zmdi-thumb-down"></i>
