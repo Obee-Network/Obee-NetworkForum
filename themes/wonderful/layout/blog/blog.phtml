@@ -5,23 +5,6 @@
 		<div class="col-md-8">
 			<h3 class="recent-articles"><?php echo $wo['lang']['most_recent_art'] ?></h3>
 			<div id="recent-blogs" class="row">
-				<?php
-						$pages = Wo_GetBlogs(array("limit" => 9));
-			               
-		                if (count($pages) > 0) {
-		                    foreach ($pages as $key => $wo['article']){
-
-		                    	$wo['article']['first'] = ($key == 0) ? true : false;
-		                        echo Wo_LoadPage('blog/includes/card-list');
-
-		                    }
-		                } 
-
-		                else {
-		                   echo '<h5 class="search-filter-center-text empty_state"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg> ' . $wo['lang']['no_blogs_found'] . '</h5>';
-		                }
-		               
-		         ?>
 			</div>
 
 			<div class="col-md-12 col-lg-12 col-sm-12 col-sx-12">
